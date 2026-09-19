@@ -307,6 +307,7 @@ function checkAnalysis(){
  $("conclusionFeedback").innerHTML='<div class="feedback good">القاعدة العلمية: يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</div>';
  $("analysisFeedback").innerHTML=`<div class="feedback ${correct===analysis.length?"good":"bad"}">أجبت بشكل صحيح عن ${correct} من ${analysis.length}. تم حفظ استنتاجك.</div>`;
  updateProgress();
+ setTimeout(()=>go("quiz"),900);
 }
 function checkQuiz(){
  if(!(completed.size===6 && Object.keys(observations).length===6 && analysisDone)){$("quizFeedback").innerHTML='<div class="feedback bad">أكمل التجارب، واحفظ ملاحظاتك، ثم أنجز التحليل قبل التحدي النهائي.</div>';return}
