@@ -282,6 +282,24 @@ function saveOneObservation(id){
  renderResultRows();updateProgress();
 }
 function observationMatch(text,keywords){return keywords.some(k=>text.includes(k));}
+function syncTypedObservations(){
+  tests.forEach(t=>{
+    if(observations[t.id]) return;
+    const el=$(`obsInput${t.id}`);
+    const v=el ? el.value.trim() : "";
+    if(!v) return;
+    observations[t.id]=v;
+    const matches=observationMatch(v,t.keywords);
+    const predMatch=testPred[t.id]===(t.react?"react":"none");
+    const fb=$(`obsFeedback${t.id}`);
+    if(fb){
+      fb.innerHTML=`<div class="feedback ${matches?"good":"bad"}"><b>${matches?"ملاحظة جيدة":"راجع ملاحظتك"}</b><br>${matches?"رصدت دليلًا مهمًا من المشاهدة.":"حاول التركيز على اللون والفقاعات والطبقة أو عدم التغير."}<br><small>توقعك كان ${predMatch?"متوافقًا":"غير متوافق"} مع النتيجة.</small><hr><b>التغذية العلمية:</b> ${t.explain}</div>`;
+    }
+  });
+  renderResultRows();
+  updateProgress();
+}
+
 function renderResultRows(){
  $("resultRows").innerHTML=tests.map(t=>`<tr><td>${t.id}</td><td>${t.metal} + ${t.solution}</td><td>${escapeHtml(observations[t.id]||"لم تُحفظ بعد")}</td><td>${testPred[t.id]===(t.react?"react":"none")?"متوافق":"غير متوافق"}</td><td>${t.react?"حدث إحلال":"لا يحدث إحلال"}</td></tr>`).join("");
 }
@@ -295,25 +313,86 @@ function buildQuestions(){
  $("quizQuestions").innerHTML=quiz.map((x,i)=>`<div class="question"><b>${i+1}. ${x.q}</b><div class="options">${x.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("")}</div></div>`).join("");
 }
 function checkAnalysis(){
- let correct=0,answered=0;
- analysis.forEach((x,i)=>{const r=document.querySelector(`input[name="a${i}"]:checked`);if(r){answered++;if(+r.value===x.a)correct++}});
- const order=[1,2,3,4,5,6].map(i=>$(`o${i}`).value);
- const expected=["Mg","Zn","Pb","H","Cu","Ag"];
- const orderOk=order.every(Boolean)&&order.join(",")===expected.join(",");
- const conclusion=($('conclusionInput').value||"").trim();
- const missingTests=6-completed.size;
- const missingNotes=6-Object.keys(observations).length;
- if(missingTests>0 || missingNotes>0){
-   $("analysisFeedback").innerHTML=`<div class="feedback bad">أكمل جميع التجارب واحفظ جميع الملاحظات أولًا. المتبقي: ${missingTests} تجربة و${missingNotes} ملاحظة.</div>`;
-   return;
- }
- if(answered<analysis.length||!orderOk||conclusion.length<10){$("analysisFeedback").innerHTML='<div class="feedback bad">أكمل أسئلة التحليل، وابنِ ترتيب النشاط، واكتب استنتاجًا من ملاحظاتك قبل الإرسال.</div>';return}
- if(!analysisDone){score+=correct*10;analysisCorrect=correct;analysisDone=true;toast(`+${correct*10} نقاط للتحليل 🎉`)}
- $("orderFeedback").innerHTML='<div class="feedback good">ترتيبك وافق الاستنتاج المدعوم بالمشاهدات: Mg > Zn > Pb > H > Cu > Ag.</div>';
- $("conclusionFeedback").innerHTML='<div class="feedback good">القاعدة العلمية: يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</div>';
- $("analysisFeedback").innerHTML=`<div class="feedback ${correct===analysis.length?"good":"bad"}">أجبت بشكل صحيح عن ${correct} من ${analysis.length}. تم حفظ استنتاجك.</div>`;
- updateProgress();
- setTimeout(()=>go("quiz"),900);
+  // حفظ أي ملاحظات كتبها الطالب ولم يضغط زر "حفظ ملاحظتي" عليها.
+  syncTypedObservations();
+
+  let correct=0,answered=0;
+  const review=[];
+  analysis.forEach((x,i)=>{
+    const r=document.querySelector(`input[name="a${i}"]:checked`);
+    if(r){
+      answered++;
+      const isCorrect=+r.value===x.a;
+      if(isCorrect) correct++;
+      review.push(
+        `<div class="feedback ${isCorrect?"good":"bad"}" style="margin-top:8px">
+          <b>السؤال ${i+1}: ${isCorrect?"✓ إجابة صحيحة":"✗ إجابة غير صحيحة"}</b>
+          ${isCorrect
+            ? "<br>إجابتك صحيحة."
+            : `<br>إجابتك: ${escapeHtml(x.opts[+r.value]||"—")}<br><b>الإجابة الصحيحة:</b> ${escapeHtml(x.opts[x.a])}`}
+        </div>`
+      );
+    } else {
+      review.push(`<div class="feedback bad" style="margin-top:8px"><b>السؤال ${i+1}: لم تتم الإجابة</b></div>`);
+    }
+  });
+
+  const order=[1,2,3,4,5,6].map(i=>$(`o${i}`).value);
+  const expected=["Mg","Zn","Pb","H","Cu","Ag"];
+  const orderOk=order.every(Boolean)&&order.join(",")===expected.join(",");
+  const conclusion=($('conclusionInput').value||"").trim();
+  const missingTests=6-completed.size;
+  const missingNotes=6-Object.keys(observations).length;
+
+  // عرض حالة الإكمال بوضوح بدل الرسالة العامة فقط.
+  if(missingTests>0 || missingNotes>0){
+    $("analysisFeedback").innerHTML=
+      `<div class="feedback bad">
+        <b>لا يمكن الانتقال بعد.</b><br>
+        التجارب المكتملة: ${completed.size} من 6.<br>
+        الملاحظات المحفوظة: ${Object.keys(observations).length} من 6.<br>
+        المتبقي: ${missingTests} تجربة و${missingNotes} ملاحظة.
+        ${missingNotes>0?"<br><small>إذا كتبت الملاحظة ولم تضغط «حفظ ملاحظتي»، يكفي الآن الضغط على «تحقق من الإجابات» ليتم حفظ الملاحظات المكتوبة تلقائيًا.</small>":""}
+      </div>`;
+    updateProgress();
+    return;
+  }
+
+  if(answered<analysis.length || !orderOk || conclusion.length<10){
+    $("analysisFeedback").innerHTML=
+      `<div class="feedback bad">
+        <b>أكمل المتطلبات التالية:</b>
+        ${answered<analysis.length?"<br>• أجب عن جميع أسئلة التحليل.":""}
+        ${!orderOk?"<br>• أكمل ترتيب سلسلة النشاط بالشكل الصحيح.":""}
+        ${conclusion.length<10?"<br>• اكتب استنتاجًا لا يقل عن 10 أحرف.":""}
+      </div>`+
+      (answered>0 ? `<div style="margin-top:10px"><b>مراجعة الإجابات التي أجبت عنها:</b>${review.join("")}</div>` : "");
+    return;
+  }
+
+  if(!analysisDone){
+    score+=correct*10;
+    analysisCorrect=correct;
+    analysisDone=true;
+    toast(`+${correct*10} نقاط للتحليل 🎉`);
+  }
+
+  $("orderFeedback").innerHTML=
+    `<div class="feedback good"><b>✓ ترتيب سلسلة النشاط صحيح.</b><br>
+    Mg > Zn > Pb > H > Cu > Ag</div>`;
+
+  $("conclusionFeedback").innerHTML=
+    '<div class="feedback good">القاعدة العلمية: يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</div>';
+
+  $("analysisFeedback").innerHTML=
+    `<div class="feedback ${correct===analysis.length?"good":"bad"}">
+      <b>نتيجة التحليل: ${correct} من ${analysis.length}</b><br>
+      تم حفظ استنتاجك، ويمكنك الانتقال إلى التحدي النهائي.
+    </div>
+    <div style="margin-top:10px"><b>مراجعة إجاباتك:</b>${review.join("")}</div>`;
+
+  updateProgress();
+  setTimeout(()=>go("quiz"),1200);
 }
 function checkQuiz(){
  if(!(completed.size===6 && Object.keys(observations).length===6 && analysisDone)){$("quizFeedback").innerHTML='<div class="feedback bad">أكمل التجارب، واحفظ ملاحظاتك، ثم أنجز التحليل قبل التحدي النهائي.</div>';return}
