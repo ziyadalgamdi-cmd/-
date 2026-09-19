@@ -33,6 +33,7 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
 .liquid{position:absolute;left:5px;right:5px;bottom:5px;height:145px;border-radius:0 0 22px 22px;background:#9dd9ff88;transition:.7s}.liquid.blue{background:#3188d888}.liquid.clear{background:#dff7ff88}.liquid.green{background:#60b87888}.liquid.colorless{background:#eaf6fb99}
 .metal{position:absolute;bottom:34px;left:42px;width:42px;height:65px;border-radius:8px;background:linear-gradient(90deg,#777,#d5d5d5,#888);box-shadow:0 2px 5px #0003;z-index:3;transition:.6s}.metal.copper{background:linear-gradient(90deg,#9a4b28,#e38b4b,#8e4327)}.metal.zinc{background:linear-gradient(90deg,#8b98a0,#e4ebef,#87939a)}.metal.lead{background:linear-gradient(90deg,#49545d,#9aa6ad,#46515a)}
 .deposit{position:absolute;bottom:28px;left:34px;width:58px;height:18px;border-radius:50%;background:#d8a12c;opacity:0;z-index:4;transition:.7s}.deposit.on{opacity:1;transform:translateY(-28px) scale(1.2)}
+.coating{position:absolute;bottom:36px;left:37px;width:52px;height:58px;border-radius:10px;opacity:0;z-index:4;transition:.8s}.coating.white{background:linear-gradient(90deg,#eef0f2,#fff,#d8dde1)}.coating.whiteOn{opacity:.9}.deposit.silver{background:linear-gradient(90deg,#777,#eee,#999);opacity:0}.deposit.silverOn,.deposit.leadOn,.deposit.copperOn{opacity:1;transform:translateY(-24px) scale(1.15)}.deposit.leadOn{background:linear-gradient(90deg,#4b555c,#b3bcc2,#59636a)}.deposit.copperOn{background:linear-gradient(90deg,#8b3f20,#e48a4a,#9b4b2a)}.metal.shrink{transform:scale(.72);transform-origin:bottom center}.predictionMini{font-size:13px;margin:8px 0}.miniChoice{border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 9px;margin:2px}.miniChoice.selected{border-color:var(--primary);background:#eaf5fc;font-weight:bold}.visualLegend{min-height:50px;background:#f3f8fb;border-radius:10px;padding:9px;font-size:13px}.observationInput{width:100%;min-height:70px;margin-top:8px;border:1px solid var(--line);border-radius:10px;padding:9px;resize:vertical}.obsFeedback{margin-top:8px}.hint{margin-top:12px;background:#eef7fb;border:1px solid #cfe4ef;border-radius:12px;padding:12px}.orderGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}.orderGrid select{padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}.question textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}.tested{border-color:#91c7a9}.report table table{font-size:13px}@media(max-width:850px){.orderGrid{grid-template-columns:repeat(2,1fr)}}
 .bubbles{position:absolute;bottom:52px;left:0;right:0;height:115px;opacity:0;z-index:5}.bubbles.on{opacity:1}.bubble{position:absolute;width:8px;height:8px;border:2px solid #fff;border-radius:50%;animation:up 1.5s infinite ease-in}.b1{left:38%;bottom:0}.b2{left:55%;bottom:15px;animation-delay:.3s}.b3{left:48%;bottom:35px;animation-delay:.7s}.b4{left:63%;bottom:8px;animation-delay:1s}@keyframes up{to{transform:translateY(-85px);opacity:0}}
 .obs{min-height:58px;background:#f5f8fa;border-radius:12px;padding:10px;font-size:14px}.testBtn{width:100%;margin-top:8px}
 .results{width:100%;border-collapse:collapse}.results th,.results td{border:1px solid var(--line);padding:9px;text-align:center}.results th{background:#eaf3f8}.results input{width:100%;border:1px solid var(--line);border-radius:7px;padding:6px}
@@ -72,7 +73,7 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
  <p>في هذه التجربة الافتراضية ستختبر تفاعلات الإحلال البسيط، وتلاحظ الأدلة على حدوث التفاعل، ثم تستنتج ترتيب نشاط بعض الفلزات.</p>
  <div class="infoGrid">
   <div class="infoBox"><b>🎯 الهدف</b><p>التعرف على تفاعلات الإحلال البسيط وربط حدوث التفاعل بنشاط الفلز.</p></div>
-  <div class="infoBox"><b>🧰 الأدوات</b><p>أنابيب اختبار افتراضية، فلزات Pb وCu وZn، ومحاليل CuSO₄ وAgNO₃ وHCl وPb(NO₃)₂ وMgSO₄.</p></div>
+  <div class="infoBox"><b>🧰 الأدوات</b><p>أنابيب اختبار افتراضية، فلزات Pb وCu وZn، ومحاليل CuSO₄ وAgNO₃ وHCl وPb(NO₃)₂ وMgSO₄.</p><small>في التجربة الأصلية: محاليل الأملاح بتركيز 0.2 M، وHCl بتركيز 3 M، ويضاف 10 mL في كل اختبار.</small></div>
   <div class="infoBox"><b>🛡️ السلامة</b><p>هذه محاكاة تعليمية فقط. لا تستخدم المواد الكيميائية في المنزل. في المختبر الحقيقي تُتبع تعليمات المعلم ومعدات الوقاية والتخلص من النفايات حسب التعليمات.</p></div>
  </div>
  <div class="card" style="background:#fff8e5;border-color:#f1d27b;margin-top:15px">
@@ -84,7 +85,7 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
 <section id="prediction" class="card section hidden">
  <span class="badge">التحدي 1 · 10 نقاط</span>
  <h2>🔮 تحدي التوقع</h2>
- <p>قبل إجراء التجربة: ماذا تتوقع أن يحدث عند وضع كل فلز في المحلول؟</p>
+ <p>قبل المختبر: ما القاعدة التي ستستخدمها لتوقع حدوث الإحلال؟ بعد ذلك ستسجل توقعًا مستقلًا لكل تجربة.</p>
  <div class="choiceGrid">
   <button class="choice" data-pred="react">سيحدث إحلال إذا كان الفلز المضاف أنشط</button>
   <button class="choice" data-pred="none">لن يحدث إحلال أبدًا</button>
@@ -97,12 +98,18 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
 <section id="variables" class="card section hidden">
  <span class="badge">التحدي 2 · 10 نقاط</span>
  <h2>🧪 تحدي المتغيرات</h2>
- <p>اختر نوع كل متغير في التجربة الافتراضية.</p>
+ <p>في هذه المجموعة من التجارب يتغير <b>زوج المواد المتفاعلة</b> من تجربة إلى أخرى؛ لذلك لا يصح عزل أثر نوع الفلز وحده بوصفه متغيرًا مستقلًا في جميع التجارب.</p>
  <div class="variables">
-  <div class="infoBox"><b>نوع الفلز المضاف</b><select id="v1"><option value="">اختر</option><option value="ind">متغير مستقل</option><option value="dep">متغير تابع</option><option value="const">ثابت</option></select></div>
-  <div class="infoBox"><b>حدوث التفاعل/مظهره</b><select id="v2"><option value="">اختر</option><option value="ind">متغير مستقل</option><option value="dep">متغير تابع</option><option value="const">ثابت</option></select></div>
-  <div class="infoBox"><b>حجم المحلول في المحاكاة</b><select id="v3"><option value="">اختر</option><option value="ind">متغير مستقل</option><option value="dep">متغير تابع</option><option value="const">ثابت</option></select></div>
+  <div class="infoBox"><b>العامل الذي يتغير بين التجارب</b><select id="v1"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select><small>زوج المواد المتفاعلة</small></div>
+  <div class="infoBox"><b>ما نلاحظ حدوثه أو عدم حدوثه</b><select id="v2"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select><small>حدوث التفاعل والأدلة المرئية</small></div>
+  <div class="infoBox"><b>حجم المحلول</b><select id="v3"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select></div>
+  <div class="infoBox"><b>تركيز المحلول</b><select id="v4"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select></div>
+  <div class="infoBox"><b>درجة الحرارة</b><select id="v5"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select></div>
+  <div class="infoBox"><b>كمية الفلز</b><select id="v6"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select></div>
+  <div class="infoBox"><b>زمن الملاحظة</b><select id="v7"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select></div>
+  <div class="infoBox"><b>مساحة سطح الفلز</b><select id="v8"><option value="">اختر</option><option value="ind">المتغير المستقل</option><option value="dep">المتغير التابع</option><option value="const">متغير ثابت</option></select></div>
  </div>
+ <div class="hint">💡 في نشاط مستقل لبحث أثر نوع الفلز وحده، يجب تثبيت نوع المحلول وتركيزه وحجمه ودرجة الحرارة وكمية الفلز ومساحة سطحه وزمن الملاحظة.</div>
  <div id="varFeedback"></div>
  <div class="actions"><button class="btn primary" onclick="checkVariables()">تحقق</button><button class="btn secondary" onclick="go('execution')">إلى المختبر</button></div>
 </section>
@@ -110,7 +117,7 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
 <section id="execution" class="card section hidden">
  <span class="badge">التحدي 3 · 5 نقاط لكل تجربة مكتملة</span>
  <h2>🔬 المختبر الافتراضي</h2>
- <p>اضغط «إجراء التجربة» في كل أنبوب. لن تظهر نتيجة التفاعل قبل تنفيذ الاختبار.</p>
+ <p>اختر توقعك لكل تجربة أولًا، ثم نفّذها. ستشاهد الدليل البصري دون إعطاء الملاحظة العلمية الجاهزة؛ اكتب ملاحظتك بنفسك ثم احفظها.</p>
  <div class="labControls" id="lab"></div>
  <div class="actions"><button class="btn primary" onclick="go('results')">بعد إكمال الاختبارات: سجل النتائج 📋</button></div>
 </section>
@@ -118,8 +125,8 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
 <section id="results" class="card section hidden">
  <span class="badge">التحدي 4 · تسجيل النتائج</span>
  <h2>📋 سجل ملاحظاتك</h2>
- <p>اكتب ملاحظتك بعد مشاهدة كل تجربة. يمكنك الرجوع إلى المختبر دون فقدان البيانات.</p>
- <table class="results"><thead><tr><th>التجربة</th><th>المواد</th><th>ملاحظتك</th></tr></thead><tbody id="resultRows"></tbody></table>
+ <p>هذا الملخص يعرض ملاحظاتك التي حفظتها بعد المشاهدة، ولا يكشف الملاحظة النموذجية إلا داخل تغذية كل تجربة.</p>
+ <table class="results"><thead><tr><th>التجربة</th><th>المواد</th><th>ملاحظتك المحفوظة</th><th>التوقع</th><th>النتيجة</th></tr></thead><tbody id="resultRows"></tbody></table>
  <div class="actions"><button class="btn primary" onclick="saveResults()">حفظ النتائج</button><button class="btn secondary" onclick="go('analysis')">تحليل النتائج 🧠</button></div>
  <div id="resultFeedback"></div>
 </section>
@@ -128,6 +135,20 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
  <span class="badge">التحدي 5 · الاستنتاج · 10 نقاط لكل إجابة صحيحة</span>
  <h2>🧠 تحدي تحليل النتائج</h2>
  <div id="analysisQuestions"></div>
+ <div class="question" id="activityOrder">
+  <b>🧩 ابنِ سلسلة النشاط بنفسك</b>
+  <p>رتّب العناصر من الأكثر نشاطًا إلى الأقل نشاطًا، اعتمادًا على مشاهداتك فقط.</p>
+  <div class="orderGrid">
+   <select id="o1"><option value="">المركز 1</option><option>Mg</option><option>Zn</option><option>Pb</option><option>H</option><option>Cu</option><option>Ag</option></select>
+   <select id="o2"><option value="">المركز 2</option><option>Mg</option><option>Zn</option><option>Pb</option><option>H</option><option>Cu</option><option>Ag</option></select>
+   <select id="o3"><option value="">المركز 3</option><option>Mg</option><option>Zn</option><option>Pb</option><option>H</option><option>Cu</option><option>Ag</option></select>
+   <select id="o4"><option value="">المركز 4</option><option>Mg</option><option>Zn</option><option>Pb</option><option>H</option><option>Cu</option><option>Ag</option></select>
+   <select id="o5"><option value="">المركز 5</option><option>Mg</option><option>Zn</option><option>Pb</option><option>H</option><option>Cu</option><option>Ag</option></select>
+   <select id="o6"><option value="">المركز 6</option><option>Mg</option><option>Zn</option><option>Pb</option><option>H</option><option>Cu</option><option>Ag</option></select>
+  </div>
+  <div id="orderFeedback"></div>
+ </div>
+ <div class="question"><b>✍️ الاستنتاج العام</b><textarea id="conclusionInput" placeholder="ما القاعدة التي توصلت إليها من التجارب السابقة؟"></textarea><div id="conclusionFeedback"></div></div>
  <div class="actions"><button class="btn primary" onclick="checkAnalysis()">تحقق من الإجابات</button><button class="btn secondary" onclick="go('quiz')">التحدي النهائي 🏆</button></div>
  <div id="analysisFeedback"></div>
 </section>
@@ -154,28 +175,27 @@ h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{mar
 
 <script>
 const tests=[
- {id:1,metal:"Pb",solution:"CuSO₄",metalClass:"lead",liquid:"blue",react:true,eq:"Pb + CuSO₄ → PbSO₄ + Cu",obs:"ظهر ترسب/تغير على سطح الرصاص، ودل ذلك على حدوث إحلال."},
- {id:2,metal:"Cu",solution:"AgNO₃",metalClass:"copper",liquid:"clear",react:true,eq:"Cu + 2AgNO₃ → Cu(NO₃)₂ + 2Ag",obs:"ظهر ترسب فضي على النحاس، وتغير لون المحلول تدريجيًا."},
- {id:3,metal:"Cu",solution:"HCl",metalClass:"copper",liquid:"colorless",react:false,eq:"NR",obs:"لم يظهر تغير ملحوظ؛ لا يحدث إحلال في المحاكاة."},
- {id:4,metal:"Zn",solution:"Pb(NO₃)₂",metalClass:"zinc",liquid:"clear",react:true,eq:"Zn + Pb(NO₃)₂ → Zn(NO₃)₂ + Pb",obs:"ظهر ترسب/طبقة على الزنك، ما يدل على إحلال الرصاص."},
- {id:5,metal:"Zn",solution:"MgSO₄",metalClass:"zinc",liquid:"clear",react:false,eq:"NR",obs:"لم يظهر تغير ملحوظ؛ لا يحدث إحلال في المحاكاة."},
- {id:6,metal:"Zn",solution:"HCl",metalClass:"zinc",liquid:"colorless",react:true,eq:"Zn + 2HCl → ZnCl₂ + H₂",obs:"ظهرت فقاعات غازية حول الزنك، وهي دليل على تكوّن الهيدروجين."}
+ {id:1,metal:"Pb",solution:"CuSO₄",metalClass:"lead",liquid:"blue",react:true,eq:"Pb + CuSO₄ → PbSO₄ + Cu",visual:"ظهر تغير على سطح الرصاص: طبقة بيضاء من كبريتات الرصاص مع ترسب نحاس بلون مائل إلى الأحمر. راقب المشهد قبل قراءة أي تفسير.",keywords:["طبقة","بيضاء","نحاس","ترسب","لون"],explain:"حدث الإحلال لأن الرصاص أنشط من النحاس؛ فتكوّنت كبريتات الرصاص وظهر النحاس على سطح الرصاص."},
+ {id:2,metal:"Cu",solution:"AgNO₃",metalClass:"copper",liquid:"clear",react:true,eq:"Cu + 2AgNO₃ → Cu(NO₃)₂ + 2Ag",visual:"تكوّنت طبقة/بلورات فضية على النحاس، وبدأ المحلول يأخذ لونًا أزرق تدريجيًا.",keywords:["فضية","فضي","بلورات","أزرق","النحاس"],explain:"حدث الإحلال لأن النحاس أنشط من الفضة؛ فأزاح النحاس أيونات الفضة فتكوّن الفضة على سطحه، وتكوّن محلول نترات النحاس."},
+ {id:3,metal:"Cu",solution:"HCl",metalClass:"copper",liquid:"colorless",react:false,eq:"NR",visual:"لم تلاحظ فقاعات أو طبقة جديدة أو تغيرًا واضحًا في قطعة النحاس؛ بقي المشهد دون تغير ملحوظ. في التجربة الحقيقية تُراعى مدة الانتظار المحددة في الدليل قبل الحكم النهائي.",keywords:["لا","تغير","فقاعات","بقي","دون"],explain:"لم يحدث الإحلال لأن النحاس أقل نشاطًا من الهيدروجين، فلا يستطيع إزاحته من حمض الهيدروكلوريك."},
+ {id:4,metal:"Zn",solution:"Pb(NO₃)₂",metalClass:"zinc",liquid:"clear",react:true,eq:"Zn + Pb(NO₃)₂ → Zn(NO₃)₂ + Pb",visual:"ظهرت مادة رمادية/فضية على سطح الزنك مع تآكل تدريجي بسيط لقطعة الزنك.",keywords:["رمادية","رمادي","فضية","رصاص","تآكل","سطح"],explain:"حدث الإحلال لأن الزنك أنشط من الرصاص؛ فأزاح الزنك الرصاص من مركبه، فترسب الرصاص على سطح الزنك."},
+ {id:5,metal:"Zn",solution:"MgSO₄",metalClass:"zinc",liquid:"clear",react:false,eq:"NR",visual:"بقي المحلول وقطعة الزنك دون تغير بصري ملحوظ؛ لا فقاعات ولا طبقة جديدة. في التجربة الحقيقية تُراعى مدة الانتظار المحددة في الدليل قبل الحكم النهائي.",keywords:["لا","تغير","بقي","دون","فقاعات"],explain:"لم يحدث الإحلال لأن الزنك أقل نشاطًا من المغنيسيوم، لذلك لا يستطيع إزاحته من كبريتات المغنيسيوم."},
+ {id:6,metal:"Zn",solution:"HCl",metalClass:"zinc",liquid:"colorless",react:true,eq:"Zn + 2HCl → ZnCl₂ + H₂",visual:"تصاعدت فقاعات غازية من سطح الزنك، ومع استمرار التفاعل تناقص حجم قطعة الزنك تدريجيًا. لا يتكون راسب صلب.",keywords:["فقاعات","غاز","تآكل","تناقص","زنك"],explain:"حدث الإحلال لأن الزنك أنشط من الهيدروجين، فأزاحه من الحمض وتكوّن غاز الهيدروجين. لا يوجد راسب صلب في هذا التفاعل."}
 ];
 const analysis=[
- {q:"أي الفلزات Pb وCu وZn كان أكثر نشاطًا وفق النتائج؟",opts:["Pb","Cu","Zn"],a:2},
- {q:"أي الفلزات الثلاثة كان أقل نشاطًا وفق النتائج؟",opts:["Pb","Cu","Zn"],a:1},
- {q:"ماذا يدل عدم تفاعل Cu مع HCl في هذه التجربة؟",opts:["النحاس أنشط من الهيدروجين","النحاس أقل نشاطًا من الهيدروجين","لا علاقة للنحاس بالهيدروجين"],a:1},
- {q:"أي دليل بصري ظهر عند تفاعل Zn مع HCl؟",opts:["فقاعات غازية","لا تغير","اختفاء المحلول"],a:0}
+ {q:"إذا كان الفلز X يزيح النحاس ولا يزيح الزنك، فأين يقع X بالنسبة إليهما؟",opts:["أنشط من الزنك","بين الزنك والنحاس في سلسلة النشاط","أقل نشاطًا من النحاس"],a:1},
+ {q:"ما الدليل التجريبي الذي يثبت أن الرصاص أنشط من النحاس؟",opts:["تفاعل Pb مع CuSO₄ وظهور النحاس","عدم تفاعل Cu مع HCl","تكوّن فقاعات مع Zn + HCl"],a:0},
+ {q:"لماذا يتفاعل الزنك مع HCl بينما لا يتفاعل النحاس معه؟",opts:["لأن الزنك أنشط من الهيدروجين والنحاس أقل نشاطًا منه","لأن النحاس فلز غازي","لأن الحمض يتفاعل مع جميع الفلزات بالطريقة نفسها"],a:0},
+ {q:"توقع نتيجة وضع النحاس في محلول كبريتات الزنك ZnSO₄.",opts:["يحدث إحلال ويتكون الزنك","لا يحدث تفاعل إحلال","تتكون فقاعات هيدروجين"],a:1}
 ];
 const quiz=[
- {q:"الصيغة العامة لتفاعل الإحلال البسيط هي:",o:["A + BC → AC + B","AB + CD → AD + CB","A + B → AB"],a:0},
+ {q:"التمثيل الرمزي لتفاعل الإحلال البسيط هو:",o:["B + AC → BC + A","AB + CD → AD + CB","A + B → AB"],a:0},
  {q:"في Zn + CuSO₄ → ZnSO₄ + Cu، الفلز الذي حل محل النحاس هو:",o:["Cu","Zn","S"],a:1},
- {q:"إذا لم يظهر تفاعل إحلال فهذا يعني غالبًا أن الفلز المضاف:",o:["أنشط من الفلز الموجود في المركب","أقل نشاطًا من الفلز الموجود في المركب","غاز دائمًا"],a:1},
+ {q:"أي ترتيب يطابق الاستنتاج المدعوم بهذه التجارب من الأكثر نشاطًا إلى الأقل نشاطًا؟",o:["Zn > Pb > H > Cu > Ag","Ag > Cu > H > Pb > Zn","Cu > Ag > Zn > H > Pb"],a:0},
  {q:"ظهور الفقاعات عند Zn + HCl يدل على تكوّن:",o:["الأكسجين","النيتروجين","الهيدروجين"],a:2},
- {q:"أي معادلة تمثل مثالًا على إحلال فلز للهيدروجين من الحمض؟",o:["Cu + HCl → لا تفاعل","Zn + 2HCl → ZnCl₂ + H₂","Cu + AgNO₃ → Cu(NO₃)₂ + Ag"],a:1}
+ {q:"إذا وُضع النحاس في ZnSO₄، فما المتوقع؟",o:["يحل النحاس محل الزنك","لا يحدث إحلال بسيط","يتكوّن غاز الهيدروجين"],a:1}
 ];
-
-let score=0, completed=new Set(), pred=null, varDone=false, analysisDone=false, quizDone=false, observations={};
+let score=0, completed=new Set(), pred=null, varDone=false, analysisDone=false, quizDone=false, observations={}, testPred={}, analysisCorrect=0, quizCorrect=0;
 
 function $(id){return document.getElementById(id)}
 function toast(msg="+5 نقاط 🎉"){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1400)}
@@ -186,6 +206,8 @@ function updateProgress(){
  $("progress").style.width=p+"%";$("progressText").textContent=`التقدم ${p}% · النقاط ${score}`;
 }
 function go(id){
+ if(id==="report" && !(completed.size===6 && Object.keys(observations).length===6 && analysisDone && quizDone)){toast("أكمل مراحل المختبر أولًا لفتح التقرير النهائي");return}
+ if(id==="quiz" && !(completed.size===6 && Object.keys(observations).length===6 && analysisDone)){toast("أكمل التجارب والملاحظات والتحليل أولًا");return}
  document.querySelectorAll(".section").forEach(x=>x.classList.add("hidden"));
  $(id).classList.remove("hidden");
  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.go===id));
@@ -205,43 +227,67 @@ function checkPrediction(){
  updateProgress();
 }
 function checkVariables(){
- const ok=$("v1").value==="ind"&&$("v2").value==="dep"&&$("v3").value==="const";
- if(ok){if(!varDone){addPoints(10);varDone=true}$("varFeedback").innerHTML='<div class="feedback good">ممتاز! حددت المتغير المستقل والتابع والثابت بصورة صحيحة.</div>'}
- else $("varFeedback").innerHTML='<div class="feedback bad">هناك اختيار غير صحيح. المتغير المستقل هو ما نغيره، والتابع ما نلاحظ/نقيسه، والثابت ما نبقيه كما هو.</div>';
+ const ok=$("v1").value==="ind"&&$("v2").value==="dep"&&["v3","v4","v5","v6","v7","v8"].every(id=>$(id).value==="const");
+ if(ok){if(!varDone){addPoints(10);varDone=true}$("varFeedback").innerHTML='<div class="feedback good">ممتاز! في هذه المجموعة العامل المتغير هو زوج المواد المتفاعلة، بينما نلاحظ حدوث التفاعل وأدلته، ونثبت ظروف مثل حجم المحلول وتركيزه ودرجة الحرارة وكمية الفلز ومساحة سطحه وزمن الملاحظة.</div>'}
+ else $("varFeedback").innerHTML='<div class="feedback bad">راجع الاختيارات: زوج المواد المتفاعلة هو العامل المستقل، وحدوث التفاعل وأدلته المرئية هو التابع، أما حجم وتركيز المحلول ودرجة الحرارة وكمية الفلز ومساحة سطحه وزمن الملاحظة فهي ثوابت.</div>';
  updateProgress();
 }
 function renderLab(){
  $("lab").innerHTML=tests.map(t=>`
- <div class="tubeCard">
+ <div class="tubeCard" id="card${t.id}">
   <div class="tubeTitle">${t.id}) ${t.metal} + ${t.solution}</div>
+  <div class="predictionMini"><b>توقعك:</b> <button class="miniChoice" data-test-pred="${t.id}" data-value="react" onclick="chooseTestPrediction(${t.id},'react')">يحدث تفاعل</button> <button class="miniChoice" data-test-pred="${t.id}" data-value="none" onclick="chooseTestPrediction(${t.id},'none')">لا يحدث تفاعل</button></div>
   <div class="tube">
-   <div class="glass"></div><div class="liquid ${t.liquid}"></div><div class="metal ${t.metalClass}"></div>
-   <div class="deposit" id="dep${t.id}"></div>
+   <div class="glass"></div><div class="liquid ${t.liquid}" id="liq${t.id}"></div><div class="metal ${t.metalClass}" id="metal${t.id}"></div>
+   <div class="coating white" id="coat${t.id}"></div><div class="deposit silver" id="dep${t.id}"></div>
    <div class="bubbles" id="bub${t.id}"><i class="bubble b1"></i><i class="bubble b2"></i><i class="bubble b3"></i><i class="bubble b4"></i></div>
   </div>
-  <div class="obs" id="obs${t.id}">لم تُجرَ التجربة بعد.</div>
+  <div class="visualLegend" id="legend${t.id}">شاهد التغيرات البصرية بعد تنفيذ التجربة.</div>
+  <textarea class="observationInput" id="obsInput${t.id}" placeholder="اكتب ما لاحظته بنفسك: لون، فقاعات، طبقة/ترسب، أو عدم تغير..."></textarea>
+  <div class="obsFeedback" id="obsFeedback${t.id}"></div>
   <button class="btn primary testBtn" onclick="runTest(${t.id})">إجراء التجربة</button>
+  <button class="btn secondary testBtn" onclick="saveOneObservation(${t.id})">حفظ ملاحظتي</button>
  </div>`).join("");
 }
 function runTest(id){
- const t=tests.find(x=>x.id===id), obs=$("obs"+id);
- obs.textContent="جارٍ إجراء التفاعل الافتراضي…";
+ const t=tests.find(x=>x.id===id);
+ if(!testPred[id]){toast("اختر توقعك أولًا قبل إجراء التجربة");return}
+ const obs=$(`legend${id}`); obs.textContent="جارٍ إجراء التفاعل الافتراضي…";
  setTimeout(()=>{
-   obs.innerHTML=`<b>${t.react?"حدث تفاعل إحلال":"لا يحدث تفاعل"}</b><br>${t.obs}<br><span class="badge">المعادلة: ${t.eq}</span>`;
-   if(t.react)$("dep"+id).classList.add("on");
-   if(id===6)$("bub6").classList.add("on");
-   if(t.react && t.liquid==="blue"){}
-   if(!completed.has(id)){completed.add(id);addPoints(5);toast("+5 نقاط لإكمال التجربة 🎉")}
-   observations[id]=t.obs;
+   $(`card${id}`).classList.add("tested");
+   if(t.react){
+     if(id===2){$(`dep${id}`).classList.add("silverOn");$(`liq${id}`).classList.add("blue");}
+     if(id===4){$(`dep${id}`).classList.add("leadOn");}
+     if(id===1){$(`coat${id}`).classList.add("whiteOn");$(`dep${id}`).classList.add("copperOn");}
+     if(id===6){$(`bub6`).classList.add("on");$(`metal6`).classList.add("shrink");}
+   }
+   obs.innerHTML=t.visual;
+   if(!completed.has(id)){completed.add(id);addPoints(5,"+5 نقاط لإكمال التجربة 🎉")}
    renderResultRows();updateProgress();
  },700);
 }
+function chooseTestPrediction(id,value){
+ testPred[id]=value;
+ document.querySelectorAll(`[data-test-pred="${id}"]`).forEach(b=>b.classList.toggle("selected",b.dataset.value===value));
+}
+function saveOneObservation(id){
+ const t=tests.find(x=>x.id===id);
+ if(!completed.has(id)){toast("نفذ التجربة أولًا ثم اكتب ملاحظتك");return}
+ const v=$(`obsInput${id}`).value.trim();
+ if(!v){$(`obsFeedback${id}`).innerHTML='<div class="feedback bad">اكتب ملاحظتك أولًا، ثم احفظها.</div>';return}
+ observations[id]=v;
+ const matches=observationMatch(v,t.keywords);
+ const predMatch=testPred[id]===(t.react?"react":"none");
+ $(`obsFeedback${id}`).innerHTML=`<div class="feedback ${matches?"good":"bad"}><b>${matches?"ملاحظة جيدة":"راجع ملاحظتك"}</b><br>${matches?"رصدت دليلًا مهمًا من المشاهدة.":"حاول التركيز على اللون والفقاعات والطبقة أو عدم التغير."}<br><small>توقعك كان ${predMatch?"متوافقًا":"غير متوافق"} مع النتيجة.</small><hr><b>التغذية العلمية:</b> ${t.explain}</div>`;
+ renderResultRows();updateProgress();
+}
+function observationMatch(text,keywords){return keywords.some(k=>text.includes(k));}
 function renderResultRows(){
- $("resultRows").innerHTML=tests.map(t=>`<tr><td>${t.id}</td><td>${t.metal} + ${t.solution}</td><td><input id="r${t.id}" value="${observations[t.id]||""}" placeholder="اكتب ملاحظتك"></td></tr>`).join("");
+ $("resultRows").innerHTML=tests.map(t=>`<tr><td>${t.id}</td><td>${t.metal} + ${t.solution}</td><td>${escapeHtml(observations[t.id]||"لم تُحفظ بعد")}</td><td>${testPred[t.id]===(t.react?"react":"none")?"متوافق":"غير متوافق"}</td><td>${t.react?"حدث إحلال":"لا يحدث إحلال"}</td></tr>`).join("");
 }
 function saveResults(){
- let count=0;tests.forEach(t=>{const v=$("r"+t.id)?.value.trim();if(v){observations[t.id]=v;count++}});
- $("resultFeedback").innerHTML=count===6?'<div class="feedback good">تم حفظ جميع الملاحظات. انتقل إلى التحليل.</div>':'<div class="feedback bad">اكتب ملاحظة لكل تجربة قبل المتابعة.</div>';
+ const missing=tests.filter(t=>!observations[t.id]);
+ $("resultFeedback").innerHTML=missing.length===0?'<div class="feedback good">تم حفظ جميع الملاحظات ومقارنتها بالنتائج. انتقل إلى التحليل.</div>':'<div class="feedback bad">ما زالت هناك ملاحظات غير محفوظة. احفظ ملاحظتك داخل بطاقة كل تجربة.</div>';
  updateProgress();
 }
 function buildQuestions(){
@@ -251,17 +297,24 @@ function buildQuestions(){
 function checkAnalysis(){
  let correct=0,answered=0;
  analysis.forEach((x,i)=>{const r=document.querySelector(`input[name="a${i}"]:checked`);if(r){answered++;if(+r.value===x.a)correct++}});
- if(answered<analysis.length){$("analysisFeedback").innerHTML='<div class="feedback bad">أجب عن جميع أسئلة التحليل.</div>';return}
- if(!analysisDone){score+=correct*10;analysisDone=true;toast(`+${correct*10} نقاط للتحليل 🎉`)}
- $("analysisFeedback").innerHTML=`<div class="feedback ${correct===analysis.length?"good":"bad"}">أجبت بشكل صحيح عن ${correct} من ${analysis.length}. يمكنك مراجعة الإجابات من خلال النتائج والمختبر.</div>`;
+ const order=[1,2,3,4,5,6].map(i=>$(`o${i}`).value);
+ const expected=["Mg","Zn","Pb","H","Cu","Ag"];
+ const orderOk=order.every(Boolean)&&order.join(",")===expected.join(",");
+ const conclusion=($("conclusionInput").value||"").trim();
+ if(answered<analysis.length||!orderOk||conclusion.length<10){$("analysisFeedback").innerHTML='<div class="feedback bad">أكمل أسئلة التحليل، وابنِ ترتيب النشاط، واكتب استنتاجًا من ملاحظاتك قبل الإرسال.</div>';return}
+ if(!analysisDone){score+=correct*10;analysisCorrect=correct;analysisDone=true;toast(`+${correct*10} نقاط للتحليل 🎉`)}
+ $("orderFeedback").innerHTML='<div class="feedback good">ترتيبك وافق الاستنتاج المدعوم بالمشاهدات: Mg > Zn > Pb > H > Cu > Ag.</div>';
+ $("conclusionFeedback").innerHTML='<div class="feedback good">القاعدة العلمية: يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</div>';
+ $("analysisFeedback").innerHTML=`<div class="feedback ${correct===analysis.length?"good":"bad"}">أجبت بشكل صحيح عن ${correct} من ${analysis.length}. تم حفظ استنتاجك.</div>`;
  updateProgress();
 }
 function checkQuiz(){
+ if(!(completed.size===6 && Object.keys(observations).length===6 && analysisDone)){$("quizFeedback").innerHTML='<div class="feedback bad">أكمل التجارب، واحفظ ملاحظاتك، ثم أنجز التحليل قبل التحدي النهائي.</div>';return}
  let correct=0,answered=0;
  quiz.forEach((x,i)=>{const r=document.querySelector(`input[name="q${i}"]:checked`);if(r){answered++;if(+r.value===x.a)correct++}});
  if(answered<quiz.length){$("quizFeedback").innerHTML='<div class="feedback bad">أجب عن الأسئلة الخمسة أولًا.</div>';return}
- if(!quizDone){score+=correct*10;quizDone=true;toast(`+${correct*10} نقاط في التحدي النهائي 🎉`)}
- $("quizFeedback").innerHTML=`<div class="feedback ${correct===5?"good":"bad"}">نتيجتك في التحدي النهائي: ${correct}/5 إجابات صحيحة.</div>`;
+ if(!quizDone){score+=correct*10;quizCorrect=correct;quizDone=true;toast(`+${correct*10} نقاط في التحدي النهائي 🎉`)}
+ $("quizFeedback").innerHTML=`<div class="feedback ${correct===5?"good":"bad"}">نتيجتك في التحدي النهائي: ${correct}/5 إجابات صحيحة. أصبح التقرير النهائي متاحًا.</div>`;
  updateProgress();setTimeout(()=>go("report"),500);
 }
 function level(){
@@ -272,18 +325,23 @@ function level(){
 function renderReport(){
  const name=$("studentName").value.trim()||"غير مسجل";
  const predText=pred==="react"?"سيحدث إحلال إذا كان الفلز المضاف أنشط":pred==="none"?"لن يحدث إحلال أبدًا":pred==="all"?"كل الفلزات ستتفاعل مع كل المحاليل":"لم يُسجل";
+ const wrongPred=tests.filter(t=>testPred[t.id] && testPred[t.id]!== (t.react?"react":"none")).map(t=>`${t.metal} + ${t.solution}`).join("، ")||"لا توجد";
+ const rows=tests.map(t=>`<tr><td>${t.id}</td><td>${t.metal} + ${t.solution}</td><td>${escapeHtml(observations[t.id]||"-")}</td><td>${t.react?"حدث إحلال":"لا يحدث إحلال"}</td></tr>`).join("");
+ const conclusion=escapeHtml((($("conclusionInput")?.value)||"").trim()||"لم يُسجل");
  $("finalScore").innerHTML=`<div class="score">المجموع: <span class="points">${score}</span> نقطة</div><p><b>اسم الطالب:</b> ${escapeHtml(name)}</p><p><b>التقييم النهائي:</b> ${level()}</p>`;
  $("reportContent").innerHTML=`<h3>تقرير تجربة تفاعلات الإحلال البسيط</h3>
  <table><tr><th>البيان</th><th>التفاصيل</th></tr>
  <tr><td>اسم الطالب</td><td>${escapeHtml(name)}</td></tr>
- <tr><td>التوقع</td><td>${predText}</td></tr>
- <tr><td>النتائج</td><td>${tests.map(t=>`${t.metal} + ${t.solution}: ${t.react?"حدث تفاعل إحلال":"لا يحدث تفاعل"} — ${t.eq}`).join("<br>")}</td></tr>
- <tr><td>الاستنتاج</td><td>يرتبط حدوث الإحلال بنشاط الفلز؛ الفلز الأكثر نشاطًا يستطيع إحلال فلز أقل نشاطًا من مركبه، وتظهر أدلة مثل الترسب أو الفقاعات بحسب التفاعل.</td></tr>
- <tr><td>مجموع النقاط</td><td>${score}</td></tr>
- <tr><td>التقييم</td><td>${level()}</td></tr></table>`;
+ <tr><td>التوقع العام</td><td>${predText}</td></tr>
+ <tr><td>ملاحظات الطالب والنتائج</td><td><table><tr><th>التجربة</th><th>ملاحظة الطالب</th><th>النتيجة</th></tr>${rows}</table></td></tr>
+ <tr><td>التفاعلات التي أخطأ الطالب في توقعها</td><td>${wrongPred}</td></tr>
+ <tr><td>التحليل</td><td>${analysisCorrect} من ${analysis.length} إجابات صحيحة</td></tr>
+ <tr><td>التحدي النهائي</td><td>${quizCorrect} من ${quiz.length} إجابات صحيحة</td></tr>
+ <tr><td>الاستنتاج النهائي</td><td>${conclusion}<br><b>القاعدة العلمية:</b> يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</td></tr>
+ <tr><td>مجموع النقاط</td><td>${score}</td></tr><tr><td>التقييم</td><td>${level()}</td></tr></table>`;
 }
 function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function resetAll(){if(!confirm("هل تريد إعادة التحدي من البداية؟"))return;score=0;completed=new Set();pred=null;varDone=false;analysisDone=false;quizDone=false;observations={};window.predScored=false;$("studentName").value="";document.querySelectorAll("select").forEach(x=>x.value="");document.querySelectorAll("input[type=radio]").forEach(x=>x.checked=false);renderLab();renderResultRows();buildQuestions();go("welcome");updateProgress()}
+function resetAll(){if(!confirm("هل تريد إعادة التحدي من البداية؟"))return;score=0;completed=new Set();pred=null;varDone=false;analysisDone=false;quizDone=false;observations={};testPred={};analysisCorrect=0;quizCorrect=0;window.predScored=false;$("studentName").value="";document.querySelectorAll("select").forEach(x=>x.value="");document.querySelectorAll("input[type=radio]").forEach(x=>x.checked=false);renderLab();renderResultRows();buildQuestions();go("welcome");updateProgress()}
 renderLab();renderResultRows();buildQuestions();updateProgress();
 </script>
 </body>
