@@ -207,7 +207,7 @@ function updateProgress(){
 }
 function go(id){
  if(id==="report" && !(completed.size===6 && Object.keys(observations).length===6 && analysisDone && quizDone)){toast("أكمل مراحل المختبر أولًا لفتح التقرير النهائي");return}
- if(id==="quiz" && !(completed.size===6 && Object.keys(observations).length===6 && analysisDone)){toast("أكمل التجارب والملاحظات والتحليل أولًا");return}
+ if(id==="quiz" && !analysisDone){toast("أكمل مرحلة التحليل أولًا");return}
  document.querySelectorAll(".section").forEach(x=>x.classList.add("hidden"));
  $(id).classList.remove("hidden");
  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.go===id));
@@ -300,7 +300,13 @@ function checkAnalysis(){
  const order=[1,2,3,4,5,6].map(i=>$(`o${i}`).value);
  const expected=["Mg","Zn","Pb","H","Cu","Ag"];
  const orderOk=order.every(Boolean)&&order.join(",")===expected.join(",");
- const conclusion=($("conclusionInput").value||"").trim();
+ const conclusion=($('conclusionInput').value||"").trim();
+ const missingTests=6-completed.size;
+ const missingNotes=6-Object.keys(observations).length;
+ if(missingTests>0 || missingNotes>0){
+   $("analysisFeedback").innerHTML=`<div class="feedback bad">أكمل جميع التجارب واحفظ جميع الملاحظات أولًا. المتبقي: ${missingTests} تجربة و${missingNotes} ملاحظة.</div>`;
+   return;
+ }
  if(answered<analysis.length||!orderOk||conclusion.length<10){$("analysisFeedback").innerHTML='<div class="feedback bad">أكمل أسئلة التحليل، وابنِ ترتيب النشاط، واكتب استنتاجًا من ملاحظاتك قبل الإرسال.</div>';return}
  if(!analysisDone){score+=correct*10;analysisCorrect=correct;analysisDone=true;toast(`+${correct*10} نقاط للتحليل 🎉`)}
  $("orderFeedback").innerHTML='<div class="feedback good">ترتيبك وافق الاستنتاج المدعوم بالمشاهدات: Mg > Zn > Pb > H > Cu > Ag.</div>';
