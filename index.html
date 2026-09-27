@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,35 +14,122 @@ button{cursor:pointer}
 .app{max-width:1180px;margin:auto;padding:18px}
 .top{background:linear-gradient(135deg,#103b63,#147d89);color:#fff;border-radius:24px;padding:24px;box-shadow:0 12px 30px #17324d25}
 .toprow{display:flex;gap:15px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px}.atom{width:52px;height:52px;border:3px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:26px}
-h1,h2,h3{margin-top:0}.top h1{margin:0;font-size:clamp(25px,4vw,38px)}.top p{margin:8px 0 0;opacity:.9}
-.student{display:flex;gap:8px;align-items:center;background:#ffffff18;padding:8px;border-radius:14px}.student input{width:210px;border:0;border-radius:9px;padding:9px}
-.progressWrap{margin-top:18px}.progressBar{height:12px;background:#ffffff35;border-radius:20px;overflow:hidden}.progress{height:100%;background:#ffd76a;width:0%;transition:.5s}.progressText{font-size:13px;margin-top:6px}
+.brand{display:flex;align-items:center;gap:12px}
+.atom{width:52px;height:52px;border:3px solid #fff;border-radius:50%;display:grid;place-items:center;font-size:26px}
+h1,h2,h3{margin-top:0}
+.top h1{margin:0;font-size:clamp(25px,4vw,38px)}
+.top p{margin:8px 0 0;opacity:.9}
+.student{display:flex;gap:8px;align-items:center;background:#ffffff18;padding:8px;border-radius:14px}
+.student input{width:210px;border:0;border-radius:9px;padding:9px}
+.progressWrap{margin-top:18px}
+.progressBar{height:12px;background:#ffffff35;border-radius:20px;overflow:hidden}
+.progress{height:100%;background:#ffd76a;width:0%;transition:.5s}
+.progressText{font-size:13px;margin-top:6px}
 .layout{display:grid;grid-template-columns:250px 1fr;gap:16px;margin-top:16px}
 .nav,.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 7px 22px #17324d12}
-.nav{padding:12px;height:max-content;position:sticky;top:12px}.nav button{width:100%;text-align:right;background:transparent;border:0;padding:12px;border-radius:12px;color:var(--ink);margin:2px 0}.nav button.active{background:#e7f3fb;color:#075b95;font-weight:bold}
-.main{min-width:0}.card{padding:22px;margin-bottom:16px}.hidden{display:none!important}
+.nav{padding:12px;height:max-content;position:sticky;top:12px}
+.nav button{width:100%;text-align:right;background:transparent;border:0;padding:12px;border-radius:12px;color:var(--ink);margin:2px 0}
+.nav button.active{background:#e7f3fb;color:#075b95;font-weight:bold}
+.main{min-width:0}
+.card{padding:22px;margin-bottom:16px}
+.hidden{display:none!important}
 .badge{display:inline-block;background:#e7f5f3;color:#08736f;padding:5px 10px;border-radius:999px;font-size:13px;font-weight:bold}
-.btn{border:0;border-radius:12px;padding:11px 17px;font-weight:bold;transition:.15s}.btn:hover{transform:translateY(-1px)}.primary{background:var(--primary);color:#fff}.secondary{background:#e7eef4;color:var(--ink)}.success{background:var(--good);color:#fff}.danger{background:#b73535;color:#fff}.gold{background:#f0b323;color:#fff}
+.btn{border:0;border-radius:12px;padding:11px 17px;font-weight:bold;transition:.15s}
+.btn:hover{transform:translateY(-1px)}
+.primary{background:var(--primary);color:#fff}
+.secondary{background:#e7eef4;color:var(--ink)}
+.success{background:var(--good);color:#fff}
+.danger{background:#b73535;color:#fff}
+.gold{background:#f0b323;color:#fff}
 .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.choiceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.choice{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;text-align:center}.choice.selected{border-color:var(--primary);background:#eaf5fc}.choice.correct{border-color:var(--good);background:#edf9f2}.choice.wrong{border-color:var(--bad);background:#fff0f0}
-.feedback{margin-top:12px;padding:12px;border-radius:12px;background:#f3f7fa}.feedback.good{background:#eaf8f0;color:#116b40}.feedback.bad{background:#fff0f0;color:#9d2c2c}
-.infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.infoBox{background:#f6f9fb;border:1px solid var(--line);border-radius:14px;padding:15px}
-.variables{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.variables select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
-.score{font-size:22px;font-weight:bold}.points{color:var(--gold)}
-.labControls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:15px}.tubeCard{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfdff}.tubeTitle{font-weight:bold;min-height:44px}.tube{height:210px;position:relative;margin:5px auto 10px;width:125px}.glass{position:absolute;inset:0;border:3px solid #7e9caf;border-top:0;border-radius:0 0 28px 28px;background:linear-gradient(90deg,#ffffff70,#dff3ff45,#ffffff70);overflow:hidden}
-.liquid{position:absolute;left:5px;right:5px;bottom:5px;height:145px;border-radius:0 0 22px 22px;background:#9dd9ff88;transition:.7s}.liquid.blue{background:#3188d888}.liquid.clear{background:#dff7ff88}.liquid.green{background:#60b87888}.liquid.colorless{background:#eaf6fb99}
-.metal{position:absolute;bottom:34px;left:42px;width:42px;height:65px;border-radius:8px;background:linear-gradient(90deg,#777,#d5d5d5,#888);box-shadow:0 2px 5px #0003;z-index:3;transition:.6s}.metal.copper{background:linear-gradient(90deg,#9a4b28,#e38b4b,#8e4327)}.metal.zinc{background:linear-gradient(90deg,#8b98a0,#e4ebef,#87939a)}.metal.lead{background:linear-gradient(90deg,#49545d,#9aa6ad,#46515a)}
-.deposit{position:absolute;bottom:28px;left:34px;width:58px;height:18px;border-radius:50%;background:#d8a12c;opacity:0;z-index:4;transition:.7s}.deposit.on{opacity:1;transform:translateY(-28px) scale(1.2)}
-.coating{position:absolute;bottom:36px;left:37px;width:52px;height:58px;border-radius:10px;opacity:0;z-index:4;transition:.8s}.coating.white{background:linear-gradient(90deg,#eef0f2,#fff,#d8dde1)}.coating.whiteOn{opacity:.9}.deposit.silver{background:linear-gradient(90deg,#777,#eee,#999);opacity:0}.deposit.silverOn,.deposit.leadOn,.deposit.copperOn{opacity:1;transform:translateY(-24px) scale(1.15)}.deposit.leadOn{background:linear-gradient(90deg,#4b555c,#b3bcc2,#59636a)}.deposit.copperOn{background:linear-gradient(90deg,#8b3f20,#e48a4a,#9b4b2a)}.metal.shrink{transform:scale(.72);transform-origin:bottom center}.predictionMini{font-size:13px;margin:8px 0}.miniChoice{border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 9px;margin:2px}.miniChoice.selected{border-color:var(--primary);background:#eaf5fc;font-weight:bold}.visualLegend{min-height:50px;background:#f3f8fb;border-radius:10px;padding:9px;font-size:13px}.observationInput{width:100%;min-height:70px;margin-top:8px;border:1px solid var(--line);border-radius:10px;padding:9px;resize:vertical}.obsFeedback{margin-top:8px}.hint{margin-top:12px;background:#eef7fb;border:1px solid #cfe4ef;border-radius:12px;padding:12px}.orderGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}.orderGrid select{padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}.question textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}.tested{border-color:#91c7a9}.report table table{font-size:13px}@media(max-width:850px){.orderGrid{grid-template-columns:repeat(2,1fr)}}
-.bubbles{position:absolute;bottom:52px;left:0;right:0;height:115px;opacity:0;z-index:5}.bubbles.on{opacity:1}.bubble{position:absolute;width:8px;height:8px;border:2px solid #fff;border-radius:50%;animation:up 1.5s infinite ease-in}.b1{left:38%;bottom:0}.b2{left:55%;bottom:15px;animation-delay:.3s}.b3{left:48%;bottom:35px;animation-delay:.7s}.b4{left:63%;bottom:8px;animation-delay:1s}@keyframes up{to{transform:translateY(-85px);opacity:0}}
-.obs{min-height:58px;background:#f5f8fa;border-radius:12px;padding:10px;font-size:14px}.testBtn{width:100%;margin-top:8px}
-.results{width:100%;border-collapse:collapse}.results th,.results td{border:1px solid var(--line);padding:9px;text-align:center}.results th{background:#eaf3f8}.results input{width:100%;border:1px solid var(--line);border-radius:7px;padding:6px}
-.question{border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:12px}.options{display:grid;gap:8px;margin-top:10px}.options label{padding:10px;border:1px solid var(--line);border-radius:10px}.options label:hover{background:#f4f8fb}
-.report{background:#fff;padding:25px;border-radius:15px}.report table{width:100%;border-collapse:collapse}.report td,.report th{border:1px solid #ccc;padding:8px}
-.toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(30px);background:#17324d;color:#fff;padding:12px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:.3s;z-index:99}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:850px){.layout{grid-template-columns:1fr}.nav{position:static;display:flex;overflow:auto;gap:5px}.nav button{min-width:130px;text-align:center}.infoGrid,.variables,.labControls,.choiceGrid{grid-template-columns:1fr}.student input{width:150px}}
-@media print{body{background:#fff}.top,.nav,.actions,.noPrint{display:none!important}.layout{display:block}.card{box-shadow:none;border:0}.report{display:block!important}}
+.choiceGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.choice{border:2px solid var(--line);background:#fff;border-radius:14px;padding:15px;text-align:center}
+.choice.selected{border-color:var(--primary);background:#eaf5fc}
+.choice.correct{border-color:var(--good);background:#edf9f2}
+.choice.wrong{border-color:var(--bad);background:#fff0f0}
+.feedback{margin-top:12px;padding:12px;border-radius:12px;background:#f3f7fa}
+.feedback.good{background:#eaf8f0;color:#116b40}
+.feedback.bad{background:#fff0f0;color:#9d2c2c}
+.infoGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.infoBox{background:#f6f9fb;border:1px solid var(--line);border-radius:14px;padding:15px}
+.variables{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.variables select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.score{font-size:22px;font-weight:bold}
+.points{color:var(--gold)}
+.labControls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:15px}
+.tubeCard{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fbfdff}
+.tubeTitle{font-weight:bold;min-height:44px}
+.tube{height:210px;position:relative;margin:5px auto 10px;width:125px}
+.glass{position:absolute;inset:0;border:3px solid #7e9caf;border-top:0;border-radius:0 0 28px 28px;background:linear-gradient(90deg,#ffffff70,#dff3ff45,#ffffff70);overflow:hidden}
+.liquid{position:absolute;left:5px;right:5px;bottom:5px;height:145px;border-radius:0 0 22px 22px;background:#9dd9ff88;transition:.7s}
+.liquid.blue{background:#3188d888}
+.liquid.clear{background:#dff7ff88}
+.liquid.green{background:#60b87888}
+.liquid.colorless{background:#eaf6fb99}
+.metal{position:absolute;bottom:34px;left:42px;width:42px;height:65px;border-radius:8px;background:linear-gradient(90deg,#777,#d5d5d5,#888);box-shadow:0 2px 5px #0003;z-index:3;transition:.6s}
+.metal.copper{background:linear-gradient(90deg,#9a4b28,#e38b4b,#8e4327)}
+.metal.zinc{background:linear-gradient(90deg,#8b98a0,#e4ebef,#87939a)}
+.metal.lead{background:linear-gradient(90deg,#49545d,#9aa6ad,#46515a)}
+.deposit{position:absolute;bottom:28px;left:34px;width:58px;height:18px;border-radius:50%;background:#d8a12c;opacity:0;z-index:4;transition:.7s}
+.deposit.on{opacity:1;transform:translateY(-28px) scale(1.2)}
+.coating{position:absolute;bottom:36px;left:37px;width:52px;height:58px;border-radius:10px;opacity:0;z-index:4;transition:.8s}
+.coating.white{background:linear-gradient(90deg,#eef0f2,#fff,#d8dde1)}
+.coating.whiteOn{opacity:.9}
+.deposit.silver{background:linear-gradient(90deg,#777,#eee,#999);opacity:0}
+.deposit.silverOn,.deposit.leadOn,.deposit.copperOn{opacity:1;transform:translateY(-24px) scale(1.15)}
+.deposit.leadOn{background:linear-gradient(90deg,#4b555c,#b3bcc2,#59636a)}
+.deposit.copperOn{background:linear-gradient(90deg,#8b3f20,#e48a4b,#9b4b2a)}
+.metal.shrink{transform:scale(.72);transform-origin:bottom center}
+.predictionMini{font-size:13px;margin:8px 0}
+.miniChoice{border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 9px;margin:2px}
+.miniChoice.selected{border-color:var(--primary);background:#eaf5fc;font-weight:bold}
+.visualLegend{min-height:50px;background:#f3f8fb;border-radius:10px;padding:9px;font-size:13px}
+.observationInput{width:100%;min-height:70px;margin-top:8px;border:1px solid var(--line);border-radius:10px;padding:9px;resize:vertical}
+.obsFeedback{margin-top:8px}
+.hint{margin-top:12px;background:#eef7fb;border:1px solid #cfe4ef;border-radius:12px;padding:12px}
+.orderGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:10px}
+.orderGrid select{padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.question textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:10px;padding:10px;margin-top:8px}
+.tested{border-color:#91c7a9}
+.report table table{font-size:13px}
+@media(max-width:850px){.orderGrid{grid-template-columns:repeat(2,1fr)}}
+.bubbles{position:absolute;bottom:52px;left:0;right:0;height:115px;opacity:0;z-index:5}
+.bubbles.on{opacity:1}
+.bubble{position:absolute;width:8px;height:8px;border:2px solid #fff;border-radius:50%;animation:up 1.5s infinite ease-in}
+.b1{left:38%;bottom:0}
+.b2{left:55%;bottom:15px;animation-delay:.3s}
+.b3{left:48%;bottom:35px;animation-delay:.7s}
+.b4{left:63%;bottom:8px;animation-delay:1s}
+@keyframes up{to{transform:translateY(-85px);opacity:0}}
+.obs{min-height:58px;background:#f5f8fa;border-radius:12px;padding:10px;font-size:14px}
+.testBtn{width:100%;margin-top:8px}
+.results{width:100%;border-collapse:collapse}
+.results th,.results td{border:1px solid var(--line);padding:9px;text-align:center}
+.results th{background:#eaf3f8}
+.results input{width:100%;border:1px solid var(--line);border-radius:7px;padding:6px}
+.question{border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:12px}
+.options{display:grid;gap:8px;margin-top:10px}
+.options label{padding:10px;border:1px solid var(--line);border-radius:10px}
+.options label:hover{background:#f4f8fb}
+.report{background:#fff;padding:25px;border-radius:15px}
+.report table{width:100%;border-collapse:collapse}
+.report td,.report th{border:1px solid #ccc;padding:8px}
+.toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(30px);background:#17324d;color:#fff;padding:12px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:.3s;z-index:99}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:850px){
+ .layout{grid-template-columns:1fr}
+ .nav{position:static;display:flex;overflow:auto;gap:5px}
+ .nav button{min-width:130px;text-align:center}
+ .infoGrid,.variables,.labControls,.choiceGrid{grid-template-columns:1fr}
+ .student input{width:150px}
+}
+@media print{
+ body{background:#fff}
+ .top,.nav,.actions,.noPrint{display:none!important}
+ .layout{display:block}
+ .card{box-shadow:none;border:0}
+ .report{display:block!important}
+}
 </style>
 </head>
 <body>
@@ -182,32 +270,49 @@ const tests=[
  {id:5,metal:"Zn",solution:"MgSO₄",metalClass:"zinc",liquid:"clear",react:false,eq:"NR",visual:"بقي المحلول وقطعة الزنك دون تغير بصري ملحوظ؛ لا فقاعات ولا طبقة جديدة. في التجربة الحقيقية تُراعى مدة الانتظار المحددة في الدليل قبل الحكم النهائي.",keywords:["لا","تغير","بقي","دون","فقاعات"],explain:"لم يحدث الإحلال لأن الزنك أقل نشاطًا من المغنيسيوم، لذلك لا يستطيع إزاحته من كبريتات المغنيسيوم."},
  {id:6,metal:"Zn",solution:"HCl",metalClass:"zinc",liquid:"colorless",react:true,eq:"Zn + 2HCl → ZnCl₂ + H₂",visual:"تصاعدت فقاعات غازية من سطح الزنك، ومع استمرار التفاعل تناقص حجم قطعة الزنك تدريجيًا. لا يتكون راسب صلب.",keywords:["فقاعات","غاز","تآكل","تناقص","زنك"],explain:"حدث الإحلال لأن الزنك أنشط من الهيدروجين، فأزاحه من الحمض وتكوّن غاز الهيدروجين. لا يوجد راسب صلب في هذا التفاعل."}
 ];
+
 const analysis=[
  {q:"إذا كان الفلز X يزيح النحاس ولا يزيح الزنك، فأين يقع X بالنسبة إليهما؟",opts:["أنشط من الزنك","بين الزنك والنحاس في سلسلة النشاط","أقل نشاطًا من النحاس"],a:1},
  {q:"ما الدليل التجريبي الذي يثبت أن الرصاص أنشط من النحاس؟",opts:["تفاعل Pb مع CuSO₄ وظهور النحاس","عدم تفاعل Cu مع HCl","تكوّن فقاعات مع Zn + HCl"],a:0},
  {q:"لماذا يتفاعل الزنك مع HCl بينما لا يتفاعل النحاس معه؟",opts:["لأن الزنك أنشط من الهيدروجين والنحاس أقل نشاطًا منه","لأن النحاس فلز غازي","لأن الحمض يتفاعل مع جميع الفلزات بالطريقة نفسها"],a:0},
  {q:"توقع نتيجة وضع النحاس في محلول كبريتات الزنك ZnSO₄.",opts:["يحدث إحلال ويتكون الزنك","لا يحدث تفاعل إحلال","تتكون فقاعات هيدروجين"],a:1}
 ];
+
 const quiz=[
- {q:"التمثيل الرمزي لتفاعل الإحلال البسيط هو:",o:["B + AC → BC + A","AB + CD → AD + CB","A + B → AB"],a:0},
+ {q:"التمثيل الرمزي لتفاعل الإحلال البسيط هو:",o:["A + BC → AC + B","AB + CD → AD + CB","A + B → AB"],a:0},
  {q:"في Zn + CuSO₄ → ZnSO₄ + Cu، الفلز الذي حل محل النحاس هو:",o:["Cu","Zn","S"],a:1},
  {q:"أي ترتيب يطابق الاستنتاج المدعوم بهذه التجارب من الأكثر نشاطًا إلى الأقل نشاطًا؟",o:["Zn > Pb > H > Cu > Ag","Ag > Cu > H > Pb > Zn","Cu > Ag > Zn > H > Pb"],a:0},
  {q:"ظهور الفقاعات عند Zn + HCl يدل على تكوّن:",o:["الأكسجين","النيتروجين","الهيدروجين"],a:2},
  {q:"إذا وُضع النحاس في ZnSO₄، فما المتوقع؟",o:["يحل النحاس محل الزنك","لا يحدث إحلال بسيط","يتكوّن غاز الهيدروجين"],a:1}
 ];
+
 let score=0, completed=new Set(), pred=null, varDone=false, analysisDone=false, quizDone=false, observations={}, testPred={}, analysisCorrect=0, quizCorrect=0;
 
 function $(id){return document.getElementById(id)}
-function toast(msg="+5 نقاط 🎉"){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1400)}
-function addPoints(n,msg){score+=n;toast(msg||`+${n} نقاط 🎉`);updateProgress()}
+function toast(msg="+5 نقاط 🎉"){
+ const t=$("toast");
+ t.textContent=msg;
+ t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),1400)
+}
+function addPoints(n,msg){
+ score+=n;
+ toast(msg||`+${n} نقاط 🎉`);
+ updateProgress()
+}
 function updateProgress(){
- const steps=[pred!==null,varDone,completed.size===6,Object.keys(observations).length===6,analysisDone,quizDone];
+ const steps=[!!window.predScored,varDone,completed.size===6,Object.keys(observations).length===6,analysisDone,quizDone];
  const p=Math.round(steps.filter(Boolean).length/steps.length*100);
- $("progress").style.width=p+"%";$("progressText").textContent=`التقدم ${p}% · النقاط ${score}`;
+ $("progress").style.width=p+"%";
+ $("progressText").textContent=`التقدم ${p}% · النقاط ${score}`;
 }
 function go(id){
- if(id==="report" && !(completed.size===6 && Object.keys(observations).length===6 && analysisDone && quizDone)){toast("أكمل مراحل المختبر أولًا لفتح التقرير النهائي");return}
- if(id==="quiz" && !analysisDone){toast("أكمل مرحلة التحليل أولًا");return}
+ if(id==="report" && !(window.predScored && varDone && completed.size===6 && Object.keys(observations).length===6 && analysisDone && quizDone)){
+  toast("أكمل مراحل المختبر أولًا لفتح التقرير النهائي");return
+ }
+ if(id==="quiz" && !analysisDone){
+  toast("أكمل مرحلة التحليل أولًا");return
+ }
  document.querySelectorAll(".section").forEach(x=>x.classList.add("hidden"));
  $(id).classList.remove("hidden");
  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.go===id));
@@ -218,20 +323,37 @@ function go(id){
 document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
 
 document.querySelectorAll("[data-pred]").forEach(b=>b.addEventListener("click",()=>{
- document.querySelectorAll("[data-pred]").forEach(x=>x.classList.remove("selected"));b.classList.add("selected");pred=b.dataset.pred;
+ document.querySelectorAll("[data-pred]").forEach(x=>x.classList.remove("selected"));
+ b.classList.add("selected");
+ pred=b.dataset.pred;
 }));
+
 function checkPrediction(){
- if(pred===null){$("predFeedback").innerHTML='<div class="feedback bad">اختر توقعًا أولًا.</div>';return}
- if(pred==="react"){if(!window.predScored){addPoints(10);window.predScored=true} $("predFeedback").innerHTML='<div class="feedback good">توقع علمي صحيح: يحدث الإحلال عندما يكون الفلز المضاف أكثر نشاطًا من الفلز الذي يحل محله.</div>'}
- else $("predFeedback").innerHTML='<div class="feedback bad">التوقع يحتاج مراجعة. فكّر في نشاط الفلزات وقدرتها على إحلال فلز آخر.</div>';
+ if(pred===null){
+  $("predFeedback").innerHTML='<div class="feedback bad">اختر توقعًا أولًا.</div>';return
+ }
+ if(pred==="react"){
+  if(!window.predScored){addPoints(10);window.predScored=true}
+  $("predFeedback").innerHTML='<div class="feedback good">توقع علمي صحيح: يحدث الإحلال عندما يكون الفلز المضاف أكثر نشاطًا من الفلز الذي يحل محله.</div>';
+ }else{
+  if(window.predScored){score-=10;window.predScored=false;toast("تم تحديث نقاط التوقع")}
+  $("predFeedback").innerHTML='<div class="feedback bad">التوقع يحتاج مراجعة. فكّر في نشاط الفلزات وقدرتها على إحلال فلز آخر.</div>';
+ }
  updateProgress();
 }
+
 function checkVariables(){
  const ok=$("v1").value==="ind"&&$("v2").value==="dep"&&["v3","v4","v5","v6","v7","v8"].every(id=>$(id).value==="const");
- if(ok){if(!varDone){addPoints(10);varDone=true}$("varFeedback").innerHTML='<div class="feedback good">ممتاز! في هذه المجموعة العامل المتغير هو زوج المواد المتفاعلة، بينما نلاحظ حدوث التفاعل وأدلته، ونثبت ظروف مثل حجم المحلول وتركيزه ودرجة الحرارة وكمية الفلز ومساحة سطحه وزمن الملاحظة.</div>'}
- else $("varFeedback").innerHTML='<div class="feedback bad">راجع الاختيارات: زوج المواد المتفاعلة هو العامل المستقل، وحدوث التفاعل وأدلته المرئية هو التابع، أما حجم وتركيز المحلول ودرجة الحرارة وكمية الفلز ومساحة سطحه وزمن الملاحظة فهي ثوابت.</div>';
+ if(ok){
+  if(!varDone){addPoints(10);varDone=true}
+  $("varFeedback").innerHTML='<div class="feedback good">ممتاز! في هذه المجموعة العامل المتغير هو زوج المواد المتفاعلة، بينما نلاحظ حدوث التفاعل وأدلته، ونثبت ظروف مثل حجم المحلول وتركيزه ودرجة الحرارة وكمية الفلز ومساحة سطحه وزمن الملاحظة.</div>';
+ }else{
+  if(varDone){score-=10;varDone=false;toast("تم تحديث نقاط المتغيرات")}
+  $("varFeedback").innerHTML='<div class="feedback bad">راجع الاختيارات: زوج المواد المتفاعلة هو العامل المستقل، وحدوث التفاعل وأدلته المرئية هو التابع، أما حجم وتركيز المحلول ودرجة الحرارة وكمية الفلز ومساحة سطحه وزمن الملاحظة فهي ثوابت.</div>';
+ }
  updateProgress();
 }
+
 function renderLab(){
  $("lab").innerHTML=tests.map(t=>`
  <div class="tubeCard" id="card${t.id}">
@@ -242,34 +364,39 @@ function renderLab(){
    <div class="coating white" id="coat${t.id}"></div><div class="deposit silver" id="dep${t.id}"></div>
    <div class="bubbles" id="bub${t.id}"><i class="bubble b1"></i><i class="bubble b2"></i><i class="bubble b3"></i><i class="bubble b4"></i></div>
   </div>
-  <div class="visualLegend" id="legend${t.id}">شاهد التغيرات البصرية بعد تنفيذ التجربة.</div>
+  <div class="visualLegend" id="legend${t.id}">راقب التغير في الأنبوب، ثم اكتب ما لاحظته.</div>
   <textarea class="observationInput" id="obsInput${t.id}" placeholder="اكتب ما لاحظته بنفسك: لون، فقاعات، طبقة/ترسب، أو عدم تغير..."></textarea>
   <div class="obsFeedback" id="obsFeedback${t.id}"></div>
   <button class="btn primary testBtn" onclick="runTest(${t.id})">إجراء التجربة</button>
   <button class="btn secondary testBtn" onclick="saveOneObservation(${t.id})">حفظ ملاحظتي</button>
  </div>`).join("");
 }
+
 function runTest(id){
  const t=tests.find(x=>x.id===id);
  if(!testPred[id]){toast("اختر توقعك أولًا قبل إجراء التجربة");return}
- const obs=$(`legend${id}`); obs.textContent="جارٍ إجراء التفاعل الافتراضي…";
+ const obs=$(`legend${id}`);
+ obs.textContent="جارٍ إجراء التفاعل الافتراضي…";
  setTimeout(()=>{
-   $(`card${id}`).classList.add("tested");
-   if(t.react){
-     if(id===2){$(`dep${id}`).classList.add("silverOn");$(`liq${id}`).classList.add("blue");}
-     if(id===4){$(`dep${id}`).classList.add("leadOn");}
-     if(id===1){$(`coat${id}`).classList.add("whiteOn");$(`dep${id}`).classList.add("copperOn");}
-     if(id===6){$(`bub6`).classList.add("on");$(`metal6`).classList.add("shrink");}
-   }
-   obs.innerHTML=t.visual;
-   if(!completed.has(id)){completed.add(id);addPoints(5,"+5 نقاط لإكمال التجربة 🎉")}
-   renderResultRows();updateProgress();
+  $(`card${id}`).classList.add("tested");
+  if(t.react){
+   if(id===2){$(`dep${id}`).classList.add("silverOn");$(`liq${id}`).classList.add("blue")}
+   if(id===4){$(`dep${id}`).classList.add("leadOn")}
+   if(id===1){$(`coat${id}`).classList.add("whiteOn");$(`dep${id}`).classList.add("copperOn")}
+   if(id===6){$(`bub6`).classList.add("on");$(`metal6`).classList.add("shrink")}
+  }
+  obs.textContent="راقب التغير في الأنبوب، ثم اكتب ما لاحظته واضغط «حفظ ملاحظتي» لعرض الملاحظة النموذجية والتفسير.";
+  if(!completed.has(id)){completed.add(id);addPoints(5,"+5 نقاط لإكمال التجربة 🎉")}
+  renderResultRows();
+  updateProgress();
  },700);
 }
+
 function chooseTestPrediction(id,value){
  testPred[id]=value;
  document.querySelectorAll(`[data-test-pred="${id}"]`).forEach(b=>b.classList.toggle("selected",b.dataset.value===value));
 }
+
 function saveOneObservation(id){
  const t=tests.find(x=>x.id===id);
  if(!completed.has(id)){toast("نفذ التجربة أولًا ثم اكتب ملاحظتك");return}
@@ -278,136 +405,155 @@ function saveOneObservation(id){
  observations[id]=v;
  const matches=observationMatch(v,t.keywords);
  const predMatch=testPred[id]===(t.react?"react":"none");
- $(`obsFeedback${id}`).innerHTML=`<div class="feedback ${matches?"good":"bad"}><b>${matches?"ملاحظة جيدة":"راجع ملاحظتك"}</b><br>${matches?"رصدت دليلًا مهمًا من المشاهدة.":"حاول التركيز على اللون والفقاعات والطبقة أو عدم التغير."}<br><small>توقعك كان ${predMatch?"متوافقًا":"غير متوافق"} مع النتيجة.</small><hr><b>التغذية العلمية:</b> ${t.explain}</div>`;
- renderResultRows();updateProgress();
+ $(`obsFeedback${id}`).innerHTML=`<div class="feedback ${matches?"good":"bad"}"><b>${matches?"ملاحظة جيدة":"راجع ملاحظتك"}</b><br>${matches?"رصدت دليلًا مهمًا من المشاهدة.":"حاول التركيز على اللون والفقاعات والطبقة أو عدم التغير."}<br><small>توقعك كان ${predMatch?"متوافقًا":"غير متوافق"} مع النتيجة.</small><hr><b>الملاحظة العلمية النموذجية:</b> ${t.visual}<br><b>التفسير العلمي:</b> ${t.explain}</div>`;
+ renderResultRows();
+ updateProgress();
 }
-function observationMatch(text,keywords){return keywords.some(k=>text.includes(k));}
+
+function observationMatch(text,keywords){
+ return keywords.some(k=>text.includes(k))
+}
 function syncTypedObservations(){
-  tests.forEach(t=>{
-    if(observations[t.id]) return;
-    const el=$(`obsInput${t.id}`);
-    const v=el ? el.value.trim() : "";
-    if(!v) return;
-    observations[t.id]=v;
-    const matches=observationMatch(v,t.keywords);
-    const predMatch=testPred[t.id]===(t.react?"react":"none");
-    const fb=$(`obsFeedback${t.id}`);
-    if(fb){
-      fb.innerHTML=`<div class="feedback ${matches?"good":"bad"}"><b>${matches?"ملاحظة جيدة":"راجع ملاحظتك"}</b><br>${matches?"رصدت دليلًا مهمًا من المشاهدة.":"حاول التركيز على اللون والفقاعات والطبقة أو عدم التغير."}<br><small>توقعك كان ${predMatch?"متوافقًا":"غير متوافق"} مع النتيجة.</small><hr><b>التغذية العلمية:</b> ${t.explain}</div>`;
-    }
-  });
-  renderResultRows();
-  updateProgress();
+ // لا تُحفظ الملاحظات المكتوبة تلقائيًا؛ يجب على الطالب ضغط «حفظ ملاحظتي» لكل تجربة.
+ renderResultRows();
+ updateProgress();
 }
 
 function renderResultRows(){
- $("resultRows").innerHTML=tests.map(t=>`<tr><td>${t.id}</td><td>${t.metal} + ${t.solution}</td><td>${escapeHtml(observations[t.id]||"لم تُحفظ بعد")}</td><td>${testPred[t.id]===(t.react?"react":"none")?"متوافق":"غير متوافق"}</td><td>${t.react?"حدث إحلال":"لا يحدث إحلال"}</td></tr>`).join("");
+ $("resultRows").innerHTML=tests.map(t=>{
+  const saved=Object.prototype.hasOwnProperty.call(observations,t.id);
+  const predictionChecked=completed.has(t.id)&&saved;
+  return `<tr><td>${t.id}</td><td>${t.metal} + ${t.solution}</td><td>${escapeHtml(saved?observations[t.id]:"لم تُحفظ بعد")}</td><td>${predictionChecked?(testPred[t.id]===(t.react?"react":"none")?"متوافق":"غير متوافق"):"يظهر بعد حفظ الملاحظة"}</td><td>${saved?(t.react?"حدث إحلال":"لا يحدث إحلال"):"يظهر بعد حفظ الملاحظة"}</td></tr>`;
+ }).join("");
 }
+
 function saveResults(){
  const missing=tests.filter(t=>!observations[t.id]);
  $("resultFeedback").innerHTML=missing.length===0?'<div class="feedback good">تم حفظ جميع الملاحظات ومقارنتها بالنتائج. انتقل إلى التحليل.</div>':'<div class="feedback bad">ما زالت هناك ملاحظات غير محفوظة. احفظ ملاحظتك داخل بطاقة كل تجربة.</div>';
  updateProgress();
 }
+
 function buildQuestions(){
  $("analysisQuestions").innerHTML=analysis.map((x,i)=>`<div class="question"><b>${i+1}. ${x.q}</b><div class="options">${x.opts.map((o,j)=>`<label><input type="radio" name="a${i}" value="${j}"> ${o}</label>`).join("")}</div></div>`).join("");
  $("quizQuestions").innerHTML=quiz.map((x,i)=>`<div class="question"><b>${i+1}. ${x.q}</b><div class="options">${x.o.map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join("")}</div></div>`).join("");
 }
+
 function checkAnalysis(){
-  // حفظ أي ملاحظات كتبها الطالب ولم يضغط زر "حفظ ملاحظتي" عليها.
-  syncTypedObservations();
+ // لا نحفظ الملاحظات تلقائيًا؛ حتى لا تظهر الملاحظة النموذجية قبل ضغط زر الحفظ.
+ syncTypedObservations();
 
-  let correct=0,answered=0;
-  const review=[];
-  analysis.forEach((x,i)=>{
-    const r=document.querySelector(`input[name="a${i}"]:checked`);
-    if(r){
-      answered++;
-      const isCorrect=+r.value===x.a;
-      if(isCorrect) correct++;
-      review.push(
-        `<div class="feedback ${isCorrect?"good":"bad"}" style="margin-top:8px">
-          <b>السؤال ${i+1}: ${isCorrect?"✓ إجابة صحيحة":"✗ إجابة غير صحيحة"}</b>
-          ${isCorrect
-            ? "<br>إجابتك صحيحة."
-            : `<br>إجابتك: ${escapeHtml(x.opts[+r.value]||"—")}<br><b>الإجابة الصحيحة:</b> ${escapeHtml(x.opts[x.a])}`}
-        </div>`
-      );
-    } else {
-      review.push(`<div class="feedback bad" style="margin-top:8px"><b>السؤال ${i+1}: لم تتم الإجابة</b></div>`);
-    }
-  });
-
-  const order=[1,2,3,4,5,6].map(i=>$(`o${i}`).value);
-  const expected=["Mg","Zn","Pb","H","Cu","Ag"];
-  const orderOk=order.every(Boolean)&&order.join(",")===expected.join(",");
-  const conclusion=($('conclusionInput').value||"").trim();
-  const missingTests=6-completed.size;
-  const missingNotes=6-Object.keys(observations).length;
-
-  // عرض حالة الإكمال بوضوح بدل الرسالة العامة فقط.
-  if(missingTests>0 || missingNotes>0){
-    $("analysisFeedback").innerHTML=
-      `<div class="feedback bad">
-        <b>لا يمكن الانتقال بعد.</b><br>
-        التجارب المكتملة: ${completed.size} من 6.<br>
-        الملاحظات المحفوظة: ${Object.keys(observations).length} من 6.<br>
-        المتبقي: ${missingTests} تجربة و${missingNotes} ملاحظة.
-        ${missingNotes>0?"<br><small>إذا كتبت الملاحظة ولم تضغط «حفظ ملاحظتي»، يكفي الآن الضغط على «تحقق من الإجابات» ليتم حفظ الملاحظات المكتوبة تلقائيًا.</small>":""}
-      </div>`;
-    updateProgress();
-    return;
-  }
-
-  if(answered<analysis.length || !orderOk || conclusion.length<10){
-    $("analysisFeedback").innerHTML=
-      `<div class="feedback bad">
-        <b>أكمل المتطلبات التالية:</b>
-        ${answered<analysis.length?"<br>• أجب عن جميع أسئلة التحليل.":""}
-        ${!orderOk?"<br>• أكمل ترتيب سلسلة النشاط بالشكل الصحيح.":""}
-        ${conclusion.length<10?"<br>• اكتب استنتاجًا لا يقل عن 10 أحرف.":""}
-      </div>`+
-      (answered>0 ? `<div style="margin-top:10px"><b>مراجعة الإجابات التي أجبت عنها:</b>${review.join("")}</div>` : "");
-    return;
-  }
-
-  if(!analysisDone){
-    score+=correct*10;
-    analysisCorrect=correct;
-    analysisDone=true;
-    toast(`+${correct*10} نقاط للتحليل 🎉`);
-  }
-
-  $("orderFeedback").innerHTML=
-    `<div class="feedback good"><b>✓ ترتيب سلسلة النشاط صحيح.</b><br>
-    Mg > Zn > Pb > H > Cu > Ag</div>`;
-
-  $("conclusionFeedback").innerHTML=
-    '<div class="feedback good">القاعدة العلمية: يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</div>';
-
-  $("analysisFeedback").innerHTML=
-    `<div class="feedback ${correct===analysis.length?"good":"bad"}">
-      <b>نتيجة التحليل: ${correct} من ${analysis.length}</b><br>
-      تم حفظ استنتاجك، ويمكنك الانتقال إلى التحدي النهائي.
-    </div>
-    <div style="margin-top:10px"><b>مراجعة إجاباتك:</b>${review.join("")}</div>`;
-
-  updateProgress();
-  setTimeout(()=>go("quiz"),1200);
-}
-function checkQuiz(){
- if(!(completed.size===6 && Object.keys(observations).length===6 && analysisDone)){$("quizFeedback").innerHTML='<div class="feedback bad">أكمل التجارب، واحفظ ملاحظاتك، ثم أنجز التحليل قبل التحدي النهائي.</div>';return}
  let correct=0,answered=0;
- quiz.forEach((x,i)=>{const r=document.querySelector(`input[name="q${i}"]:checked`);if(r){answered++;if(+r.value===x.a)correct++}});
- if(answered<quiz.length){$("quizFeedback").innerHTML='<div class="feedback bad">أجب عن الأسئلة الخمسة أولًا.</div>';return}
- if(!quizDone){score+=correct*10;quizCorrect=correct;quizDone=true;toast(`+${correct*10} نقاط في التحدي النهائي 🎉`)}
- $("quizFeedback").innerHTML=`<div class="feedback ${correct===5?"good":"bad"}">نتيجتك في التحدي النهائي: ${correct}/5 إجابات صحيحة. أصبح التقرير النهائي متاحًا.</div>`;
- updateProgress();setTimeout(()=>go("report"),500);
+ const review=[];
+ analysis.forEach((x,i)=>{
+  const r=document.querySelector(`input[name="a${i}"]:checked`);
+  if(r){
+   answered++;
+   const isCorrect=+r.value===x.a;
+   if(isCorrect)correct++;
+   review.push(
+    `<div class="feedback ${isCorrect?"good":"bad"}" style="margin-top:8px">
+      <b>السؤال ${i+1}: ${isCorrect?"✓ إجابة صحيحة":"✗ إجابة غير صحيحة"}</b>
+      ${isCorrect
+       ? "<br>إجابتك صحيحة."
+       : `<br>إجابتك: ${escapeHtml(x.opts[+r.value]||"—")}<br><b>الإجابة الصحيحة:</b> ${escapeHtml(x.opts[x.a])}`}
+    </div>`
+   );
+  }else{
+   review.push(`<div class="feedback bad" style="margin-top:8px"><b>السؤال ${i+1}: لم تتم الإجابة</b></div>`);
+  }
+ });
+
+ const order=[1,2,3,4,5,6].map(i=>$(`o${i}`).value);
+ const expected=["Mg","Zn","Pb","H","Cu","Ag"];
+ const orderOk=order.every(Boolean)&&order.join(",")===expected.join(",");
+ const conclusion=($("conclusionInput").value||"").trim();
+ const missingTests=6-completed.size;
+ const missingNotes=6-Object.keys(observations).length;
+
+ if(missingTests>0 || missingNotes>0){
+  $("analysisFeedback").innerHTML=
+   `<div class="feedback bad">
+     <b>لا يمكن الانتقال بعد.</b><br>
+     التجارب المكتملة: ${completed.size} من 6.<br>
+     الملاحظات المحفوظة: ${Object.keys(observations).length} من 6.<br>
+     المتبقي: ${missingTests} تجربة و${missingNotes} ملاحظة.
+     ${missingNotes>0?"<br><small>ارجع إلى المختبر واضغط «حفظ ملاحظتي» لكل تجربة بعد كتابة ملاحظتك؛ لن تُحفظ الملاحظات تلقائيًا.</small>":""}
+   </div>`;
+  updateProgress();
+  return;
+ }
+
+ if(answered<analysis.length || !orderOk || conclusion.length<10){
+  $("analysisFeedback").innerHTML=
+   `<div class="feedback bad">
+     <b>أكمل المتطلبات التالية:</b>
+     ${answered<analysis.length?"<br>• أجب عن جميع أسئلة التحليل.":""}
+     ${!orderOk?"<br>• أكمل ترتيب سلسلة النشاط بالشكل الصحيح.":""}
+     ${conclusion.length<10?"<br>• اكتب استنتاجًا لا يقل عن 10 أحرف.":""}
+   </div>`+
+   (answered>0 ? `<div style="margin-top:10px"><b>مراجعة الإجابات التي أجبت عنها:</b>${review.join("")}</div>` : "");
+  return;
+ }
+
+ const previousAnalysis=analysisDone?analysisCorrect:0;
+ score+=(correct-previousAnalysis)*10;
+ analysisCorrect=correct;
+ analysisDone=true;
+ toast(`${correct-previousAnalysis>=0?"+":""}${(correct-previousAnalysis)*10} نقاط بعد مراجعة التحليل 🎉`);
+
+ $("orderFeedback").innerHTML=
+  `<div class="feedback good"><b>✓ ترتيب سلسلة النشاط صحيح.</b><br>
+  Mg > Zn > Pb > H > Cu > Ag</div>`;
+
+ $("conclusionFeedback").innerHTML=
+  '<div class="feedback good">القاعدة العلمية: يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</div>';
+
+ $("analysisFeedback").innerHTML=
+  `<div class="feedback ${correct===analysis.length?"good":"bad"}">
+    <b>نتيجة التحليل: ${correct} من ${analysis.length}</b><br>
+    تم حفظ استنتاجك، ويمكنك الانتقال إلى التحدي النهائي.
+  </div>
+  <div style="margin-top:10px"><b>مراجعة إجاباتك:</b>${review.join("")}</div>`;
+
+ updateProgress();
+ setTimeout(()=>go("quiz"),1200);
 }
+
+function checkQuiz(){
+ if(!(completed.size===6 && Object.keys(observations).length===6 && analysisDone)){
+  $("quizFeedback").innerHTML='<div class="feedback bad">أكمل التجارب، واحفظ ملاحظاتك، ثم أنجز التحليل قبل التحدي النهائي.</div>';return
+ }
+ let correct=0,answered=0;
+ const review=[];
+ quiz.forEach((x,i)=>{
+  const r=document.querySelector(`input[name="q${i}"]:checked`);
+  if(r){
+   answered++;
+   const isCorrect=+r.value===x.a;
+   if(isCorrect)correct++;
+   review.push(`<div class="feedback ${isCorrect?"good":"bad"}" style="margin-top:8px"><b>السؤال ${i+1}: ${isCorrect?"✓ إجابة صحيحة":"✗ إجابة غير صحيحة"}</b>${isCorrect?"<br>أحسنت، إجابتك صحيحة.":`<br>إجابتك: ${escapeHtml(x.o[+r.value]||"—")}<br><b>الإجابة الصحيحة:</b> ${escapeHtml(x.o[x.a])}`}</div>`);
+  }else{
+   review.push(`<div class="feedback bad" style="margin-top:8px"><b>السؤال ${i+1}: لم تتم الإجابة.</b></div>`);
+  }
+ });
+ if(answered<quiz.length){
+  $("quizFeedback").innerHTML='<div class="feedback bad">أجب عن الأسئلة الخمسة أولًا.</div>'+review.join("");return
+ }
+ const previous=quizDone?quizCorrect:0;
+ score+=(correct-previous)*10;
+ quizCorrect=correct;
+ quizDone=true;
+ toast(`${correct-previous>=0?"+":""}${(correct-previous)*10} نقاط بعد مراجعة التحدي 🎉`);
+ $("quizFeedback").innerHTML=`<div class="feedback ${correct===5?"good":"bad"}"><b>نتيجتك في التحدي النهائي: ${correct}/5 إجابات صحيحة.</b><br>راجع تفاصيل كل سؤال أدناه. أصبح التقرير النهائي متاحًا.</div>`+review.join("");
+ updateProgress();
+}
+
 function level(){
  if(score>=100)return"عالم محترف";
  if(score>=65)return"باحث متميز";
  return"عالم مبتدئ";
 }
+
 function renderReport(){
  const name=$("studentName").value.trim()||"غير مسجل";
  const predText=pred==="react"?"سيحدث إحلال إذا كان الفلز المضاف أنشط":pred==="none"?"لن يحدث إحلال أبدًا":pred==="all"?"كل الفلزات ستتفاعل مع كل المحاليل":"لم يُسجل";
@@ -426,8 +572,18 @@ function renderReport(){
  <tr><td>الاستنتاج النهائي</td><td>${conclusion}<br><b>القاعدة العلمية:</b> يستطيع الفلز الأكثر نشاطًا أن يحل محل الفلز الأقل نشاطًا أو الهيدروجين في مركباته.</td></tr>
  <tr><td>مجموع النقاط</td><td>${score}</td></tr><tr><td>التقييم</td><td>${level()}</td></tr></table>`;
 }
-function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function resetAll(){if(!confirm("هل تريد إعادة التحدي من البداية؟"))return;score=0;completed=new Set();pred=null;varDone=false;analysisDone=false;quizDone=false;observations={};testPred={};analysisCorrect=0;quizCorrect=0;window.predScored=false;$("studentName").value="";document.querySelectorAll("select").forEach(x=>x.value="");document.querySelectorAll("input[type=radio]").forEach(x=>x.checked=false);renderLab();renderResultRows();buildQuestions();go("welcome");updateProgress()}
+
+function escapeHtml(s){
+ return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))
+}
+function resetAll(){
+ if(!confirm("هل تريد إعادة التحدي من البداية؟"))return;
+ score=0;completed=new Set();pred=null;varDone=false;analysisDone=false;quizDone=false;observations={};testPred={};analysisCorrect=0;quizCorrect=0;window.predScored=false;
+ $("studentName").value="";
+ document.querySelectorAll("select").forEach(x=>x.value="");
+ document.querySelectorAll("input[type=radio]").forEach(x=>x.checked=false);
+ renderLab();renderResultRows();buildQuestions();go("welcome");updateProgress()
+}
 renderLab();renderResultRows();buildQuestions();updateProgress();
 </script>
 </body>
