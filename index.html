@@ -3,193 +3,312 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>تجربة 1.1 — التقنيات المختبرية والسلامة في المختبر</title>
+<title>مختبر افتراضي واقعي — الاستعمال الفعال لموقد بنزن 1.2</title>
 <style>
-:root{--ink:#16324f;--blue:#0b6fa4;--teal:#0e9aa7;--gold:#e8a33a;--bg:#eef5f8;--card:#fff;--ok:#16855b;--bad:#b73535}
-*{box-sizing:border-box} body{margin:0;font-family:"Tahoma","Arial",sans-serif;background:linear-gradient(135deg,#eaf4f7,#f8fbfc);color:var(--ink)}
-header{background:linear-gradient(135deg,#073b5c,#0b7894);color:#fff;padding:28px 5vw;box-shadow:0 6px 20px #1233  }
-header h1{margin:0 0 8px;font-size:clamp(25px,4vw,42px)} header p{margin:0;font-size:17px;opacity:.95}
-.wrap{max-width:1200px;margin:auto;padding:22px}
-.progress{height:12px;background:#d7e5ea;border-radius:20px;overflow:hidden;margin:14px 0 20px}.bar{height:100%;width:0;background:linear-gradient(90deg,#e8a33a,#20b4a8);transition:.35s}
-nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px} nav button,.btn{border:0;border-radius:12px;padding:11px 15px;background:#fff;color:var(--ink);box-shadow:0 2px 9px #1232;cursor:pointer;font-weight:700} nav button.active,.btn.primary{background:var(--blue);color:#fff}
-section{display:none}.active-section{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 5px 18px #15334b16;border:1px solid #dbe8ed}
-.card h2,.card h3{margin-top:0}.tag{display:inline-block;background:#e8f5f6;color:#08737d;border-radius:999px;padding:5px 10px;font-size:13px;font-weight:700}
-.callout{border-right:5px solid var(--gold);background:#fff7e8;padding:13px;border-radius:10px;margin:12px 0}
-.lab{min-height:330px;position:relative;overflow:hidden;border-radius:18px;background:linear-gradient(#bfe3ee 0 62%,#d5c6a6 62%);border:3px solid #c4dce4}
-.lab:before{content:"";position:absolute;left:6%;right:6%;top:16%;height:18%;background:linear-gradient(#dce9ef,#a8c1cc);border-radius:14px;box-shadow:inset 0 0 0 5px #9bb2bc}
-.bench{position:absolute;bottom:18%;left:7%;right:7%;height:18px;background:#765d4a;border-radius:7px}.stand{position:absolute;bottom:18%;right:18%;width:10px;height:58%;background:#5c6770}.arm{position:absolute;bottom:66%;right:18%;width:145px;height:9px;background:#5c6770}
-.beaker{position:absolute;bottom:25%;right:35%;width:120px;height:125px;border:5px solid #477789;border-top:0;border-radius:0 0 22px 22px;background:linear-gradient(#ffffff88,#ffffff22);transform:perspective(400px) rotateY(-8deg);box-shadow:inset 0 -48px 0 #8bd1ef99}
-.beaker:after{content:"";position:absolute;left:16px;right:16px;bottom:18px;height:42px;background:#e9e9e955;border-top:2px solid #fff}
-.scale{position:absolute;bottom:25%;left:18%;width:155px;height:70px;background:#dfe6e8;border:5px solid #65747b;border-radius:12px;box-shadow:0 10px 0 #526169}.scale:after{content:"⚖️";position:absolute;font-size:32px;left:54px;top:13px}
-.filter{position:absolute;bottom:24%;left:58%;width:150px;height:120px}.funnel{width:70px;height:70px;margin:auto;border-left:8px solid #789; border-right:8px solid #789;border-bottom:10px solid #789;clip-path:polygon(0 0,100% 0,62% 70%,62% 100%,38% 100%,38% 70%);background:#fff8}.paper{width:54px;height:22px;background:#f4e4b6;border-radius:50%;margin:-3px auto 0}.tube{height:50px;width:8px;background:#789;margin:auto}
-.flame{position:absolute;bottom:18%;right:43%;width:28px;height:65px;background:linear-gradient(#58c9ff,#0578cf);clip-path:polygon(50% 0,78% 38%,100% 67%,78% 100%,22% 100%,0 67%,22% 38%);display:none}.flame.on{display:block}
-input,textarea,select{width:100%;padding:10px;border:1px solid #c7d9df;border-radius:10px;font:inherit} textarea{min-height:90px}
-.measure{display:grid;grid-template-columns:1fr 1fr;gap:10px}.result{padding:12px;border-radius:10px;background:#edf8f4;margin-top:10px;font-weight:700}
-.choice{display:block;width:100%;text-align:right;margin:8px 0;padding:12px;border:1px solid #d4e1e6;border-radius:10px;background:#fff;cursor:pointer}.choice:hover{background:#eef8fb}
-.feedback{padding:10px;border-radius:10px;margin-top:8px;font-weight:700}.ok{background:#e5f7ef;color:var(--ok)}.bad{background:#fdeaea;color:var(--bad)}
-table{width:100%;border-collapse:collapse;margin-top:10px}th,td{border:1px solid #c8d8de;padding:9px;text-align:center}th{background:#e8f2f5}
-footer{text-align:center;color:#55717e;padding:30px}
-.small{font-size:13px;color:#5e7480}.hidden{display:none}
-@media(max-width:700px){.measure{grid-template-columns:1fr}.lab{min-height:280px}.beaker{right:30%;transform:scale(.85)}}
+:root{--navy:#123b59;--teal:#087d82;--cyan:#3bb8c2;--gold:#e4aa32;--bg:#edf4f7;--card:#fff;--ink:#17384f;--muted:#617786;--danger:#c94d42;--ok:#168253}
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 20% 10%,#fff 0,#edf4f7 45%,#e3edf2 100%);line-height:1.65}
+header{color:#fff;background:linear-gradient(135deg,#0c385a,#087d82);padding:20px 0;box-shadow:0 5px 22px #0b304425}
+.wrap{max-width:1280px;margin:auto;padding:0 18px}
+.top{display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+h1{font-size:clamp(25px,4vw,43px);margin:0}.sub{margin:3px 0 0;opacity:.9}
+.student{display:flex;align-items:center;gap:8px}.student input{padding:10px;border:0;border-radius:9px;font:inherit;width:190px}
+.progress{height:9px;background:#ffffff38;border-radius:99px;margin-top:16px;overflow:hidden}.progress i{display:block;height:100%;width:12%;background:#ffd46a;transition:.3s}
+main{padding:18px 0 35px}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}nav button,.btn{border:0;border-radius:10px;padding:10px 14px;background:#fff;color:var(--ink);font-weight:700;cursor:pointer;box-shadow:0 2px 9px #12384f16}nav button.active,.btn.primary{background:var(--teal);color:#fff}
+section{display:none}.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:15px}.card{background:#fff;border:1px solid #d8e6ec;border-radius:18px;padding:18px;box-shadow:0 5px 18px #153c5312}
+h2,h3{color:#075b78;margin-top:0}.tag{display:inline-block;padding:4px 10px;background:#e4f4f4;color:#087477;border-radius:99px;font-weight:bold}
+.callout{padding:13px 15px;background:#fff7df;border-right:5px solid var(--gold);border-radius:11px;margin:12px 0}
+.danger{padding:13px 15px;background:#fff0ef;border-right:5px solid var(--danger);border-radius:11px}
+.ok{padding:13px 15px;background:#ecf8f1;border-right:5px solid var(--ok);border-radius:11px}
+label{font-weight:700;display:block;margin:8px 0 4px}input[type=number],select,textarea{width:100%;padding:9px;border:1px solid #cbd9df;border-radius:8px;font:inherit}textarea{min-height:90px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:720px){.row{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;background:#fff}th,td{border:1px solid #ccd9df;padding:8px;text-align:center}th{background:#eaf3f6}
+.hidden{display:none!important}.muted{color:var(--muted)}.q{margin:15px 0 5px;font-weight:bold}.ans{padding:10px;background:#eef8f2;border-right:4px solid var(--ok);border-radius:9px}
+.lab{position:relative;height:520px;border-radius:20px;overflow:hidden;background:linear-gradient(#dcecf3 0 67%,#b2c0c5 67%);box-shadow:inset 0 0 50px #183d4b22}
+.wallline{position:absolute;top:0;left:0;right:0;height:6px;background:#d6e1e5}
+.bench{position:absolute;bottom:0;left:0;right:0;height:34%;background:linear-gradient(#8e9da1,#6e7e83);box-shadow:inset 0 8px 0 #aebbc0}
+.shelf{position:absolute;top:38px;right:5%;width:90%;height:7px;background:#8d9a9f}.shelf:before,.shelf:after{content:"";position:absolute;top:7px;width:8px;height:105px;background:#9ca9ad}.shelf:before{right:8%}.shelf:after{left:8%}
+.bottle{position:absolute;top:57px;width:48px;height:78px;background:#cde8e9;border:2px solid #6d8b92;border-radius:8px 8px 12px 12px}.bottle:before{content:"";position:absolute;top:-17px;left:12px;width:20px;height:17px;background:#6d7e83;border-radius:4px}.b1{right:17%}.b2{right:23%}.b3{left:18%}
+.labelx{font-size:10px;text-align:center;padding-top:28px;color:#31505b}
+.burner{position:absolute;bottom:19%;left:50%;transform:translateX(-50%);width:125px;height:190px;z-index:5}
+.base{position:absolute;bottom:0;left:5px;width:115px;height:20px;background:linear-gradient(#c5cdd0,#69767a 55%,#4c585c);border-radius:50%;box-shadow:0 4px 8px #20363d55}
+.tube{position:absolute;bottom:14px;left:39px;width:47px;height:102px;background:linear-gradient(90deg,#4f5b5f,#aeb8bb 45%,#606b6f);border-radius:8px;box-shadow:inset 3px 0 4px #ffffff55,inset -4px 0 5px #26383d55}
+.collar{position:absolute;bottom:92px;left:26px;width:73px;height:19px;background:linear-gradient(#68757a,#343e42);border-radius:6px;box-shadow:0 2px 4px #1e303555}
+.nozzle{position:absolute;bottom:105px;left:50%;transform:translateX(-50%);width:31px;height:20px;background:linear-gradient(#aeb7ba,#555f63);border-radius:5px 5px 9px 9px;box-shadow:inset 0 2px 2px #ffffff66}
+.airhole{position:absolute;bottom:84px;width:9px;height:9px;border-radius:50%;background:#1f2b2e;box-shadow:0 0 0 2px #aab4b6}.airhole.a{left:29px}.airhole.b{right:29px}
+.flame{position:absolute;bottom:116px;left:50%;transform:translateX(-50%);width:92px;height:165px;opacity:.15;filter:drop-shadow(0 0 14px #49bfe9);transition:.25s}
+.flame:before{content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%) rotate(45deg);width:72px;height:116px;background:linear-gradient(145deg,#55c8ee 5%,#169bd0 55%,#087bb5 100%);border-radius:55% 0 55% 55%;box-shadow:0 0 22px #42c9f055,0 0 45px #58d5ff44;animation:flicker .16s infinite alternate}
+.flame:after{content:"";position:absolute;left:50%;bottom:7px;transform:translateX(-50%) rotate(45deg);width:39px;height:73px;background:linear-gradient(145deg,#d9f9ff,#68d9f5 55%,#1ca7d4);border-radius:55% 0 55% 55%;box-shadow:0 0 13px #d9fbff99}
+.flame .inner{position:absolute;left:50%;bottom:7px;transform:translateX(-50%) rotate(45deg);width:17px;height:41px;background:#effdff;border-radius:60% 0 60% 60%;z-index:2}
+.flame.on{opacity:1}
+.flame.state-low{filter:drop-shadow(0 0 16px #ff9b1a)}
+.flame.state-low:before{background:linear-gradient(145deg,#fff28a,#ffc42b 55%,#ef7715);box-shadow:0 0 28px #ffad2eaa}
+.flame.state-low:after{background:linear-gradient(145deg,#fffbd0,#ffe15a,#ff941c)}
+.flame.state-low .inner{background:#fffbdc}
+.flame.state-mid{filter:drop-shadow(0 0 15px #ffc33c)}
+.flame.state-mid:before{background:linear-gradient(145deg,#dff68a 0%,#e8d13e 35%,#4bb9d4 75%,#158cb9);box-shadow:0 0 24px #e6c63e88}
+.flame.state-mid:after{background:linear-gradient(145deg,#fff5b0,#d9e879 45%,#52c6e4)}
+.flame.state-mid .inner{background:#f7ffe5}
+.flame.state-high{filter:drop-shadow(0 0 14px #49c9ef)}
+.flame.state-high:before{background:linear-gradient(145deg,#70d8f4 5%,#159fd2 55%,#087bb5 100%);box-shadow:0 0 22px #42c9f055,0 0 45px #58d5ff44}
+.flame.state-high:after{background:linear-gradient(145deg,#e8fcff,#70d9f5 55%,#1ca7d4)}
+.flame.state-high .inner{background:#ffffff}
+@keyframes flicker{from{transform:translateX(-50%) rotate(43deg) scale(.97,1.02)}to{transform:translateX(-50%) rotate(47deg) scale(1.03,.98)}}
+.flame.on:before{animation:flicker .13s infinite alternate}
+.rack{position:absolute;left:50%;transform:translateX(-50%);width:220px;height:9px;background:#68777c;border-radius:3px;bottom:var(--rack,52%);transition:bottom .35s}
+.stand{position:absolute;bottom:22%;left:calc(50% + 125px);width:8px;height:65%;background:#606e72}.ring{position:absolute;left:calc(50% + 77px);bottom:var(--rack,52%);width:95px;height:8px;border-radius:50%;border:7px solid #657277;border-top-width:5px;transform:translateY(3px)}
+.beaker{position:absolute;left:50%;transform:translateX(-50%);width:130px;height:112px;bottom:calc(var(--rack,52%) + 9px);border:4px solid #73939a;border-top:0;border-radius:0 0 18px 18px;background:linear-gradient(transparent 0 30%,#a9e4ed 30%);transition:bottom .35s}
+.beaker:before{content:"250 mL";position:absolute;right:7px;top:42px;font-size:11px;color:#50727a}.water{position:absolute;left:5px;right:5px;bottom:4px;height:66px;border-radius:0 0 13px 13px;background:linear-gradient(#87d9e8,#54b7cc);animation:water 2s infinite ease-in-out alternate}@keyframes water{to{height:69px}}
+.thermo{position:absolute;left:calc(50% + 45px);bottom:calc(var(--rack,52%) + 17px);width:10px;height:120px;background:#eee;border:2px solid #657b83;border-radius:10px;transform:rotate(7deg);z-index:3}.thermo:after{content:"";position:absolute;bottom:-9px;left:-5px;width:18px;height:18px;border-radius:50%;background:#e85c55}.mercury{position:absolute;bottom:9px;left:2px;width:4px;height:70px;background:#e85c55;border-radius:4px}
+.ruler{position:absolute;bottom:8%;left:8%;width:220px;height:30px;background:repeating-linear-gradient(90deg,#f5d66b 0 9px,#9d7d29 9px 10px);border:2px solid #806925;border-radius:3px}
+.ruler span{font-size:10px;margin:3px}
+.hud{position:absolute;top:15px;left:15px;background:#082c3bcf;color:#fff;padding:10px 13px;border-radius:12px;z-index:8}
+.bubble{position:absolute;right:16px;top:15px;background:#fff;padding:10px 13px;border-radius:12px;box-shadow:0 3px 15px #17384f20;z-index:8}
+.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:850px){.controls{grid-template-columns:1fr 1fr}}
+.control{background:#f4f8fa;border:1px solid #d6e4e9;border-radius:12px;padding:11px}.control input[type=range]{width:100%}
+.big{font-size:28px;font-weight:bold}.small{font-size:12px;color:#617786}
+.status{padding:10px;border-radius:10px;margin-top:9px;font-weight:bold}.status.good{background:#e8f7ee;color:#176d46}.status.bad{background:#fff0ef;color:#a33e38}.status.neutral{background:#edf3f6;color:#365a6c}
+
+.teacherbar{position:sticky;top:0;z-index:50;background:#082f49;color:#fff;padding:9px 12px;border-radius:12px;margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;box-shadow:0 4px 14px #082f4933}
+.teacherbar .tb{border:1px solid #ffffff44;background:#ffffff12;color:#fff;border-radius:9px;padding:8px 12px;font-weight:700;cursor:pointer}
+.teacherbar .tb.on{background:#e2aa35;color:#17384f}
+.teacherbar .hint{font-size:12px;opacity:.88;margin-right:auto}
+body.projector{background:#071d2b}
+body.projector header{padding:10px 0}
+body.projector .wrap{max-width:1500px}
+body.projector main{padding-top:10px}
+body.projector nav{display:none}
+body.projector .card{box-shadow:0 8px 28px #0005}
+body.projector h1{font-size:clamp(28px,4vw,52px)}
+body.projector .lab{height:min(68vh,700px)}
+.answer-lock{display:none}
+.teacher-mode .answer-lock{display:block}
+.answer-lock .ans{display:none}
+.teacher-mode .answer-lock .ans{display:block}
+.reveal{display:none}
+.teacher-mode .reveal{display:inline-block}
+.teacher-mode .student{display:flex}
+.teacher-mode .teacher-only{display:block}
+.teacher-only{display:none}
+
 </style>
 </head>
 <body>
-<header>
-<div class="wrap">
-<span class="tag">كيمياء 1 • تجربة 1.1</span>
-<h1>🧪 التقنيات المختبرية والسلامة في المختبر</h1>
-<p>مهمة تفاعلية: قياس الكتلة والحجم وفصل مخلوط الملح والرمل بالترشيح.</p>
-<div class="progress"><div class="bar" id="bar"></div></div>
+<header><div class="wrap">
+<div class="top"><div><h1>🔥 الاستعمال الفعّال لموقد بنزن</h1><div class="sub">تجربة 1.2 — مختبر افتراضي يحاكي إجراءات التجربة المدرسية</div></div>
+<div class="student"><b>اسم الطالب:</b><input id="student" placeholder="اكتب اسمك"></div></div>
+<div class="progress"><i id="prog"></i></div>
+</div></header>
+<main class="wrap">
+<div class="teacherbar" id="teacherbar">
+  <button class="tb" id="teacherToggle">👨‍🏫 وضع المعلم: مغلق</button>
+  <button class="tb" id="projectorBtn">🖥️ وضع العرض</button>
+  <button class="tb" id="answersBtn">👁️ إظهار الإجابات</button>
+  <button class="tb" id="homeBtn">🏠 بداية الدرس</button>
+  <span class="hint">وضع العرض مخصص لك كمعلم؛ الطلاب يشاهدون الشاشة فقط ولا يحتاجون إلى فتح الرابط.</span>
 </div>
-</header>
 
-<div class="wrap">
-<nav id="nav"></nav>
+<nav id="nav">
+<button class="active" data-id="intro">المهمة</button><button data-id="lab">المختبر الواقعي</button><button data-id="predict">التوقع</button><button data-id="data">البيانات</button><button data-id="answers">كل الإجابات</button><button data-id="worksheet">ورقة التجربة</button><button data-id="quiz">التقويم</button>
+</nav>
 
-<section id="s0" class="active-section">
+<section id="intro" class="active">
 <div class="grid">
-<div class="card">
-<h2>🎯 مهمة اليوم</h2>
-<p>أنت وفريقك تعملون كفريق كيميائي. أمامكم مخلوط من <b>ملح الطعام والرمل والماء</b>، وعليكم استخدام أدوات المختبر لقياس الكتلة والحجم وفصل مكونات المخلوط بالترشيح.</p>
-<div class="callout"><b>السؤال المحوري:</b> كيف نقيس الكتلة؟ كيف نقيس حجم السائل؟ وكيف نفصل مكونات المخلوط؟</div>
-<button class="btn primary" onclick="go(1)">ابدأ المهمة ▶</button>
+<div class="card"><span class="tag">🎯 التحدي</span><h2>اكتشف الارتفاع الأكثر فاعلية</h2><p>ستعمل داخل مختبر افتراضي. اضبط الغاز والأكسجين، افحص لون الشعلة، غيّر ارتفاع شبكة التسخين، ثم شغّل التسخين وسجّل زمن الغليان.</p><div class="callout"><b>قاعدة التجربة:</b> غيّر ارتفاع شبكة التسخين فقط، وحافظ على بقية العوامل ثابتة قدر الإمكان.</div></div>
+<div class="card"><h2>🔬 ماذا نحاكي؟</h2><ul><li>موقد بنزن وشعلة زرقاء ومخروط داخلي.</li><li>شبكة تسخين وكأس 250 mL.</li><li>100 mL من الماء المقطر.</li><li>قياس ارتفاع الشبكة.</li><li>مقياس حرارة وساعة إيقاف.</li><li>أربعة ارتفاعات وتجارب متتابعة.</li></ul></div>
+<div class="card"><h2>🛡️ السلامة</h2><p>المحاكاة للتعلم، أما التجربة الحقيقية فتُنفذ تحت إشراف المعلم فقط. لا تُشعل موقد بنزن فعليًا دون تدريب وتعليمات المعلم.</p></div>
 </div>
-<div class="card">
-<h2>🛡️ سلامة المختبر</h2>
-<ul>
-<li>ارتدِ النظارة الواقية ومعطف المختبر والقفازين.</li>
-<li>لا تأكل أو تتذوق أي مادة كيميائية.</li>
-<li>اتبع خطوات التخلص من المواد.</li>
-<li>اغسل يديك بالماء والصابون بعد انتهاء التجربة.</li>
-</ul>
-<p class="small">هذه النقاط مأخوذة من احتياطات السلامة في دليل التجربة.</p>
-</div>
-</div>
-</section>
 
-<section id="s1">
+<div class="card teacher-only" id="teacherPlan">
+<h2>👨‍🏫 سيناريو العرض أمام الطلاب</h2>
 <div class="grid">
-<div class="card">
-<span class="tag">التحدي 1</span><h2>⚖️ قياس الكتلة</h2>
-<p>لدينا ورقة وزن، ثم نضيف إليها نحو 5.0 g من ملح الطعام.</p>
-<label>كتلة ورقة الوزن (g)</label><input id="paperSalt" type="number" step="0.1">
-<label>كتلة الورقة + الملح (g)</label><input id="mixSalt" type="number" step="0.1">
-<button class="btn primary" onclick="calcSalt()">احسب كتلة الملح</button>
-<div id="saltRes"></div>
-<div class="callout">تذكّر: كتلة الملح = كتلة (الورقة + الملح) − كتلة الورقة.</div>
+<div><b>1. التحدي</b><p>اسأل: ما الارتفاع الذي يجعل التسخين أكثر فاعلية؟</p></div>
+<div><b>2. ضبط الشعلة</b><p>دع الطلاب يلاحظون درجات اللون الثلاث قبل الوصول إلى الشعلة الزرقاء.</p></div>
+<div><b>3. التوقع</b><p>خذ فرضية الطلاب قبل إجراء التجربة.</p></div>
+<div><b>4. التجارب الأربع</b><p>نفّذ كل ارتفاع أمامهم وسجّل الزمن على الشاشة.</p></div>
+<div><b>5. تحليل النتائج</b><p>قارن الأزمنة واسأل: أي ارتفاع كان أكثر فاعلية؟</p></div>
+<div><b>6. الاستنتاج</b><p>أظهر الإجابات النموذجية في نهاية المناقشة فقط.</p></div>
 </div>
-<div class="card"><div class="lab"><div class="bench"></div><div class="stand"></div><div class="arm"></div><div class="scale"></div><div class="beaker"></div></div></div>
 </div>
 </section>
 
-<section id="s2">
+<section id="lab">
 <div class="grid">
-<div class="card">
-<span class="tag">التحدي 2</span><h2>📏 قراءة المخبار المدرج</h2>
-<p>قِس نحو 80 mL من الماء المقطر بالمخبار المدرج سعة 100 mL، وسجل الحجم إلى أقرب 0.1 mL.</p>
-<label>قراءة الطالب للحجم (mL)</label><input id="waterVol" type="number" step="0.1" placeholder="مثال: 80.0">
-<button class="btn primary" onclick="checkVol()">تحقق من قراءة الحجم</button>
-<div id="volRes"></div>
-<div class="callout"><b>قاعدة القراءة:</b> انظر إلى أسفل تقعر سطح الماء.</div>
+<div class="card" style="grid-column:1/-1"><h2>🧪 المختبر الافتراضي</h2>
+<div class="lab" id="scene">
+<div class="wallline"></div><div class="shelf"></div><div class="bottle b1"><div class="labelx">ماء مقطر</div></div><div class="bottle b2"><div class="labelx">ماء</div></div><div class="bottle b3"><div class="labelx">أدوات</div></div>
+<div class="bench"></div><div class="stand"></div><div class="ring"></div><div class="rack" id="rack"></div><div class="beaker"><div class="water"></div></div><div class="thermo"><div class="mercury" id="mercury"></div></div><div class="burner"><div class="base"></div><div class="tube"></div><div class="collar"></div><div class="nozzle"></div><div class="airhole a"></div><div class="airhole b"></div><div class="flame" id="flame"><div class="inner"></div></div></div>
+<div class="ruler"></div>
+<div class="hud">التجربة <span id="trialHud">1</span> / 4 — <span id="heatState">الموقد مطفأ</span></div>
+<div class="bubble">🌡️ <span id="tempHud">25.0</span> °C &nbsp; ⏱️ <span id="timeHud">0.0</span> s</div>
+</div>
 </div>
 <div class="card">
-<h3>👁️ سؤال سريع</h3>
-<p>أين تنظر عند قراءة حجم الماء؟</p>
-<button class="choice" onclick="feedback('qvol',false)">أعلى سطح الماء</button>
-<button class="choice" onclick="feedback('qvol',true)">أسفل تقعر سطح الماء</button>
-<button class="choice" onclick="feedback('qvol',false)">قاع المخبار</button>
-<div id="qvol"></div>
+<h3>🎛️ لوحة التحكم</h3>
+<div class="controls">
+<div class="control"><label>تدفق الغاز: <span id="gasVal">0</span>%</label><input id="gas" type="range" min="0" max="100" value="0"></div>
+<div class="control"><label>الأكسجين: <span id="airVal">0</span>%</label><input id="air" type="range" min="0" max="100" value="0"></div>
+<div class="control"><label>ارتفاع الشبكة: <span id="heightVal">6</span> cm</label><input id="height" type="range" min="3" max="12" step="0.5" value="6"></div>
+<div class="control"><label>حجم الماء</label><div class="big">100 mL</div><div class="small">ثابت في جميع التجارب</div></div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+<button class="btn primary" id="ignite">🔥 إشعال الموقد</button><button class="btn" id="stop">⏹ إطفاء الموقد</button><button class="btn" id="startHeat">▶️ بدء التسخين</button><button class="btn" id="reset">↺ إعادة التجربة</button>
+</div>
+<div id="status" class="status neutral">ابدأ بضبط الغاز والأكسجين ثم أشعل الموقد.</div>
+</div>
+<div class="card">
+<h3>🧭 ماذا يحدث في الواقع؟</h3>
+<p id="explain">حرّك الأكسجين تدريجيًا لرؤية ثلاث حالات بصرية للشعلة: <b>أصفر</b> → <b>انتقالي</b> → <b>أزرق مع مخروط أزرق داخلي</b>. لا يبدأ قياس زمن الغليان إلا بعد الوصول إلى الشعلة الزرقاء المطلوبة.</p>
+<details><summary>لماذا نغيّر الارتفاع؟</summary><p>لأن ارتفاع شبكة التسخين هو المتغير المستقل الذي نريد دراسة أثره في زمن غليان الماء.</p></details>
+<details><summary>ما القياس التابع؟</summary><p>الزمن اللازم لغليان الماء، ويُقاس بالثواني.</p></details>
 </div>
 </div>
 </section>
 
-<section id="s3">
-<div class="card">
-<span class="tag">التحدي 3</span><h2>🧂🪨 ماذا يحدث عند إضافة الماء؟</h2>
-<p>قبل الترشيح: ضع في ذهنك ما سيحدث عندما نضيف الماء إلى مخلوط ملح الطعام والرمل ونحركه مدة دقيقة.</p>
-<button class="choice" onclick="feedback('mixq',false)">يذوب الملح والرمل معًا</button>
-<button class="choice" onclick="feedback('mixq',true)">يذوب ملح الطعام بينما يبقى الرمل غير ذائب</button>
-<button class="choice" onclick="feedback('mixq',false)">لا يتغير أي شيء</button>
-<div id="mixq"></div>
-<div class="lab" style="margin-top:14px"><div class="bench"></div><div class="beaker" style="right:38%"></div><div class="beaker" style="right:61%;transform:scale(.65)"></div></div>
-</div>
-</section>
+<section id="predict"><div class="card answer-lock"><h2>🧠 قبل التجربة</h2>
+<div class="q">1. ما الثوابت في هذه التجربة؟</div><div class="ans">حجم الماء، نوع الكأس وحجمه، نوع الموقد والوقود، وشدة اللهب وبقية ظروف التجربة، مع المحافظة عليها ثابتة قدر الإمكان.</div>
+<div class="q">2. ما المتغيرات في هذه التجربة؟</div><div class="ans">المتغير المستقل: ارتفاع شبكة التسخين فوق الموقد. المتغير التابع: زمن غليان الماء.</div>
+<div class="q">3. ما القياس الذي يمثل المتغير التابع؟</div><div class="ans">الزمن اللازم لغليان الماء بالثواني (s).</div>
+<div class="q">4. اكتب فرضية حول الارتفاع الأكثر فاعلية.</div><div class="ans">أتوقع أن يكون التسخين أكثر فاعلية عندما تكون شبكة التسخين عند مستوى قمة المخروط الداخلي الأزرق للشعلة.</div>
+</div></section>
 
-<section id="s4">
-<div class="grid">
-<div class="card">
-<span class="tag">التحدي 4</span><h2>🔬 رتّب جهاز الترشيح</h2>
-<p>رتّب الخطوات الآتية من البداية إلى النهاية:</p>
-<div id="sortList"></div>
-<button class="btn primary" onclick="checkOrder()">تحقق من الترتيب</button>
-<div id="orderRes"></div>
-</div>
-<div class="card">
-<h3>💡 لماذا نستخدم الترشيح؟</h3>
-<p>لأن الرمل يبقى غير ذائب، بينما يمر السائل الذي يحتوي على الملح الذائب عبر ورقة الترشيح.</p>
-<div class="filter"><div class="funnel"></div><div class="paper"></div><div class="tube"></div></div>
-<div class="callout">صب الخليط ببطء لتجنب تناثر السائل، وثبّت ساق القمع في منتصف الكأس كما في الدليل.</div>
-</div>
-</div>
-</section>
+<section id="data"><div class="card"><h2>📊 سجّل نتائجك</h2><p class="muted">المحاكاة تستخدم <b>تسارعًا زمنيًا تعليميًا</b> حتى لا ينتظر الطالب طويلًا، مع بقاء المقارنة بين الارتفاعات وزمن الغليان واضحة. القياسات الواقعية تُسجّل في المختبر الحقيقي.</p>
+<table><thead><tr><th>التجربة</th><th>درجة الحرارة الابتدائية °C</th><th>ارتفاع الشبكة cm</th><th>زمن الغليان s</th></tr></thead><tbody id="tbody"></tbody></table>
+<button class="btn primary" onclick="analyze()">تحليل النتائج</button><div id="analysis" class="callout hidden"></div></div></section>
 
-<section id="s5">
-<div class="card">
-<span class="tag">ورقة التجارب</span>
-<h2>📝 املأ ورقة التجربة إلكترونيًا</h2>
-<p>الخانات التالية مطابقة لفكرة ورقة التجارب المرفقة: اسم التجربة، الفرضية/الهدف، المواد والأدوات، خطوات العمل، النتائج، الاستنتاج.</p>
-<label>اسم الطالب</label><input id="stName">
-<label>الشعبة</label><input id="sectionName">
-<label>اسم التجربة</label><input value="التقنيات المختبرية والسلامة في المختبر" id="expName">
-<label>الفرضية / الهدف</label><textarea id="goal">تعلم قياس الكتلة والحجم وفصل مكونات مخلوط الملح والرمل بالترشيح، مع تطبيق قواعد السلامة في المختبر.</textarea>
-<label>المواد والأدوات</label><textarea id="tools">رمل، ملح طعام (NaCl)، ماء مقطر، ميزان، مخبار مدرج 100 mL، كؤوس زجاجية، حامل حلقة، حلقة، قمع زجاجي، ملعقتان، ساق زجاجية، ورق ترشيح، ورق وزن، قارورة ماء للغسل، زجاجة ساعة.</textarea>
-<label>خطوات العمل</label><textarea id="steps">1) قياس كتلة ورقة الوزن. 2) قياس كتلة الورقة والملح ثم حساب كتلة الملح. 3) تكرار القياس مع الرمل. 4) قياس نحو 80 mL من الماء المقطر. 5) إضافة الماء إلى خليط الملح والرمل والتحريك دقيقة. 6) تجهيز جهاز الترشيح. 7) ترشيح الخليط ببطء. 8) غسل ما تبقى من الرمل. 9) ترك ورقة الترشيح حتى تجف وتسجيل الملاحظات.</textarea>
-<label>النتائج والملاحظات</label><textarea id="results" placeholder="اكتب القياسات والملاحظات الفعلية التي حصل عليها فريقك..."></textarea>
-<label>الاستنتاج</label><textarea id="conclusion" placeholder="ماذا تعلمت؟ ولماذا أمكن فصل الرمل عن الملح؟"></textarea>
-<button class="btn primary" onclick="printSheet()">🖨️ طباعة ورقة الطالب</button>
-</div>
-</section>
+<section id="answers"><div class="card answer-lock"><h2>📘 جميع أسئلة التحليل والاستنتاج — إجابات نموذجية</h2>
+<div class="q">1. لماذا كنت تطفئ الموقد بين تجربة وأخرى؟</div><div class="ans">لإيقاف التسخين أثناء تغيير ارتفاع شبكة التسخين ونقل الكأس الساخنة، ولإعادة ضبط ظروف التجربة بأمان قبل التجربة التالية.</div>
+<div class="q">2. لماذا يُعد ارتفاع شبكة التسخين متغيرًا مستقلًا؟</div><div class="ans">لأننا نغيّر هذا الارتفاع عمدًا لندرس أثره في زمن غليان الماء.</div>
+<div class="q">3. لماذا يُعد الزمن اللازم لغليان الماء متغيرًا تابعًا؟</div><div class="ans">لأنه القياس الذي يتأثر بتغير ارتفاع شبكة التسخين.</div>
+<div class="q">4. ما الفروق التي لاحظتها بين نتائج التجارب الأربع؟</div><div class="ans">تختلف أزمنة الغليان باختلاف ارتفاع الشبكة. ويحدد الارتفاع الأكثر فاعلية من خلال أقل زمن غليان في البيانات المسجلة.</div>
+<div class="q">5. لماذا استغرق غليان الماء وقتًا أقل عندما كانت شبكة التسخين على قمة المخروط الداخلي الأزرق للشعلة؟</div><div class="ans">لأن الشبكة تكون في موضع فعّال وساخن من الشعلة، فتنتقل الحرارة إلى الكأس والماء بكفاءة أكبر.</div>
+<div class="q">6. لماذا كان استعمال ماسك كؤوس أو قفازات حرارية لنقل كأس الماء بعد التجربة مهمًا، ولم يكن مهمًا قبل العمل؟</div><div class="ans">بعد التسخين تصبح الكأس والماء ساخنين وقد يسببان حروقًا؛ لذلك نستخدم وسيلة حماية مناسبة. قبل التسخين لم تكن الكأس ساخنة بسبب التجربة.</div>
+<div class="q">7. ما مصادر الخطأ المحتملة؟</div><div class="ans">عدم ثبات حجم الماء أو درجة حرارته الابتدائية، تغير شدة اللهب، عدم دقة قياس الارتفاع، اختلاف موضع الكأس، التأخر في تشغيل أو إيقاف ساعة الإيقاف، اختلاف تحديد لحظة بدء الغليان، وفقدان الحرارة للوسط المحيط.</div>
+<h3>الكيمياء في واقع الحياة</h3>
+<div class="q">1. لماذا يُعد وضع مستودع مقياس الحرارة داخل الشعلة فكرة غير صحيحة لقياس الحرارة الناتجة عن الشعلة؟</div><div class="ans">لأن المستودع سيكون داخل اللهب مباشرة، وهذا لا يمثل بالضرورة الحرارة المنتقلة إلى الجسم المراد تسخينه، كما أن التعرض المباشر للهب شديد الحرارة وغير آمن للمقياس.</div>
+<div class="q">2. لماذا تفحصت أنبوب توصيل الغاز وتأكدت من عدم وجود شقوق أو ثقوب؟</div><div class="ans">لمنع تسرب الغاز؛ لأن التسرب قد يسبب خطر الحريق عند وجود لهب.</div>
+</div></section>
 
-<section id="s6">
-<div class="card">
-<span class="tag">التقويم الختامي</span><h2>🏆 تحدي الكيميائي</h2>
-<div id="quiz"></div>
-<div id="score"></div>
-</div>
-</section>
-</div>
-<footer>مدارس الهيئة الملكية بينبع • تجربة 1.1 • التقنيات المختبرية والسلامة في المختبر</footer>
+<section id="worksheet"><div class="card"><h2>📝 ورقة التجربة</h2>
+<p>نموذج مختصر مطابق لحقول ورقة التجارب: اسم الطالب/الشعبة، اسم التجربة، الفرضية/الهدف، المواد والأدوات، خطوات العمل، النتائج، الاستنتاج.</p>
+<div class="row"><div><label>اسم الطالب</label><input id="wname"></div><div><label>الشعبة</label><input id="wsec"></div></div>
+<label>الفرضية / الهدف</label><textarea id="wgoal">الهدف: تسخين كأس ماء باستعمال موقد بنزن وقياس المسافات ودرجة الحرارة. الفرضية: أتوقع أن يكون التسخين أكثر فاعلية عند مستوى قمة المخروط الداخلي الأزرق للشعلة.</textarea>
+<label>المواد والأدوات</label><textarea id="wtools">مخبار مدرج 100 mL، أربعة كؤوس 250 mL، موقد بنزن، عيدان ثقاب، مقياس حرارة، حامل حلقة، حلقة معدنية، شبكة تسخين، مسطرة، ساعة إيقاف، ماسك كؤوس أو قفازات حرارية، لبادة حرارية، ماء مقطر.</textarea>
+<label>خطوات العمل</label><textarea id="wsteps">قياس 100 mL من الماء المقطر في كل كأس، تسجيل درجة الحرارة الابتدائية، تجهيز الموقد وضبط الشعلة الزرقاء، اختبار أربعة ارتفاعات لشبكة التسخين، تسجيل الارتفاع وزمن الغليان لكل تجربة، ثم إطفاء الموقد ونقل الكؤوس الساخنة بأمان وتنظيف الأدوات.</textarea>
+<label>النتائج</label><textarea id="wresults" placeholder="ستُنسخ هنا نتائج الجدول بعد إجراء التجارب الأربع."></textarea>
+<label>الاستنتاج</label><textarea id="wconclusion">بناءً على النتائج، يكون الارتفاع الأكثر فاعلية هو الارتفاع الذي حقق أقل زمن غليان للماء مع ثبات العوامل الأخرى قدر الإمكان.</textarea>
+<button class="btn primary" onclick="printWorksheet()">🖨️ طباعة</button>
+</div></section>
+
+<section id="quiz"><div class="card"><h2>🏆 التقويم</h2>
+<div class="q">1. المتغير المستقل هو:</div><label><input type="radio" name="q1" value="1"> ارتفاع شبكة التسخين</label><label><input type="radio" name="q1" value="0"> زمن الغليان</label>
+<div class="q">2. المتغير التابع هو:</div><label><input type="radio" name="q2" value="1"> زمن الغليان</label><label><input type="radio" name="q2" value="0"> حجم الكأس</label>
+<div class="q">3. الشعلة المضبوطة تكون:</div><label><input type="radio" name="q3" value="1"> زرقاء وبداخلها مخروط أزرق</label><label><input type="radio" name="q3" value="0"> صفراء</label>
+<div class="q">4. الشعلة الصفراء تعني الحاجة إلى:</div><label><input type="radio" name="q4" value="1"> أكسجين أكثر</label><label><input type="radio" name="q4" value="0"> ماء أكثر</label>
+<div class="q">5. أقل زمن غليان يدل على:</div><label><input type="radio" name="q5" value="1"> ارتفاع أكثر فاعلية ضمن النتائج</label><label><input type="radio" name="q5" value="0"> أكبر حجم ماء</label>
+<button class="btn primary" onclick="grade()">احسب الدرجة</button><div id="score" class="ok hidden"></div>
+</div></section>
+</main>
+<footer class="wrap muted">محاكاة تعليمية مبنية على تجربة 1.2 «الاستعمال الفعال لموقد بنزن» في دليل التجارب العملية.</footer>
 
 <script>
-const names=["🎬 المهمة","⚖️ الكتلة","📏 الحجم","🧂 المخلوط","🔬 الترشيح","📝 الورقة","🏆 التقويم"];
-let current=0, done=new Set();
-const nav=document.getElementById("nav");
-names.forEach((n,i)=>{let b=document.createElement("button");b.textContent=n;b.onclick=()=>go(i);nav.appendChild(b)});
-function go(i){document.querySelectorAll("section").forEach(x=>x.classList.remove("active-section"));document.getElementById("s"+i).classList.add("active-section");[...nav.children].forEach((b,j)=>b.classList.toggle("active",j===i));current=i;document.getElementById("bar").style.width=(i/(names.length-1)*100)+"%";window.scrollTo({top:0,behavior:"smooth"})}
-function feedback(id,ok){let e=document.getElementById(id);e.className="feedback "+(ok?"ok":"bad");e.textContent=ok?"✅ صحيح — أحسنت!":"❌ حاول مرة أخرى وفكر في خاصية الذوبان أو طريقة القياس.";if(ok)done.add(id)}
-function calcSalt(){let p=+paperSalt.value,m=+mixSalt.value;let e=document.getElementById("saltRes");if(!isFinite(p)||!isFinite(m)){e.className="feedback bad";e.textContent="أدخل القياسين أولًا.";return}let v=(m-p).toFixed(1);e.className="result";e.textContent="كتلة ملح الطعام = "+v+" g";done.add("salt")}
-function checkVol(){let v=+waterVol.value,e=document.getElementById("volRes");if(!isFinite(v)){e.className="feedback bad";e.textContent="أدخل قراءة المخبار.";return}if(v>=79 && v<=81){e.className="feedback ok";e.textContent="✅ قراءة قريبة من 80 mL. سجّل القراءة الفعلية التي تراها في المختبر.";done.add("vol")}else{e.className="feedback bad";e.textContent="راجع مستوى الماء وأسفل التقعر؛ المطلوب نحو 80 mL."}}
-const order=["طي ورقة الترشيح","وضع ورقة الترشيح في القمع","تثبيت القمع فوق كأس الاستقبال","صب الخليط ببطء","جمع السائل الراشح"];
-let shuffled=[...order].sort(()=>Math.random()-.5), sortList=document.getElementById("sortList");
-shuffled.forEach((x,i)=>{let d=document.createElement("div");d.className="card";d.style.margin="7px 0";d.draggable=true;d.dataset.v=x;d.textContent=(i+1)+" — "+x;d.ondragstart=e=>e.dataTransfer.setData("text/plain",x);d.ondragover=e=>e.preventDefault();d.ondrop=e=>{let a=e.dataTransfer.getData("text/plain"),b=d.dataset.v,els=[...sortList.children],A=els.find(z=>z.dataset.v===a);if(A&&A!==d){sortList.insertBefore(A,d);renumber()}};sortList.appendChild(d)});
-function renumber(){[...sortList.children].forEach((d,i)=>d.textContent=(i+1)+" — "+d.dataset.v)}
-function checkOrder(){let got=[...sortList.children].map(x=>x.dataset.v),ok=got.every((x,i)=>x===order[i]);let e=document.getElementById("orderRes");e.className="feedback "+(ok?"ok":"bad");e.textContent=ok?"✅ ترتيب صحيح!":"❌ راجع تسلسل تجهيز ورقة الترشيح ثم الصب وجمع الراشح.";if(ok)done.add("order")}
-const qs=[
-["أي أداة تستخدم لقياس حجم الماء؟",["الميزان","المخبار المدرج","ورقة الوزن"],1],
-["كيف تحسب كتلة الملح؟",["كتلة الورقة − كتلة (الورقة + الملح)","كتلة (الورقة + الملح) − كتلة الورقة","تجمع الكتلتين"],1],
-["ماذا يحدث للرمل عند إضافة الماء؟",["يذوب تمامًا","يبقى غير ذائب","يتحول إلى ملح"],1],
-["ما الطريقة المستخدمة لفصل الرمل عن المحلول؟",["الترشيح","الاحتراق","التقطير"],0],
-["لماذا لا تعاد المواد الكيميائية الفائضة إلى عبواتها الأصلية؟",["لمنع تلوث العبوة ومحتواها","لزيادة الكمية","لأنها تتبخر دائمًا"],0]
-];
-let qi=document.getElementById("quiz");qs.forEach((q,i)=>{let d=document.createElement("div");d.className="card";d.innerHTML="<h3>"+(i+1)+". "+q[0]+"</h3>";q[1].forEach((a,j)=>{let b=document.createElement("button");b.className="choice";b.textContent=a;b.onclick=()=>{let f=document.getElementById("f"+i);f.className="feedback "+(j===q[2]?"ok":"bad");f.textContent=j===q[2]?"✅ إجابة صحيحة":"❌ ليست الإجابة الصحيحة";b.parentElement.querySelectorAll("button").forEach(x=>x.disabled=true);updateScore()};d.appendChild(b)});let f=document.createElement("div");f.id="f"+i;d.appendChild(f);qi.appendChild(d)});
-function updateScore(){let n=[...document.querySelectorAll(".feedback.ok")].filter(x=>x.id&&x.id[0]=="f").length;document.getElementById("score").innerHTML="<div class='result'>🏆 نتيجتك: "+n+" / "+qs.length+"</div>"}
-function printSheet(){
- const vals={name:stName.value,sec:sectionName.value,exp:expName.value,goal:goal.value,tools:tools.value,steps:steps.value,results:results.value,conclusion:conclusion.value};
- const w=window.open("","_blank"); w.document.write(`<html lang="ar" dir="rtl"><head><meta charset="utf-8"><title>ورقة التجارب</title><style>body{font-family:Tahoma,Arial;max-width:900px;margin:25px auto;line-height:1.8;color:#222}h1{text-align:center}table{width:100%;border-collapse:collapse}td{border:1px solid #777;padding:10px;vertical-align:top}.box{min-height:80px}</style></head><body><h1>ورقة التجارب — تجربة 1.1</h1><table><tr><td>اسم الطالب: ${esc(vals.name)}</td><td>الشعبة: ${esc(vals.sec)}</td></tr><tr><td colspan="2"><b>اسم التجربة:</b> ${esc(vals.exp)}</td></tr><tr><td colspan="2"><b>الفرضية / الهدف:</b><div class="box">${esc(vals.goal)}</div></td></tr><tr><td colspan="2"><b>المواد والأدوات:</b><div class="box">${esc(vals.tools)}</div></td></tr><tr><td><b>خطوات العمل:</b><div class="box">${esc(vals.steps).replace(/\\n/g,"<br>")}</div></td><td><b>النتائج:</b><div class="box">${esc(vals.results).replace(/\\n/g,"<br>")}</div></td></tr><tr><td colspan="2"><b>الاستنتاج:</b><div class="box">${esc(vals.conclusion).replace(/\\n/g,"<br>")}</div></td></tr></table><script>window.print()<\/script></body></html>`);w.document.close()
+const nav=[...document.querySelectorAll('nav button')], sections=[...document.querySelectorAll('main section')];
+nav.forEach((b,i)=>b.onclick=()=>{nav.forEach(x=>x.classList.remove('active'));b.classList.add('active');sections.forEach(s=>s.classList.toggle('active',s.id===b.dataset.id));document.getElementById('prog').style.width=((i+1)/nav.length*100)+'%'});
+const gas=document.getElementById('gas'),air=document.getElementById('air'),height=document.getElementById('height');
+const gasVal=document.getElementById('gasVal'),airVal=document.getElementById('airVal'),heightVal=document.getElementById('heightVal');
+const flame=document.getElementById('flame'),rack=document.getElementById('rack'),status=document.getElementById('status'),scene=document.getElementById('scene');
+let lit=false,heating=false,trial=1,time=0,temp=25,timer=null,boil=false;
+let records=JSON.parse(localStorage.getItem('bunsenRecords')||'[]');
+function sync(){
+ gasVal.textContent=gas.value;airVal.textContent=air.value;heightVal.textContent=height.value;
+ const h=Number(height.value); scene.style.setProperty('--rack',(45+h*1.1)+'%');
+ flame.classList.remove('on','state-low','state-mid','state-high');
+ if(lit){
+   flame.classList.add('on');
+   const o=Number(air.value);
+   if(o<35){
+     flame.classList.add('state-low');
+   }else if(o<65){
+     flame.classList.add('state-mid');
+   }else{
+     flame.classList.add('state-high');
+   }
+ }
 }
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-go(0);
+gas.oninput=air.oninput=height.oninput=sync;
+function setStatus(t,c='neutral'){status.className='status '+c;status.textContent=t}
+document.getElementById('ignite').onclick=()=>{
+ if(Number(gas.value)<35){setStatus('ارفع تدفق الغاز أولًا.','bad');return}
+ if(Number(air.value)<45){lit=true;sync();setStatus('اللهب اشتعل، لكنه أصفر. زد الأكسجين حتى يصبح أزرقًا.','bad');return}
+ lit=true;sync();setStatus('تم إشعال الموقد. الشعلة زرقاء وبداخلها مخروط أزرق.','good');document.getElementById('heatState').textContent='الموقد مشتعل';
+};
+document.getElementById('stop').onclick=()=>{lit=false;heating=false;clearInterval(timer);sync();document.getElementById('heatState').textContent='الموقد مطفأ';setStatus('أُطفئ الموقد بأمان.','neutral')};
+document.getElementById('startHeat').onclick=()=>{
+ if(!lit){setStatus('أشعل الموقد أولًا.','bad');return}
+ if(Number(air.value)<65){setStatus('اضبط الأكسجين حتى تصل الشعلة إلى الدرجة الثالثة: زرقاء وبداخلها مخروط أزرق.','bad');return}
+ if(Number(gas.value)<35){setStatus('تدفق الغاز غير كافٍ.','bad');return}
+ if(heating)return;
+ heating=true;time=0;temp=25;boil=false;document.getElementById('heatState').textContent='جارٍ التسخين…';
+ const h=Number(height.value);
+ const ideal=6;
+ const distancePenalty=Math.abs(h-ideal);
+ // تسارع زمني تعليمي: يجعل المحاكاة أقصر من المختبر الحقيقي مع الحفاظ على
+ // الفكرة التجريبية: الارتفاع الأقرب للموضع الفعال يعطي زمنًا أقل.
+ const rate=1.25/(1+distancePenalty*.28);
+ timer=setInterval(()=>{
+   time+=0.5; temp+=rate;
+   document.getElementById('timeHud').textContent=time.toFixed(1);document.getElementById('tempHud').textContent=temp.toFixed(1);
+   const mercury=Math.min(102,(temp-25)*2.5);document.getElementById('mercury').style.height=mercury+'px';
+   if(temp>=100){boil=true;heating=false;clearInterval(timer);document.getElementById('heatState').textContent='الماء يغلي';setStatus('بدأ الغليان — سجّل زمن الغليان في جدول البيانات.','good');saveTrial(time,h)}
+ },500);
+};
+document.getElementById('reset').onclick=()=>{clearInterval(timer);heating=false;lit=false;time=0;temp=25;document.getElementById('timeHud').textContent='0.0';document.getElementById('tempHud').textContent='25.0';document.getElementById('mercury').style.height='0px';sync();setStatus('تمت إعادة التجربة.','neutral')};
+function saveTrial(t,h){
+ records=records.filter(x=>x.trial!==trial);records.push({trial,height:h,time:+t.toFixed(1),temp:25});localStorage.setItem('bunsenRecords',JSON.stringify(records));renderRows();
+ document.getElementById('wresults').value=records.sort((a,b)=>a.trial-b.trial).map(x=>`التجربة ${x.trial}: درجة البداية ${x.temp} °C، ارتفاع الشبكة ${x.height} cm، زمن الغليان ${x.time} s`).join('\\n');
+ if(trial<4){trial++;document.getElementById('trialHud').textContent=trial;setStatus('استخدم الكأس التالية، غيّر ارتفاع الشبكة وفق خطة التجربة، ثم أعد التسخين.','neutral')}
+}
+function renderRows(){const tb=document.getElementById('tbody');tb.innerHTML='';for(let i=1;i<=4;i++){let x=records.find(r=>r.trial===i);tb.innerHTML+=`<tr><td>${i}</td><td>25.0</td><td>${x?x.height:'—'}</td><td>${x?x.time:'—'}</td></tr>`}}
+function analyze(){
+ if(records.length<2){document.getElementById('analysis').classList.remove('hidden');document.getElementById('analysis').textContent='أكمل تجربتين على الأقل قبل المقارنة.';return}
+ let best=[...records].sort((a,b)=>a.time-b.time)[0];document.getElementById('analysis').classList.remove('hidden');document.getElementById('analysis').innerHTML=`ضمن القياسات المسجلة، أقل زمن غليان هو <b>${best.time} s</b> عند ارتفاع شبكة قدره <b>${best.height} cm</b> في التجربة ${best.trial}. هذا هو الارتفاع الأكثر فاعلية ضمن نتائج المحاكاة/القياسات المدخلة.`;
+}
+function grade(){let s=0;for(let i=1;i<=5;i++){let x=document.querySelector('input[name=q'+i+']:checked');if(x)s+=+x.value}let d=document.getElementById('score');d.classList.remove('hidden');d.textContent=`درجتك: ${s} / 5`;}
+function printWorksheet(){const n=document.getElementById('wname').value||document.getElementById('student').value||'—',sec=document.getElementById('wsec').value||'—';const html=`<html dir="rtl"><meta charset="utf-8"><title>ورقة التجربة</title><style>body{font-family:Tahoma;line-height:1.8;padding:35px;color:#123b59}h1{text-align:center}.box{border:1px solid #777;padding:12px;margin:10px 0;white-space:pre-wrap}</style><h1>الاستعمال الفعال لموقد بنزن — تجربة 1.2</h1><div class="box">اسم الطالب: ${n} — الشعبة: ${sec}</div><h3>الفرضية / الهدف</h3><div class="box">${document.getElementById('wgoal').value}</div><h3>المواد والأدوات</h3><div class="box">${document.getElementById('wtools').value}</div><h3>خطوات العمل</h3><div class="box">${document.getElementById('wsteps').value}</div><h3>النتائج</h3><div class="box">${document.getElementById('wresults').value||'تُسجّل أثناء التجربة.'}</div><h3>الاستنتاج</h3><div class="box">${document.getElementById('wconclusion').value}</div><script>window.print()<\/script>`;let w=window.open();w.document.write(html);w.document.close();}
+
+let teacherMode=false, projector=false, answersVisible=false;
+const teacherToggle=document.getElementById('teacherToggle');
+const projectorBtn=document.getElementById('projectorBtn');
+const answersBtn=document.getElementById('answersBtn');
+teacherToggle.onclick=()=>{
+ teacherMode=!teacherMode;
+ document.body.classList.toggle('teacher-mode',teacherMode);
+ teacherToggle.classList.toggle('on',teacherMode);
+ teacherToggle.textContent=teacherMode?'👨‍🏫 وضع المعلم: مفعّل':'👨‍🏫 وضع المعلم: مغلق';
+ if(!teacherMode){answersVisible=false;document.body.classList.remove('answers-visible');answersBtn.textContent='👁️ إظهار الإجابات';answersBtn.classList.remove('on')}
+};
+projectorBtn.onclick=()=>{
+ projector=!projector;
+ document.body.classList.toggle('projector',projector);
+ projectorBtn.classList.toggle('on',projector);
+ projectorBtn.textContent=projector?'🖥️ خروج من وضع العرض':'🖥️ وضع العرض';
+ if(projector && document.documentElement.requestFullscreen){document.documentElement.requestFullscreen().catch(()=>{})}
+};
+answersBtn.onclick=()=>{
+ if(!teacherMode){setStatus('فعّل وضع المعلم أولًا لإظهار الإجابات.','bad');return}
+ answersVisible=!answersVisible;
+ document.body.classList.toggle('answers-visible',answersVisible);
+ document.querySelectorAll('.answer-lock .ans').forEach(x=>x.style.display=answersVisible?'block':'none');
+ answersBtn.textContent=answersVisible?'🙈 إخفاء الإجابات':'👁️ إظهار الإجابات';
+ answersBtn.classList.toggle('on',answersVisible);
+};
+document.getElementById('homeBtn').onclick=()=>{
+ nav[0].click();
+ window.scrollTo({top:0,behavior:'smooth'});
+};
+renderRows();sync();
+
 </script>
-</body>
-</html>
+</body></html>
