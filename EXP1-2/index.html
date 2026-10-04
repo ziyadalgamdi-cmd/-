@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مختبر الروابط التساهمية التفاعلي</title>
+<style>
+:root{
+  --bg1:#071a2b;
+  --bg2:#0c2c4a;
+  --panel:rgba(255,255,255,.10);
+  --panel2:rgba(255,255,255,.07);
+  --stroke:rgba(255,255,255,.18);
+  --text:#f8fbff;
+  --muted:#b9d4e9;
+  --cyan:#35d6ff;
+  --blue:#6b8cff;
+  --violet:#a875ff;
+  --pink:#ff6eb4;
+  --green:#56e39f;
+  --yellow:#ffd166;
+  --red:#ff6b6b;
+  --shadow:0 24px 60px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Tahoma","Arial",sans-serif;background:
+radial-gradient(circle at 20% 10%,rgba(53,214,255,.18),transparent 30%),
+radial-gradient(circle at 85% 20%,rgba(168,117,255,.20),transparent 28%),
+linear-gradient(140deg,var(--bg1),var(--bg2));color:var(--text)}
+body{padding:20px}
+button{font:inherit}
+.app{max-width:1180px;margin:auto}
+.topbar{
+ display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
+ background:var(--panel);border:1px solid var(--stroke);border-radius:24px;padding:18px 20px;
+ box-shadow:var(--shadow);backdrop-filter:blur(14px)
+}
+.title h1{margin:0 0 6px;font-size:clamp(1.3rem,3vw,2rem)}
+.title p{margin:0;color:var(--muted);line-height:1.7}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--stroke);font-size:.88rem}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;margin-top:16px}
+.panel{background:var(--panel);border:1px solid var(--stroke);border-radius:24px;box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+.labWrap{padding:14px}
+.lab{
+ position:relative;min-height:560px;border-radius:20px;overflow:hidden;
+ background:
+ linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025)),
+ radial-gradient(circle at 50% 10%,rgba(255,255,255,.08),transparent 38%);
+ border:1px solid rgba(255,255,255,.12);
+ touch-action:pan-y
+}
+.lab:before{
+ content:"";position:absolute;left:-10%;right:-10%;bottom:-105px;height:260px;
+ background:repeating-linear-gradient(90deg,rgba(255,255,255,.06) 0 1px,transparent 1px 46px),
+ repeating-linear-gradient(0deg,rgba(255,255,255,.06) 0 1px,transparent 1px 46px);
+ transform:perspective(400px) rotateX(62deg);transform-origin:center bottom;opacity:.65
+}
+.help{position:absolute;top:14px;right:16px;color:var(--muted);font-size:.9rem;z-index:20}
+.statusPill{position:absolute;top:14px;left:16px;z-index:20;padding:8px 12px;border:1px solid var(--stroke);
+border-radius:999px;background:rgba(0,0,0,.18);font-size:.85rem}
+.centerGuide{
+ position:absolute;left:50%;top:122px;width:170px;height:170px;transform:translateX(-50%);
+ border:2px dashed rgba(255,255,255,.20);border-radius:50%;display:grid;place-items:center;
+ color:rgba(255,255,255,.38);font-weight:800;pointer-events:none;transition:.25s
+}
+.centerGuide.ready{border-color:var(--green);box-shadow:0 0 35px rgba(86,227,159,.18);color:var(--green)}
+.atom{
+ position:absolute;top:150px;width:126px;height:126px;border-radius:50%;
+ display:grid;place-items:center;cursor:grab;user-select:none;touch-action:none;
+ transform-style:preserve-3d;z-index:12;transition:box-shadow .2s,filter .2s
+}
+.atom:active{cursor:grabbing}
+.atom.dragging{filter:brightness(1.15);box-shadow:0 0 0 5px rgba(255,255,255,.09)}
+.atom .shell{
+ position:absolute;inset:-16px;border-radius:50%;border:1px solid rgba(255,255,255,.18);
+ box-shadow:inset 0 0 30px rgba(255,255,255,.04)
+}
+.atom .shell.s2{inset:-30px;transform:rotate(28deg) scaleY(.55)}
+.atom .core{
+ width:88px;height:88px;border-radius:50%;display:grid;place-items:center;
+ font-weight:900;font-size:1.55rem;border:1px solid rgba(255,255,255,.22);
+ box-shadow:inset -18px -18px 24px rgba(0,0,0,.20),0 18px 34px rgba(0,0,0,.28)
+}
+.atom.left .core{background:radial-gradient(circle at 28% 22%,#fff 0 5%,#63e0ff 22%,#2a6eff 75%)}
+.atom.right .core{background:radial-gradient(circle at 28% 22%,#fff 0 5%,#dca0ff 22%,#7d4cff 75%)}
+.e{
+ position:absolute;width:11px;height:11px;border-radius:50%;background:var(--yellow);
+ box-shadow:0 0 0 2px rgba(7,26,43,.8),0 0 12px rgba(255,209,102,.8)
+}
+.e.e1{top:-2px;left:56px}.e.e2{right:-2px;top:56px}.e.e3{bottom:-2px;left:56px}.e.e4{left:-2px;top:56px}
+.overlap{
+ position:absolute;left:50%;top:175px;width:210px;height:95px;transform:translateX(-50%) scale(.65);
+ border-radius:50%;background:radial-gradient(ellipse,rgba(53,214,255,.42),rgba(168,117,255,.28),transparent 72%);
+ filter:blur(8px);opacity:0;transition:.25s;z-index:7;pointer-events:none
+}
+.overlap.show{opacity:1;transform:translateX(-50%) scale(1)}
+.bondZone{
+ position:absolute;left:50%;top:178px;width:170px;height:92px;transform:translateX(-50%);
+ border-radius:18px;z-index:15;display:grid;place-items:center;pointer-events:none
+}
+.bondZone.hot{outline:2px dashed var(--cyan);outline-offset:8px;background:rgba(53,214,255,.06)}
+.bondDisplay{display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center}
+.bondLine{
+ width:110px;height:10px;border-radius:99px;
+ background:linear-gradient(90deg,var(--cyan),var(--pink));box-shadow:0 5px 14px rgba(0,0,0,.24)
+}
+.bondLine:before,.bondLine:after{
+ content:"";display:block;position:relative;width:9px;height:9px;border-radius:50%;background:var(--yellow);
+ box-shadow:0 0 0 2px rgba(7,26,43,.75)
+}
+.bondLine:before{left:34px;top:1px}.bondLine:after{right:-67px;top:-8px}
+.footerHint{
+ position:absolute;left:50%;bottom:18px;transform:translateX(-50%);width:min(90%,600px);
+ text-align:center;color:var(--muted);font-size:.92rem;line-height:1.7;z-index:20
+}
+.side{padding:16px;display:flex;flex-direction:column;gap:13px}
+.section{background:var(--panel2);border:1px solid var(--stroke);border-radius:18px;padding:14px}
+.section h3{margin:0 0 10px;font-size:1rem}
+.mols,.controls{display:flex;gap:8px;flex-wrap:wrap}
+.btn{
+ border:1px solid var(--stroke);background:rgba(255,255,255,.08);color:var(--text);
+ border-radius:12px;padding:9px 12px;font-weight:800;cursor:pointer;min-height:42px
+}
+.btn:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.btn.active{background:linear-gradient(135deg,rgba(53,214,255,.26),rgba(168,117,255,.24));border-color:var(--cyan)}
+.btn.primary{width:100%;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#07101b;border:0}
+.metric{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:.88rem;margin-top:8px}
+.bondPalette{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.bondCard{
+ min-height:88px;border:1px solid var(--stroke);background:rgba(255,255,255,.07);border-radius:14px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+ cursor:grab;user-select:none;touch-action:none
+}
+.bondCard:active{cursor:grabbing}.bondCard.dragging{opacity:.55}
+.miniLines{display:flex;flex-direction:column;gap:4px}
+.miniLines i{display:block;width:42px;height:5px;border-radius:99px;background:linear-gradient(90deg,var(--cyan),var(--pink))}
+.bondCard span{font-size:.78rem;color:var(--muted)}
+.feedback{
+ min-height:64px;padding:11px;border-radius:14px;border:1px solid var(--stroke);
+ color:var(--muted);line-height:1.6;font-size:.9rem
+}
+.feedback.ok{border-color:rgba(86,227,159,.55);background:rgba(86,227,159,.08);color:#dfffee}
+.feedback.bad{border-color:rgba(255,107,107,.55);background:rgba(255,107,107,.08);color:#ffe7e7}
+.score{
+ display:grid;grid-template-columns:1fr 1fr;gap:8px
+}
+.score div{padding:12px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid var(--stroke);text-align:center}
+.score b{display:block;font-size:1.45rem;margin-top:4px}
+.dragGhost{
+ position:fixed;z-index:9999;pointer-events:none;transform:translate(-50%,-50%);opacity:.92;
+ background:rgba(7,26,43,.95);border:1px solid var(--cyan);border-radius:14px;padding:10px 14px;
+ box-shadow:0 18px 40px rgba(0,0,0,.35)
+}
+@media(max-width:820px){
+ body{padding:10px}.main{grid-template-columns:1fr}.lab{min-height:470px}.atom{width:104px;height:104px}.atom .core{width:74px;height:74px}
+ .centerGuide{top:125px;width:140px;height:140px}.overlap{top:165px}.bondZone{top:168px}
+}
+
+/* Corrected geometry, electron accounting and accessible interactions. */
+.main>*{min-width:0}.side{align-self:start}.btn:disabled{opacity:.45;cursor:default;transform:none}
+button:focus-visible,.atom:focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+.atom{width:126px;height:126px}.atom .core{color:#071a2b}
+.electrons{position:absolute;inset:0;pointer-events:none}
+.e{background:var(--cyan);box-shadow:0 0 0 2px #071a2b,0 0 9px #35d6ff66;transform:translate(-50%,-50%)}
+.atom.right .e,.rightDot{background:var(--pink);box-shadow:0 0 0 2px #071a2b,0 0 9px #ff6eb455}
+.centerGuide{width:110px;height:90px;top:46%;font-size:.8rem;text-align:center;transform:translate(-50%,-50%);z-index:4}
+.centerGuide.ready{color:transparent}.centerGuide.occupied{border-color:transparent;box-shadow:none;color:transparent}
+.overlap,.overlap.show{transform:translate(-50%,-50%);transition:opacity .2s}
+.bondZone{width:100px;height:86px;transform:translate(-50%,-50%);pointer-events:none}
+.bondZone.occupied{pointer-events:auto;cursor:grab;touch-action:none}
+.bondZone.hot{outline-offset:2px}.bondZone.occupied:focus-visible{outline:3px solid var(--yellow)}
+.bondLine{height:9px;position:relative;direction:ltr;pointer-events:none}
+.bondLine:before,.bondLine:after{display:none}
+.sharedDot{position:absolute;top:50%;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px #071a2b}
+.sharedDot.fromL{left:calc(50% - 8px);background:var(--cyan)}
+.sharedDot.fromR{left:calc(50% + 8px);background:var(--pink)}
+.bondCard{color:var(--text);min-width:0;padding:8px 2px}
+.bondCard:focus-visible{outline-offset:2px}.bondCard[aria-pressed=true]{border-color:var(--green);background:#56e39f22}
+.labActions{margin-top:14px}.legend{display:flex;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.82rem;margin:16px 2px}
+.legend span{display:flex;align-items:center;gap:8px}.legendDot{display:inline-block;width:10px;height:10px;border-radius:50%}.leftDot{background:var(--cyan)}
+.modelNote,.smallNote{color:var(--muted);line-height:1.8;font-size:.82rem;margin:12px 0 0}
+.source{text-align:center;margin-bottom:15px}.source a{color:var(--cyan)}
+.footerHint{bottom:20px;pointer-events:none}.help{pointer-events:none}.statusPill{pointer-events:none}
+.metric{line-height:1.6}.metric b{white-space:nowrap;color:var(--text)}
+@media(max-width:820px){.atom{width:104px;height:104px}.atom .core{width:74px;height:74px}.help{font-size:.8rem;left:12px;right:12px}.statusPill{top:46px;left:12px}.lab{min-height:430px}}
+@media(max-width:480px){.atom{width:84px;height:84px}.atom .core{width:60px;height:60px;font-size:1.3rem}.labWrap{padding:10px}.topbar{padding:16px}.chip{font-size:.78rem}.atom .shell.s2{inset:-18px}.lab{min-height:400px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+.labWrap{align-self:start}.labPalette{position:absolute;left:50%;bottom:82px;transform:translateX(-50%);width:min(90%,330px);z-index:22}
+.labPalette .bondCard{background:#132e48;box-shadow:0 7px 18px #0002}
+@media(max-width:820px){.lab{min-height:470px}}
+@media(max-width:480px){.lab{min-height:470px}.labPalette{bottom:85px}.labPalette .bondCard{min-height:80px}.footerHint{font-size:.83rem}}
+[hidden]{display:none!important}
+.quizSection{margin-top:20px;padding:26px;scroll-margin-top:16px}
+.quizSection h2{font-size:1.6rem;margin:6px 0 12px}.quizSection h3{margin:26px 0 12px;font-size:1.12rem}
+.quizSection p{line-height:1.9;color:var(--muted)}.quizEyebrow{color:var(--cyan);font-weight:700}
+.quizIntro{display:grid;grid-template-columns:1.6fr 1fr;gap:28px;align-items:center}.quizStart{padding:18px;border:1px solid var(--stroke);border-radius:18px;background:var(--panel2)}
+.quizTop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.quizSection progress{display:block;width:100%;height:12px;margin:10px 0 24px;accent-color:var(--green);border:0;border-radius:99px;overflow:hidden}
+.quizSection progress::-webkit-progress-bar{background:#ffffff20}.quizSection progress::-webkit-progress-value{background:var(--green)}
+.questionField{border:0;margin:0;padding:0;min-width:0}.questionField legend{float:right;width:100%;padding:0;margin:0 0 20px;font-size:1.3rem;font-weight:900;line-height:1.85;color:var(--text)}
+.quizOptions{display:grid;grid-template-columns:1fr 1fr;gap:12px;clear:both}
+.quizOption{display:flex;align-items:center;gap:12px;min-height:82px;padding:14px 16px;cursor:pointer;border:1px solid var(--stroke);border-radius:16px;background:var(--panel2);line-height:1.75}
+.quizOption input{width:18px;height:18px;flex-shrink:0;accent-color:var(--cyan)}
+.optionLetter{display:grid;place-items:center;flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#ffffff14;font-weight:800}
+.quizOption.chosen{border-color:var(--cyan);background:#35d6ff14}.quizOption.answerCorrect{border-color:var(--green);background:#56e39f18}
+.quizOption.answerWrong{border-color:var(--red);background:#ff6b6b16}.quizOption:focus-within{outline:2px solid var(--yellow);outline-offset:3px}
+.quizHint{padding:14px 16px;border:1px solid var(--stroke);border-radius:14px;margin-top:18px;color:var(--muted)}
+.quizHint summary,.reviewItem summary{cursor:pointer;font-weight:700;line-height:1.8;min-height:28px}
+.quizHint p{margin-bottom:0}.quizFeedback{margin-top:16px;padding:18px;border:1px solid var(--stroke);border-radius:16px;line-height:1.9}
+.quizFeedback p{margin:8px 0}.quizFeedback.ok{border-color:var(--green);background:#56e39f12}.quizFeedback.bad{border-color:var(--red);background:#ff6b6b12}
+.quizFeedback strong{font-size:1.1rem}.quizSection .correctExplanation{color:#a9f8cd;font-weight:700}
+.quizActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}.quizActions .btn{min-height:48px;padding:11px 20px}.quizActions .primary{width:auto;min-width:150px}
+.resultMetrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0 16px}.resultMetrics>div{padding:18px 12px;border-radius:16px;background:var(--panel2);border:1px solid var(--stroke);color:var(--muted);text-align:center;line-height:1.8}
+.resultMetrics b{display:block;font-size:1.7rem;margin-top:8px;color:var(--text)}
+.masteryBar{height:12px;background:#ffffff20;border-radius:99px;overflow:hidden}.masteryBar span{height:100%;display:block;background:linear-gradient(90deg,var(--cyan),var(--green))}
+.tableWrap{overflow-x:auto}.resultsTable{border-collapse:collapse;width:100%;font-size:.94rem;line-height:1.75}.resultsTable th,.resultsTable td{padding:12px;text-align:right;border-bottom:1px solid var(--stroke)}
+.resultsTable thead{background:#ffffff0d}.resultsTable tbody th{font-weight:700}.recommendations{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.recommendation{border:1px solid var(--stroke);border-radius:16px;padding:16px;line-height:1.8;background:var(--panel2)}.recommendation p{margin:6px 0 0;font-size:.92rem}
+.reviewItem{border:1px solid var(--stroke);border-radius:14px;padding:14px 16px;margin-top:10px}.reviewQuestion{color:var(--text)!important;font-weight:700}
+.quizSide p{margin:0 0 12px}.quizSection :focus-visible{outline:3px solid var(--yellow);outline-offset:4px}
+@media(max-width:820px){.quizIntro{grid-template-columns:1fr}.resultMetrics{grid-template-columns:1fr 1fr}.recommendations{grid-template-columns:1fr}.quizSection{padding:20px}.resultsTable th,.resultsTable td{padding:10px}}
+@media(max-width:580px){.quizOptions{grid-template-columns:1fr}.quizSection{padding:16px}.questionField legend{font-size:1.15rem}.quizOption{padding:12px;gap:10px}.quizSection h2{font-size:1.4rem}.resultsTable{font-size:.82rem}.resultsTable th,.resultsTable td{padding:8px}.resultMetrics>div{font-size:.8rem}.resultMetrics b{font-size:1.4rem}}
+@media print{html,body{background:white!important;color:#111!important;padding:0}.topbar,.main,.source,#quizIntro,#quizPane,.quizActions{display:none!important}.app{max-width:none}.quizSection{padding:0;border:0;box-shadow:none;background:white;color:#111}.quizSection p,.resultMetrics>div,.resultMetrics b,.quizSection .correctExplanation{color:#111!important}.resultMetrics>div,.recommendation,.reviewItem{background:white;border-color:#aaa}.resultsTable th,.resultsTable td{border-color:#aaa}.tableWrap{overflow:visible}.reviewItem{break-inside:avoid}.masteryBar{background:#ddd}.quizSection h3{break-after:avoid}}
+
+
+/* Final unified mouse, touch and keyboard controls. */
+.questionField h3{margin:0 0 20px!important;padding:0;font-size:1.3rem!important;font-weight:900;line-height:1.85;color:var(--text)}
+.quizOption{font:inherit;font-size:1rem;color:var(--text);text-align:right;width:100%;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background .12s,border-color .12s}
+.quizOption[aria-disabled=true]{cursor:default}.quizOption:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.quizOption .optionLetter{pointer-events:none}.optionText{pointer-events:none}
+.quizOption{scroll-margin-block:110px}.quizFeedback{scroll-margin-bottom:100px}
+.quizNavigation{position:sticky;bottom:0;z-index:30;display:flex;flex-wrap:nowrap;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));background:#183449;border-top:1px solid var(--stroke)}
+.quizNavigation .btn{flex:1;min-width:0;max-width:280px;width:auto;min-height:48px}
+.topbar,.panel{-webkit-backdrop-filter:blur(14px)}
+.resultsTable tbody th{unicode-bidi:isolate}.resultMetrics b{unicode-bidi:isolate}
+.btn{touch-action:manipulation}.quizSection{overflow-wrap:break-word}
+@media(max-width:580px){.questionField h3{font-size:1.15rem!important}.quizNavigation{margin-left:-8px;margin-right:-8px;padding-left:8px;padding-right:8px}.quizNavigation .btn{font-size:.92rem;padding:10px 8px}.quizOption{min-height:72px}.quizSection{scroll-margin-top:8px}}
+@media print{.quizNavigation{display:none!important}}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="title">
+      <h1>مختبر الروابط التساهمية التفاعلي</h1>
+      <p>قرّب الذرتين، ثم اسحب بطاقة الرابطة إلى منطقة التداخل. راقب كيف تتشارك الذرتان إلكترونات التكافؤ دون زيادة عددها.</p>
+    </div>
+    <div class="chips">
+      <span class="chip">سحب وإفلات</span>
+      <span class="chip">جذب تلقائي</span>
+      <span class="chip">إلكترونات تكافؤ صحيحة</span>
+      <span class="chip">تعلم بالمحاولة</span>
+    </div>
+  </header>
+
+  <div class="main">
+    <section class="panel labWrap">
+      <div id="lab" class="lab" aria-label="منطقة بناء الرابطة التساهمية" aria-describedby="modelNote">
+        <div class="help">اسحب الذرات أو حرّكها بمفاتيح الأسهم</div>
+        <div class="statusPill">الحالة: <b id="distText">ذرتان منفصلتان</b></div>
+        <div id="centerGuide" class="centerGuide">منطقة التداخل</div>
+        <div id="overlap" class="overlap"></div>
+        <div id="bondZone" class="bondZone">
+          <div id="bondDisplay" class="bondDisplay"></div>
+        </div>
+
+        <div id="leftAtom" class="atom left" role="button" tabindex="0" aria-label="الذرة اليسرى، حرّكها بمفاتيح الأسهم">
+          <div class="shell"></div><div class="shell s2"></div>
+          <div id="leftCore" class="core">H</div>
+          <div class="electrons" aria-hidden="true"></div>
+        </div>
+
+        <div id="rightAtom" class="atom right" role="button" tabindex="0" aria-label="الذرة اليمنى، حرّكها بمفاتيح الأسهم">
+          <div class="shell"></div><div class="shell s2"></div>
+          <div id="rightCore" class="core">H</div>
+          <div class="electrons" aria-hidden="true"></div>
+        </div>
+
+        <div class="labPalette" aria-label="بطاقات الروابط">
+        <div class="bondPalette">
+          <button type="button" class="bondCard" data-bond="1">
+            <div class="miniLines"><i></i></div>
+            <b>أحادية</b><span>زوج واحد</span>
+          </button>
+          <button type="button" class="bondCard" data-bond="2">
+            <div class="miniLines"><i></i><i></i></div>
+            <b>ثنائية</b><span>زوجان</span>
+          </button>
+          <button type="button" class="bondCard" data-bond="3">
+            <div class="miniLines"><i></i><i></i><i></i></div>
+            <b>ثلاثية</b><span>٣ أزواج</span>
+          </button>
+        </div>
+        </div>
+        <div id="footerHint" class="footerHint">
+          ابدأ بتقريب الذرتين. عندما تظهر هالة التداخل، اسحب بطاقة الرابطة المناسبة إلى المركز.
+        </div>
+      </div>
+      <div class="labActions controls"><button id="closerBtn" class="btn">قرّب الذرتين</button><button id="apartBtn" class="btn">أبعد الذرتين</button><button id="removeBtn" class="btn" disabled>إزالة الرابطة</button></div>
+      <div class="legend"><span><i class="legendDot leftDot"></i>إلكترونات الذرة اليسرى</span><span><i class="legendDot rightDot"></i>إلكترونات الذرة اليمنى</span></div>
+      <p id="modelNote" class="modelNote">تمثيل تعليمي مبسّط وفق نموذج لويس، بمظهر مجسّم. النقاط تمثل إلكترونات التكافؤ فقط، وكل خط يرمز إلى الزوج المشترك نفسه ولا يضيف إلكترونات. ألوان النقاط ترميز تعليمي للمساهمتين، وليست ألوانًا فعلية للإلكترونات. الهالات لا تمثل مدارات ذرية دقيقة، والنقاط ليست مسارات للإلكترونات. تقريب الذرات هنا خطوة للتفاعل التعليمي، وليس ضمانًا لتكوّن رابطة في الواقع.</p>
+    </section>
+
+    <aside class="panel side">
+      <div class="section">
+        <h3>1) اختر الجزيء</h3>
+        <div class="mols">
+          <button class="btn active" data-mol="H2">H₂</button>
+          <button class="btn" data-mol="O2">O₂</button>
+          <button class="btn" data-mol="N2">N₂</button>
+        </div>
+        <div class="metric"><span>إلكترونات التكافؤ لكل ذرة</span><b id="goalText">١</b></div>
+      </div>
+
+      <div class="section">
+        <h3>2) اختر الرابطة واسحبها</h3>
+        <p class="smallNote">اسحب إحدى بطاقات الروابط الموجودة داخل المختبر، أو انقر عليها. أكمل قاعدة الثنائية للهيدروجين والثمانية للأكسجين والنيتروجين.</p>
+        <p class="smallNote">يمكنك أيضًا النقر على البطاقة أو اختيارها بمفتاح Enter.</p>
+      </div>
+
+      <div class="section">
+        <h3>3) التحقق</h3>
+        <div id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true">لم يتم بناء رابطة بعد.</div>
+        <div class="controls" style="margin-top:10px">
+          <button id="checkBtn" class="btn primary" disabled>تحقق من الرابطة</button>
+          <button id="resetBtn" class="btn">إعادة المحاولة</button>
+        </div>
+      </div>
+
+      <div class="section analysis"><h3>تتبّع الإلكترونات</h3><div class="metric"><span>مجموع إلكترونات التكافؤ</span><b id="totalElectrons">٢</b></div><div class="metric"><span>إلكترونات مشتركة</span><b id="sharedElectrons">٠</b></div><div class="metric"><span>غير مشتركة لكل ذرة</span><b id="unsharedElectrons">١</b></div><div class="metric"><span>إلكترونات التكافؤ حول كل ذرة</span><b id="aroundElectrons">١</b></div><p class="smallNote">الإلكترون المشترك يُحسب حول كلتا الذرتين، لكنه إلكترون واحد في المجموع الفعلي.</p></div>
+      <div class="section quizSide"><h3>4) أسئلة وتحليل النتائج</h3><p id="quizGateSide" class="smallNote"></p><button id="openQuiz" class="btn primary" disabled>انتقل إلى التقويم</button></div>
+      <div class="score">
+        <div>نقاط البناء<b id="score">0</b></div>
+        <div>المكتمل<b id="done">٠ من ٣</b></div>
+      </div>
+    </aside>
+  </div>
+<section id="quizSection" class="panel quizSection" aria-labelledby="quizHeading">
+  <div id="quizIntro" class="quizIntro">
+    <div><span class="quizEyebrow">من البناء إلى الفهم</span><h2 id="quizHeading">التقويم والتغذية الراجعة</h2><p>٨ أسئلة، ولكل سؤال أربعة بدائل وإجابة صحيحة واحدة. اضغط على إجابتك لاعتمادها. عند الخطأ، اقرأ التفسير ثم اضغط الإجابة الصحيحة لتصحيحها قبل الانتقال.</p><p class="smallNote">تُحسب الدرجة من إجاباتك الأولى. يُسجّل التصحيح بعد الشرح منفصلًا، ولا يرفع درجة المحاولة الأولى.</p></div>
+    <div class="quizStart"><p id="quizGate" role="status"></p><button id="startQuiz" class="btn primary" disabled>ابدأ الأسئلة</button></div>
+  </div>
+  <div id="quizPane" hidden>
+    <div class="quizTop"><b id="questionPosition"></b><span id="questionCategory" class="chip"></span></div>
+    <label class="smallNote" for="quizProgress" id="quizProgressText">أُنجز ٠ من ٨ أسئلة</label><progress id="quizProgress" value="0" max="8"></progress>
+    <div id="answerForm">
+      <section class="questionField" aria-labelledby="questionText"><h3 id="questionText" tabindex="-1"></h3><div id="quizOptions" class="quizOptions" role="group" aria-labelledby="questionText"></div></section>
+      <details id="quizHint" class="quizHint"><summary>تلميح يساعدك على التفكير</summary><p id="hintText"></p></details>
+      <div id="quizFeedback" class="quizFeedback" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+      <p id="questionActionHint" class="smallNote" role="status"></p><div id="quizNavigation" class="quizActions quizNavigation"><button id="previousQuestion" type="button" class="btn" disabled>السؤال السابق</button><button id="nextQuestion" type="button" class="btn primary" disabled>السؤال التالي</button></div>
+    </div>
+  </div>
+  <div id="quizResults" hidden>
+    <h2 id="resultTitle" tabindex="-1">تحليل نتائجك</h2><p id="resultSummary"></p>
+    <div class="resultMetrics"><div>درجة المحاولة الأولى<b id="firstScore"></b></div><div>الصحيح من المحاولة الأولى<b id="firstCorrect"></b></div><div>إجابات صُحّحت بعد الشرح<b id="correctedCount"></b></div><div>إجابات أولى سبقتها تلميحات<b id="hintCount"></b></div></div>
+    <div id="masteryBar" class="masteryBar" role="progressbar" aria-label="نسبة الإجابات الصحيحة من المحاولة الأولى" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="masteryFill"></span></div>
+    <p class="smallNote">هذه نتيجة تعليمية لهذا النشاط. درجة المحاولة الأولى لا تتغير بالرجوع إلى الأسئلة أو تصحيحها. الإجابات التي صُحّحت بعد ظهور الحل لا تُحسب إتقانًا مستقلًا جديدًا.</p>
+    <h3>أداؤك حسب الموضوع</h3><div class="tableWrap"><table class="resultsTable"><thead><tr><th scope="col">الموضوع</th><th scope="col">الصحيح أولًا</th><th scope="col">النسبة (تقريبًا)</th><th scope="col">القراءة التعليمية</th></tr></thead><tbody id="categoryResults"></tbody></table></div>
+    <h3>مراجعة موجّهة لك</h3><ul id="resultRecommendations" class="recommendations"></ul>
+    <h3>نتائج البناء في المختبر</h3><div class="tableWrap"><table class="resultsTable"><thead><tr><th scope="col">الجزيء</th><th scope="col">اختيارات البطاقات</th><th scope="col">اختيارات غير مطابقة</th><th scope="col">الإنجاز العملي</th></tr></thead><tbody id="practicalResults"></tbody></table></div>
+    <p class="smallNote">تُسجّل اختيارات البطاقات بعد تقريب الذرتين منذ فتح الملف. إعادة التقويم تصفّر نتائج الأسئلة فقط، وتحافظ على سجل البناء العملي.</p>
+    <h3>مراجعة الإجابات والتصحيح</h3><div id="answerReview"></div>
+    <div class="quizActions"><button id="restartQuiz" class="btn">إعادة التقويم</button><button id="printResults" class="btn">طباعة التحليل</button></div>
+    <p class="smallNote">إعادة التقويم تبدأ محاولة جديدة للأسئلة الثمانية وتصفّر نتائجها السابقة.</p>
+  </div>
+</section>
+
+  <p class="modelNote source">مرجع علمي: <a href="https://openstax.org/books/chemistry-2e/pages/7-3-lewis-symbols-and-structures" target="_blank" rel="noopener">رموز لويس والروابط التساهمية — OpenStax</a></p>
+</div>
+
+<script>
+(()=>{
+ 'use strict';
+ const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+ const lab=$('#lab'), left=$('#leftAtom'), right=$('#rightAtom'), zone=$('#bondZone');
+ const display=$('#bondDisplay'), guide=$('#centerGuide'), cloud=$('#overlap'), feedback=$('#feedback');
+ const models={H2:{sym:'H',label:'H₂',valence:1,pairs:1,type:'أحادية',target:2},O2:{sym:'O',label:'O₂',valence:6,pairs:2,type:'ثنائية',target:8},N2:{sym:'N',label:'N₂',valence:5,pairs:3,type:'ثلاثية',target:8}};
+ const arabic=n=>n.toLocaleString('ar-SA');
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ let current='H2', selected=0, verified=false, drag=null;
+ let pos={L:{x:.18,y:.46},R:{x:.82,y:.46}};
+ const completed=new Set();
+ const labStats={H2:{attempts:0,errors:0},O2:{attempts:0,errors:0},N2:{attempts:0,errors:0}};
+ function notifyProgress(){window.dispatchEvent(new CustomEvent("bondlab:progress",{detail:{completed:Array.from(completed),stats:JSON.parse(JSON.stringify(labStats))}}));}
+ function geometry(){
+   const w=lab.clientWidth,h=lab.clientHeight,size=left.offsetWidth;
+   const a={x:pos.L.x*w,y:pos.L.y*h},b={x:pos.R.x*w,y:pos.R.y*h};
+   const d=Math.hypot(b.x-a.x,b.y-a.y);
+   return {w,h,size,a,b,d,mx:(a.x+b.x)/2,my:(a.y+b.y)/2,angle:Math.atan2(b.y-a.y,b.x-a.x)};
+ }
+ function ready(){const g=geometry();return g.d<=g.size+30&&g.d>=g.size*.84;}
+ function bounded(p,g){const top=100+g.size/2,palette=lab.querySelector('.labPalette'),bottom=Math.max(top,palette.offsetTop-g.size/2-16);return {x:clamp(p.x,g.size/2+8,g.w-g.size/2-8),y:clamp(p.y,top,bottom)};}
+ function setPoint(which,p){const g=geometry();p=bounded(p,g);pos[which]={x:p.x/g.w,y:p.y/g.h};}
+ function message(text,kind=''){feedback.className='feedback'+(kind?' '+kind:'');feedback.textContent=text;}
+ function renderElectrons(){
+   const m=models[current],remaining=m.valence-selected,g=geometry();
+   [left,right].forEach((el,index)=>{
+     const side=index===0?'L':'R',target=el.querySelector('.electrons');target.replaceChildren();
+     const facing=index===0?g.angle:g.angle+Math.PI;
+     // Initial Lewis symbols: one electron per side before pairing.
+     // Once shared electrons move to the bond, only non-shared electrons remain.
+     let groups;
+     if(!selected){
+       groups=m.sym==='H'?[1,0,0,0]:m.sym==='O'?[1,2,1,2]:[1,1,2,1];
+     }else{
+       groups=remaining===0?[0,0,0,0]:remaining===2?[0,0,2,0]:[0,2,0,2];
+     }
+     groups.forEach((count,k)=>{
+       const angle=facing+k*Math.PI/2,radius=g.size/2+3;
+       for(let j=0;j<count;j++){
+         const tangent=count===2?(j===0?-7:7):0;
+         const e=document.createElement('i');e.className='e';e.dataset.origin=side;
+         e.style.left=(g.size/2+Math.cos(angle)*radius-Math.sin(angle)*tangent)+'px';
+         e.style.top=(g.size/2+Math.sin(angle)*radius+Math.cos(angle)*tangent)+'px';target.append(e);
+       }
+     });
+     const around=m.valence+selected;
+     el.setAttribute('aria-label',`ذرة ${m.sym} ${index===0?'يسرى':'يمنى'}، ${arabic(remaining)} إلكترونًا غير مشترك و${arabic(selected*2)} إلكترونًا مشتركًا؛ حرّكها بمفاتيح الأسهم`);
+     el.dataset.nonshared=String(remaining);el.dataset.around=String(around);
+   });
+   $('#totalElectrons').textContent=arabic(m.valence*2);
+   $('#sharedElectrons').textContent=arabic(selected*2);
+   $('#unsharedElectrons').textContent=arabic(remaining);
+   $('#aroundElectrons').textContent=arabic(m.valence+selected);
+ }
+ function renderBond(){
+   display.replaceChildren();
+   for(let i=0;i<selected;i++){
+     const line=document.createElement('div');line.className='bondLine';
+     for(const side of ['L','R']){const dot=document.createElement('i');dot.className='sharedDot from'+side;dot.dataset.origin=side;line.append(dot);}
+     display.append(line);
+   }
+   zone.classList.toggle('occupied',!!selected);
+   zone.tabIndex=selected?0:-1;zone.setAttribute('role',selected?'button':'presentation');
+   zone.setAttribute('aria-label',selected?'الرابطة المركبة؛ اسحبها خارج منطقة التداخل لإزالتها، أو اضغط Delete':'منطقة إسقاط الرابطة');
+   guide.classList.toggle('occupied',!!selected);
+   $$('.bondCard').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.bond)===selected)));
+   $('#removeBtn').disabled=!selected;
+ }
+ function clearBond(){selected=0;verified=false;renderBond();}
+ function paint(){
+   const g=geometry();
+   [left,right].forEach((el,i)=>{const p=i===0?g.a:g.b;el.style.left=(p.x-g.size/2)+'px';el.style.top=(p.y-g.size/2)+'px';});
+   const canBuild=ready();
+   if(!canBuild&&selected){clearBond();message('أُزيلت الرابطة من النموذج عند إبعاد الذرتين، وعادت النقاط إلى تمثيل الذرتين المنفصلتين في هذا النموذج.');}
+   for(const el of [zone,guide,cloud]){el.style.left=g.mx+'px';el.style.top=g.my+'px';}
+   zone.style.transform=`translate(-50%,-50%) rotate(${g.angle}rad)`;
+   const core=left.querySelector('.core').offsetWidth;
+   zone.style.width=Math.max(64,g.d-core+12)+'px';
+   $$('.bondLine').forEach(el=>el.style.width=Math.max(48,g.d-core+4)+'px');
+   cloud.style.width=(g.size+60)+'px';cloud.style.height=(g.size*.8)+'px';
+   cloud.classList.toggle('show',canBuild);guide.classList.toggle('ready',canBuild);
+   $('#distText').textContent=verified?'بناء صحيح':selected?'رابطة مقترحة':canBuild?'جاهز للمشاركة':'ذرتان منفصلتان';
+   $('#footerHint').textContent=selected?'اسحب الرابطة خارج منطقة التداخل لإزالتها، أو تحقق من البناء.':canBuild?'تداخلت الهالات في النموذج. اختر بطاقة الرابطة المناسبة وأسقطها بين الذرتين.':'قرّب الذرتين بالسحب، أو استخدم زر «قرّب الذرتين».';
+   $('#checkBtn').disabled=!canBuild||!selected;
+   renderElectrons();
+ }
+ function snapAtoms(){
+   const g=geometry(),d=g.size+16;
+   const cx=clamp(g.mx,g.size/2+8+d/2,g.w-g.size/2-8-d/2);
+   const cy=bounded({x:cx,y:g.my},g).y;
+   setPoint('L',{x:cx-d/2,y:cy});setPoint('R',{x:cx+d/2,y:cy});paint();
+ }
+ function cleanup(){
+   if(!drag)return;
+   const old=drag;drag=null;
+   old.el.classList.remove('dragging');old.ghost?.remove();zone.classList.remove('hot');
+   if(old.el.hasPointerCapture?.(old.id))old.el.releasePointerCapture(old.id);
+ }
+ function cancelDrag(){
+   if(!drag)return;
+   const previous=drag;
+   if(drag.kind==='atom'){pos=drag.startPos;selected=drag.startBond;verified=drag.startVerified;renderBond();}
+   cleanup();paint();
+   if(previous.kind==='atom'){feedback.className=previous.startFeedback.kind;feedback.textContent=previous.startFeedback.text;}
+ }
+ function reset(){cancelDrag();clearBond();pos={L:{x:.18,y:.46},R:{x:.82,y:.46}};normalize();paint();message('اختر عدد الأزواج المشتركة بعد تقريب الذرتين.');}
+ function normalize(){const g=geometry();setPoint('L',g.a);setPoint('R',g.b);}
+ function choose(key){
+   cancelDrag();current=key;const m=models[key];
+   $('#leftCore').textContent=m.sym;$('#rightCore').textContent=m.sym;$('#goalText').textContent=arabic(m.valence);
+   $$('.mols button').forEach(b=>{const active=b.dataset.mol===key;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});reset();
+ }
+ function applyBond(n){
+   if(!ready()){message('قرّب الذرتين أولًا؛ ثم ضع الرابطة بينهما.','bad');return;}
+   const m=models[current];labStats[current].attempts++;
+   if(n!==m.pairs){
+     labStats[current].errors++;notifyProgress();
+     clearBond();paint();
+     const around=m.valence+n;
+     message(m.sym==='H'?'هذه البطاقة لا تناسب H₂. لكل ذرة هيدروجين إلكترون تكافؤ واحد؛ تتشارك الذرتان زوجًا واحدًا فقط، فيُحسب إلكترونان حول كل منهما.':`هذه البطاقة لا تناسب ${m.label}. يلزم أن يكون حول كل ذرة ${arabic(m.target)} إلكترونات مع المشاركة؛ هذا العدد من الأزواج لا يحقق البناء الصحيح وفق نموذج لويس. المطلوب رابطة ${m.type} بها ${arabic(m.pairs)} من الأزواج المشتركة.`,'bad');
+     return;
+   }
+   selected=n;verified=false;renderBond();paint();notifyProgress();
+   message('ساهمت كل ذرة بإلكترون في كل زوج مشترك، دون زيادة المجموع. تحقق من البناء لتسجيل الإنجاز.');
+ }
+ function check(){
+   if(!ready()||!selected)return;
+   const m=models[current];if(selected!==m.pairs)return;
+   verified=true;
+   if(!completed.has(current)){completed.add(current);$('#score').textContent=arabic(Math.round(completed.size/3*100));$('#done').textContent=arabic(completed.size)+' من ٣';}
+   notifyProgress();
+   const description=selected===1?'زوج إلكتروني مشترك واحد':selected===2?'زوجان إلكترونيان مشتركان':'ثلاثة أزواج إلكترونية مشتركة';
+   const lone=m.sym==='H'?'لا تبقى إلكترونات غير مشتركة.':m.sym==='O'?'تبقى حول كل ذرة أكسجين زوجان غير مشتركين.':'يبقى حول كل ذرة نيتروجين زوج واحد غير مشترك.';
+   paint();message(`✓ صحيح! ${m.label}: رابطة ${m.type}، ${description}. ${lone}${completed.size===3?' أنجزت الجزيئات الثلاثة!':''}`,'ok');
+ }
+ function moveAtom(which,p){
+   const g=geometry(),other=which==='L'?g.b:g.a,min=g.size*.86;
+   p=bounded(p,g);let dx=p.x-other.x,dy=p.y-other.y,d=Math.hypot(dx,dy);
+   if(d<min){if(d<.01){dx=which==='L'?-1:1;dy=0;d=1;}p=bounded({x:other.x+dx/d*min,y:other.y+dy/d*min},g);if(Math.hypot(p.x-other.x,p.y-other.y)<min-1)return;}
+   setPoint(which,p);verified=false;paint();
+ }
+ function begin(e,kind,el,which=null){
+   if(drag||e.isPrimary===false||(e.pointerType==='mouse'&&e.button!==0))return;
+   if(kind==='placed'&&!selected)return;
+   if(kind==='atom')e.preventDefault();
+   el.focus?.({preventScroll:true});
+   const g=geometry();
+   drag={kind,el,which,id:e.pointerId,x:e.clientX,y:e.clientY,moved:false,n:kind==='placed'?selected:Number(el.dataset.bond),point:which==='L'?g.a:g.b,startPos:JSON.parse(JSON.stringify(pos)),startBond:selected,startVerified:verified,startFeedback:{text:feedback.textContent,kind:feedback.className}};
+   try{el.setPointerCapture?.(e.pointerId);}catch(_){}
+ }
+ function inside(e){
+   // Hit-test in rotated bond coordinates, rather than the oversized axis-aligned rectangle.
+   const r=lab.getBoundingClientRect(),g=geometry();
+   const x=e.clientX-r.left-lab.clientLeft-g.mx,y=e.clientY-r.top-lab.clientTop-g.my;
+   const ux=x*Math.cos(g.angle)+y*Math.sin(g.angle),uy=-x*Math.sin(g.angle)+y*Math.cos(g.angle);
+   return Math.abs(ux)<=zone.offsetWidth/2&&Math.abs(uy)<=zone.offsetHeight/2;
+ }
+ function onMove(e){
+   if(!drag||e.pointerId!==drag.id)return;
+   const dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+   if(!drag.moved&&Math.hypot(dx,dy)<6)return;
+   drag.moved=true;drag.el.classList.add('dragging');
+   if(drag.kind==='atom'){moveAtom(drag.which,{x:drag.point.x+dx,y:drag.point.y+dy});return;}
+   e.preventDefault();
+   if(!drag.ghost){drag.ghost=document.createElement('div');drag.ghost.className='dragGhost';drag.ghost.setAttribute('aria-hidden','true');drag.ghost.textContent=({1:'رابطة أحادية',2:'رابطة ثنائية',3:'رابطة ثلاثية'})[drag.n];document.body.append(drag.ghost);}
+   drag.ghost.style.left=e.clientX+'px';drag.ghost.style.top=e.clientY+'px';
+   zone.classList.toggle('hot',inside(e)&&ready());
+ }
+ function onEnd(e){
+   if(!drag||e.pointerId!==drag.id)return;
+   const old=drag,hit=inside(e);cleanup();
+   if(old.kind==='atom'){if(old.moved&&ready())snapAtoms();return;}
+   if(!old.moved)return; // Native click is the accessible tap alternative.
+   old.el.dataset.suppressUntil=String(Date.now()+600);
+   if(old.kind==='placed'){
+     if(!hit){clearBond();paint();message('أُزيلت الرابطة، وعاد عرض النقاط إلى تمثيل الذرتين المنفصلتين.');}
+     return;
+   }
+   if(hit)applyBond(old.n);else message('أسقط البطاقة بين الذرتين، داخل منطقة التداخل.','bad');
+ }
+ [[left,'L'],[right,'R']].forEach(([el,which])=>{
+   el.addEventListener('pointerdown',e=>begin(e,'atom',el,which));
+   el.addEventListener('keydown',e=>{
+     const vectors={ArrowLeft:[-12,0],ArrowRight:[12,0],ArrowUp:[0,-12],ArrowDown:[0,12]};
+     if(!vectors[e.key]||drag)return;e.preventDefault();const g=geometry(),p=which==='L'?g.a:g.b,v=vectors[e.key];moveAtom(which,{x:p.x+v[0],y:p.y+v[1]});
+   });
+ });
+ $$('.bondCard').forEach(el=>{
+   el.setAttribute('aria-label',`اختيار رابطة ${el.querySelector('b').textContent}؛ اسحبها أو انقر عليها`);
+   el.addEventListener('pointerdown',e=>begin(e,'card',el));
+   el.addEventListener('click',e=>{if(drag||Date.now()<Number(el.dataset.suppressUntil||0))return;applyBond(Number(el.dataset.bond));});
+ });
+ zone.addEventListener('pointerdown',e=>begin(e,'placed',zone));
+ zone.addEventListener('keydown',e=>{if(!selected||drag)return;if(['Delete','Backspace','Enter',' '].includes(e.key)){e.preventDefault();clearBond();paint();message('أُزيلت الرابطة.');}});
+ document.addEventListener('pointermove',onMove,{passive:false});
+ document.addEventListener('pointerup',onEnd);
+ document.addEventListener('pointercancel',e=>{if(drag&&drag.id===e.pointerId)cancelDrag();});
+ document.addEventListener('lostpointercapture',e=>{if(drag&&drag.id===e.pointerId)cancelDrag();},true);
+ window.addEventListener('blur',cancelDrag);
+ $('#closerBtn').addEventListener('click',()=>{cancelDrag();const g=geometry();setPoint('L',{x:g.w/2-(g.size+16)/2,y:g.h*.46});setPoint('R',{x:g.w/2+(g.size+16)/2,y:g.h*.46});verified=false;paint();});
+ $('#apartBtn').addEventListener('click',()=>{cancelDrag();pos={L:{x:.18,y:.46},R:{x:.82,y:.46}};normalize();paint();});
+ $('#removeBtn').addEventListener('click',()=>{cancelDrag();clearBond();paint();message('أُزيلت الرابطة، وعادت النقاط إلى تمثيل الذرتين المنفصلتين في هذا النموذج.');});
+ $('#checkBtn').addEventListener('click',check);$('#resetBtn').addEventListener('click',reset);
+ $$('.mols button').forEach(el=>el.addEventListener('click',()=>choose(el.dataset.mol)));
+ let previousWidth=lab.clientWidth;
+ function resizeLab(){if(lab.clientWidth<left.offsetWidth*2+48||lab.clientWidth===previousWidth)return;previousWidth=lab.clientWidth;cancelDrag();normalize();if(selected)snapAtoms();else paint();}
+ if(typeof window.ResizeObserver==='function')new ResizeObserver(resizeLab).observe(lab);
+ window.addEventListener('resize',()=>requestAnimationFrame(resizeLab));
+ window.addEventListener('orientationchange',()=>requestAnimationFrame(resizeLab));
+ choose('H2');
+})();
+
+</script>
+<script>
+(()=>{
+ 'use strict';
+ const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+ const num=n=>Number(n).toLocaleString('ar-SA',{maximumFractionDigits:1});
+const questions=[
+ {id:'q1',category:'valence',question:'قبل تكوّن جزيء H₂، ما مجموع إلكترونات التكافؤ في ذرتي هيدروجين متعادلتين؟',hint:'لكل ذرة هيدروجين إلكترون تكافؤ واحد. اجمع مساهمتي الذرتين.',correctValues:['B'],options:[
+  {value:'A',label:'إلكترون واحد',feedback:'هذا عدد إلكترونات التكافؤ لذرة هيدروجين واحدة؛ السؤال يتناول ذرتين.'},
+  {value:'B',label:'إلكترونان',feedback:'لكل ذرة هيدروجين إلكترون تكافؤ واحد، فيكون المجموع ⁦١ + ١ = ٢⁩.'},
+  {value:'C',label:'أربعة إلكترونات',feedback:'المشاركة لا تضاعف عدد الإلكترونات الفعلي؛ الذرتان تقدّمان إلكترونين فقط.'},
+  {value:'D',label:'ثمانية إلكترونات',feedback:'الهيدروجين يكتمل حوله إلكترونان، ولا تنطبق عليه قاعدة الثمانية.'}]},
+ {id:'q2',category:'valence',question:'لكل ذرة نيتروجين متعادلة خمسة إلكترونات تكافؤ. ما مجموع إلكترونات التكافؤ المتاحة لبناء جزيء N₂؟',hint:'عدّ إلكترونات التكافؤ التي تقدّمها الذرتان قبل توزيعها على الروابط والأزواج غير المشتركة.',correctValues:['D'],options:[
+  {value:'A',label:'خمسة إلكترونات',feedback:'خمسة إلكترونات هي مساهمة ذرة نيتروجين واحدة؛ توجد ذرتان في N₂.'},
+  {value:'B',label:'ستة إلكترونات',feedback:'الستة هي الإلكترونات المشتركة في الرابطة الثلاثية فقط؛ تبقى إلكترونات غير مشتركة أيضًا.'},
+  {value:'C',label:'ثمانية إلكترونات',feedback:'ثمانية تصف عدد الإلكترونات المحسوبة حول كل ذرة بعد المشاركة، ولا تمثل المجموع الفعلي للجزيء.'},
+  {value:'D',label:'عشرة إلكترونات',feedback:'تقدّم كل ذرة خمسة إلكترونات تكافؤ؛ المجموع الفعلي ⁦٥ + ٥ = ١٠⁩.'}]},
+ {id:'q3',category:'sharing',question:'إذا تشاركت ذرتان زوجًا إلكترونيًا واحدًا، فما وصف الرابطة الناتجة وعدد إلكتروناتها المشتركة؟',hint:'الزوج يحتوي على إلكترونين، وعدد الأزواج المشتركة يحدد نوع الرابطة.',correctValues:['A'],options:[
+  {value:'A',label:'أحادية؛ إلكترونان مشتركان',feedback:'الرابطة الأحادية تمثل زوجًا واحدًا، والزوج يحتوي على إلكترونين.'},
+  {value:'B',label:'أحادية؛ إلكترون مشترك واحد',feedback:'الزوج يتكوّن من إلكترونين؛ إلكترون واحد لا يمثل زوجًا إلكترونيًا.'},
+  {value:'C',label:'ثنائية؛ إلكترونان مشتركان',feedback:'الرابطة الثنائية تحتاج إلى زوجين مشتركين، أي أربعة إلكترونات.'},
+  {value:'D',label:'ثلاثية؛ ثلاثة إلكترونات مشتركة',feedback:'الرابطة الثلاثية تتكوّن من ثلاثة أزواج، أي ستة إلكترونات مشتركة.'}]},
+ {id:'q4',category:'sharing',question:'يمثل نموذج لويس لجزيء O₂ رابطة ثنائية. كم إلكترونًا يوجد في الأزواج المشتركة بين الذرتين؟',hint:'حوّل عدد الأزواج في الرابطة الثنائية إلى عدد إلكترونات.',correctValues:['C'],options:[
+  {value:'A',label:'إلكترونان',feedback:'إلكترونان يمثلان زوجًا واحدًا؛ الرابطة الثنائية تحتوي على زوجين.'},
+  {value:'B',label:'ثلاثة إلكترونات',feedback:'الأزواج المشتركة تحتوي على عدد زوجي من الإلكترونات؛ زوجان يعنيان أربعة إلكترونات.'},
+  {value:'C',label:'أربعة إلكترونات',feedback:'في الرابطة الثنائية زوجان مشتركان؛ ⁦٢ × ٢ = ٤⁩ إلكترونات.'},
+  {value:'D',label:'ستة إلكترونات',feedback:'ستة إلكترونات تمثل ثلاثة أزواج مشتركة، أي رابطة ثلاثية.'}]},
+ {id:'q5',category:'sharing',question:'في نموذج لويس الصحيح لجزيء N₂، تسهم كل ذرة بثلاثة إلكترونات في الرابطة الثلاثية. كم إلكترونًا غير مشترك يبقى حول كل ذرة؟',hint:'ابدأ بخمسة إلكترونات تكافؤ لكل ذرة، واطرح الإلكترونات التي أسهمت بها في المشاركة.',correctValues:['B'],options:[
+  {value:'A',label:'إلكترون واحد',feedback:'لكل ذرة خمسة إلكترونات تكافؤ، وتسهم بثلاثة؛ المتبقي ⁦٥ − ٣ = ٢⁩ وليس واحدًا.'},
+  {value:'B',label:'إلكترونان',feedback:'يتبقى إلكترونان غير مشتركين لأن ⁦٥ − ٣ = ٢⁩، فيشكّلان زوجًا واحدًا حول كل ذرة.'},
+  {value:'C',label:'ثلاثة إلكترونات',feedback:'الثلاثة هي مساهمة الذرة في الأزواج المشتركة؛ الإلكترونات غير المشتركة المتبقية عددها اثنان.'},
+  {value:'D',label:'أربعة إلكترونات',feedback:'أربعة هي مجموع الإلكترونات غير المشتركة في ذرتي N₂ معًا، وليست حول ذرة واحدة.'}]},
+ {id:'q6',category:'accounting',question:'في نموذج لويس لجزيء O₂، يوجد ١٢ إلكترون تكافؤ فعليًا، منها ٤ إلكترونات مشتركة. ما مجموع الإلكترونات غير المشتركة في الجزيء؟',hint:'المجموع الفعلي يساوي الإلكترونات المشتركة زائد الإلكترونات غير المشتركة.',correctValues:['D'],options:[
+  {value:'A',label:'أربعة إلكترونات',feedback:'أربعة إلكترونات غير مشتركة توجد حول كل ذرة أكسجين؛ للجزيء ذرتان.'},
+  {value:'B',label:'ستة إلكترونات',feedback:'ستة تمثل إلكترونات التكافؤ الأصلية لذرة أكسجين واحدة؛ المطلوب مجموع الإلكترونات غير المشتركة في الجزيء.'},
+  {value:'C',label:'اثنا عشر إلكترونًا',feedback:'اثنا عشر هي جميع إلكترونات التكافؤ، ويجب استبعاد الأربعة المشتركة لحساب غير المشتركة.'},
+  {value:'D',label:'ثمانية إلكترونات',feedback:'عدد الإلكترونات غير المشتركة في الجزيء يساوي ⁦١٢ − ٤ = ٨⁩، أي أربعة حول كل ذرة.'}]},
+ {id:'q7',category:'accounting',question:'في نموذج لويس الصحيح لـ N₂، تُحسب ثمانية إلكترونات تكافؤ حول كل ذرة. لماذا يبقى المجموع الفعلي لإلكترونات التكافؤ عشرة، وليس ستة عشر؟',hint:'قارن عدّ الإلكترون المشترك حول كل ذرة بعدّه مرة واحدة في الجزيء.',correctValues:['A'],options:[
+  {value:'A',label:'الإلكترونات المشتركة تُحسب حول الذرتين، وتُعدّ مرة واحدة في المجموع',feedback:'تُحسب الإلكترونات الستة المشتركة حول كلتا الذرتين. عدّها مرة واحدة، مع أربعة غير مشتركة، يعطي ١٠.'},
+  {value:'B',label:'تفقد الذرتان ستة إلكترونات أثناء تكوين الرابطة',feedback:'في هذا الجزيء تتشارك الذرتان الإلكترونات ولا تفقدان ستة إلكترونات؛ المجموع الفعلي محفوظ.'},
+  {value:'C',label:'الإلكترونات غير المشتركة لا تدخل في مجموع إلكترونات التكافؤ',feedback:'الإلكترونات غير المشتركة جزء من إلكترونات التكافؤ، وتدخل في المجموع الفعلي.'},
+  {value:'D',label:'يتحول كل زوج مشترك إلى إلكترون واحد عند تكوين الرابطة',feedback:'كل زوج مشترك يظل مكوّنًا من إلكترونين؛ لا تندمج الإلكترونات لتصبح إلكترونًا واحدًا.'}]},
+ {id:'q8',category:'accounting',question:'ساهمت كل ذرة هيدروجين بإلكترون واحد في رابطة H₂. أي وصف يميز المجموع الفعلي عن العدد المحسوب حول كل ذرة؟',hint:'الإلكترونان المشتركان يخدمان الذرتين، دون إنشاء إلكترونات جديدة.',correctValues:['C'],options:[
+  {value:'A',label:'المجموع أربعة؛ وحول كل ذرة إلكترونان',feedback:'المجموع الفعلي ليس أربعة؛ احتساب الزوج حول الذرتين لا يضاعف عدد الإلكترونات.'},
+  {value:'B',label:'المجموع إلكترونان؛ وحول كل ذرة إلكترون واحد',feedback:'الزوج المشترك يُحسب حول كل ذرة؛ لذلك يُحسب إلكترونان حول كل ذرة هيدروجين.'},
+  {value:'C',label:'المجموع إلكترونان؛ وحول كل ذرة إلكترونان',feedback:'يوجد إلكترونان فعليًا في H₂، ويُحسب الزوج المشترك حول كلتا الذرتين فيكتمل حول كل منهما إلكترونان.'},
+  {value:'D',label:'المجموع إلكترون واحد؛ وحول كل ذرة إلكترونان',feedback:'تقدّم الذرتان إلكترونين فعليًا؛ المشاركة لا تختزل الزوج إلى إلكترون واحد.'}]}
+];
+
+ const categories={
+   valence:{label:'إلكترونات التكافؤ',tip:'احسب المجموع الفعلي بجمع إلكترونات التكافؤ التي تقدّمها الذرتان: H₂ = ٢، وN₂ = ١٠.'},
+   sharing:{label:'الأزواج ونوع الرابطة',tip:'كل زوج مشترك يحتوي على إلكترونين. الأحادية زوج واحد، والثنائية زوجان، والثلاثية ثلاثة أزواج. في N₂ يبقى زوج غير مشترك حول كل ذرة.'},
+   accounting:{label:'حفظ الإلكترونات وعدّها',tip:'عدّ الإلكترون المشترك مرة واحدة في المجموع الفعلي، واحسبه حول كلتا الذرتين عند فحص اكتمال الغلاف. لا تنشأ إلكترونات جديدة بالمشاركة.'}
+ };
+
+ let labState={completed:[],stats:{}},started=false,finished=false,index=0,states=[];
+ let viewToken=0;
+ const fresh=()=>questions.map(()=>({first:null,selected:null,last:null,attempts:0,solved:false,hint:false,hintOpen:false,firstUsedHint:false}));
+ function tag(name,text,className=''){const el=document.createElement(name);el.textContent=text;if(className)el.className=className;return el;}
+ function focus(el){try{el.focus({preventScroll:true});}catch(_){el.focus();}}
+ function show(el,block='start'){try{el.scrollIntoView({block,behavior:'auto'});}catch(_){el.scrollIntoView();}}
+ // Validate identifiers and answer keys before any answer can be graded.
+ const valid=questions.length===8&&new Set(questions.map(q=>q.id)).size===questions.length&&questions.every(q=>q.options.length===4&&q.correctValues.length===1&&q.options.filter(o=>o.value===q.correctValues[0]).length===1&&new Set(q.options.map(o=>o.value)).size===4);
+ function unlock(){
+   const unlocked=valid&&['H2','O2','N2'].every(k=>labState.completed.includes(k));
+   $('#startQuiz').disabled=!unlocked;$('#openQuiz').disabled=!unlocked;
+   const text=!valid?'تعذّر تحميل الأسئلة؛ أعد فتح الملف الأصلي.':unlocked?'أنجزت التجارب الثلاث؛ ابدأ التقويم لتختبر فهمك.':`أكمل بناء الروابط الثلاث وتحقق منها أولًا. المكتمل: ${num(labState.completed.length)} من ٣.`;
+   $('#quizGate').textContent=text;$('#quizGateSide').textContent=text;
+ }
+ window.addEventListener('bondlab:progress',e=>{
+   labState={completed:e.detail.completed.slice(),stats:JSON.parse(JSON.stringify(e.detail.stats))};unlock();
+   if(finished)results(false);
+ });
+ function open(){
+   if(!valid||!['H2','O2','N2'].every(k=>labState.completed.includes(k)))return;
+   if(!started){states=fresh();index=0;started=true;finished=false;}
+   if(!finished){$('#quizPane').hidden=false;$('#quizIntro').hidden=true;renderQuestion();}
+   show(finished?$('#quizResults'):$('#quizPane'));focus(finished?$('#resultTitle'):$('#questionText'));
+ }
+ function renderQuestion(){
+   const q=questions[index],s=states[index],token=++viewToken;
+   $('#questionText').textContent=q.question;$('#questionPosition').textContent=`السؤال ${num(index+1)} من ${num(questions.length)}`;
+   $('#questionCategory').textContent=categories[q.category].label;
+   const options=$('#quizOptions');options.replaceChildren();
+   q.options.forEach((o,i)=>{
+     const button=document.createElement('button');button.type='button';button.className='quizOption';
+     button.id=`answer-${q.id}-${o.value}`;button.dataset.value=o.value;
+     button.append(tag('span',['أ','ب','ج','د'][i],'optionLetter'),tag('span',o.label,'optionText'));
+     button.addEventListener('click',()=>grade(o.value,token));
+     button.addEventListener('keydown',e=>{
+       if(e.repeat&&['Enter',' '].includes(e.key)){e.preventDefault();return;}
+       const keys={ArrowDown:1,ArrowUp:-1,ArrowRight:-1,ArrowLeft:1};
+       if(keys[e.key]){e.preventDefault();const buttons=$$('#quizOptions button');focus(buttons[(i+keys[e.key]+buttons.length)%buttons.length]);}
+       if(e.key==='Home'){e.preventDefault();focus($('#quizOptions button'));}
+       if(e.key==='End'){e.preventDefault();focus($$('#quizOptions button')[$$('#quizOptions button').length-1]);}
+     });
+     options.append(button);
+   });
+   const hint=$('#quizHint');hint.open=s.hintOpen;$('#hintText').textContent=q.hint;
+   hint.querySelector('summary').onclick=()=>{
+     if(token!==viewToken)return;
+     if(!hint.open&&s.first===null)s.hint=true;
+   };
+   hint.ontoggle=()=>{if(token===viewToken)s.hintOpen=hint.open;};
+   renderState();
+ }
+ function renderState(){
+   const q=questions[index],s=states[index],correct=q.correctValues[0];
+   $$('#quizOptions button').forEach((b,i)=>{
+     const v=b.dataset.value,good=s.last!==null&&v===correct,bad=s.last!==null&&v===s.last&&s.last!==correct;
+     b.classList.toggle('chosen',v===s.selected);b.classList.toggle('answerCorrect',good);b.classList.toggle('answerWrong',bad);
+     b.setAttribute('aria-pressed',String(v===s.selected));b.setAttribute('aria-disabled',String(s.solved));
+     b.tabIndex=s.solved&&v!==s.selected?-1:0;
+     b.querySelector('.optionLetter').textContent=good?'✓':bad?'×':['أ','ب','ج','د'][i];
+     b.setAttribute('aria-label',q.options[i].label+(good?'؛ الإجابة الصحيحة':bad?'؛ اختيار غير صحيح':''));
+   });
+   $('#previousQuestion').disabled=index===0;
+   $('#nextQuestion').disabled=!s.solved;$('#nextQuestion').textContent=index===questions.length-1?'عرض تحليل النتائج':'السؤال التالي';
+   $('#questionActionHint').textContent=s.solved?'حُفظت إجابتك. اقرأ الشرح ثم انتقل للسؤال التالي.':s.first===null?'اضغط إجابة واحدة بالماوس أو اللمس، أو ركّز عليها واضغط Enter. الأسهم تحرّك التركيز دون احتساب إجابة.':'اقرأ التصحيح، ثم اضغط الإجابة الصحيحة لاعتمادها.';
+   const solved=states.filter(x=>x.solved).length;
+   $('#quizProgress').max=questions.length;$('#quizProgress').value=solved;$('#quizProgressText').textContent=`أُنجز ${num(solved)} من ${num(questions.length)} أسئلة`;
+   const box=$('#quizFeedback');box.replaceChildren();box.hidden=s.last===null;box.className='quizFeedback';
+   if(s.last===null)return;
+   const chosen=q.options.find(o=>o.value===s.last),answer=q.options.find(o=>o.value===correct),good=s.solved;
+   box.className='quizFeedback '+(good?'ok':'bad');
+   box.append(tag('strong',good?(s.first===correct?'إجابة صحيحة من المحاولة الأولى':'تم تصحيح الإجابة'):'إجابتك تحتاج إلى تصحيح'));
+   box.append(tag('p',chosen.feedback));
+   if(!good){box.append(tag('p','الإجابة الصحيحة: '+answer.label,'correctExplanation'),tag('p',answer.feedback),tag('p','اضغط الإجابة الصحيحة لاعتماد التصحيح. تُحفظ إجابتك الأولى لحساب الدرجة.','smallNote'));}
+ }
+ function grade(value,token){
+   if(!started||finished||token!==viewToken)return;
+   const q=questions[index],s=states[index];
+   if(s.solved||s.last===value||!q.options.some(o=>o.value===value))return;
+   if(s.first===null){s.first=value;s.firstUsedHint=s.hint;}
+   s.selected=value;s.last=value;s.attempts++;s.solved=value===q.correctValues[0];
+   renderState();
+   // Keep focus on the answer: a held Enter key must never activate Next.
+   show($('#quizFeedback'),'nearest');
+ }
+ function navigate(direction,token){
+   if(!started||finished||token!==viewToken)return;
+   if(direction===1&&!states[index].solved)return;
+   if(direction===-1&&index===0)return;
+
+   if(direction===1&&index===questions.length-1){results();return;}
+   index+=direction;renderQuestion();show($('#quizPane'));focus($('#questionText'));
+ }
+ function bindNavigation(id,direction){
+   const b=$(id);let intent=null;
+   b.addEventListener('pointerdown',()=>{intent=viewToken;});
+   b.addEventListener('keydown',e=>{
+     if(['Enter',' '].includes(e.key)){if(e.repeat){e.preventDefault();return;}intent=viewToken;}
+   });
+   b.addEventListener('click',e=>{
+     if(e.detail>1)return;const token=intent===null?viewToken:intent;intent=token;navigate(direction,token);
+     Promise.resolve().then(()=>{if(intent===token)intent=null;});
+   });
+ }
+ function results(announce=true){
+   if(!states.length||!states.every(s=>s.solved))return;if(!finished)viewToken++;finished=true;
+   $('#quizPane').hidden=true;$('#quizResults').hidden=false;
+   const firstCorrect=states.filter((s,i)=>s.first===questions[i].correctValues[0]).length;
+   const corrected=questions.length-firstCorrect,percent=firstCorrect/questions.length*100;
+   $('#firstScore').textContent=num(percent)+'٪';$('#firstCorrect').textContent=num(firstCorrect)+' من '+num(questions.length);
+   $('#correctedCount').textContent=num(corrected);$('#hintCount').textContent=num(states.filter(s=>s.firstUsedHint).length);
+   $('#resultSummary').textContent=firstCorrect===questions.length?'أجبت عن الأسئلة الثمانية بصورة صحيحة من المحاولة الأولى. أحسنت الربط بين نوع الرابطة وعدد الإلكترونات.':`أجبت عن ${num(firstCorrect)} أسئلة بصورة صحيحة من المحاولة الأولى، وصحّحت ${num(corrected)} إجابات بعد الشرح. راجع المجالات الموضحة أدناه لترسّخ فهمك.`;
+   $('#masteryFill').style.width=percent+'%';$('#masteryBar').setAttribute('aria-valuenow',String(percent));
+   const tbody=$('#categoryResults');tbody.replaceChildren();const tips=$('#resultRecommendations');tips.replaceChildren();
+   Object.entries(categories).forEach(([id,c])=>{
+     const indices=questions.map((q,i)=>q.category===id?i:-1).filter(i=>i>=0);
+     const correct=indices.filter(i=>states[i].first===questions[i].correctValues[0]).length;
+     const ratio=Math.round(correct/indices.length*1000)/10,row=document.createElement('tr');
+     row.append(tag('th',c.label),tag('td',num(correct)+' من '+num(indices.length)),tag('td',num(ratio)+'٪'),tag('td',correct===indices.length?'إتقان في هذه الأسئلة':correct===0?'راجع هذا المجال':'يحتاج إلى تعزيز'));tbody.append(row);
+     if(correct!==indices.length){const card=tag('li','','recommendation');card.append(tag('strong',c.label),tag('p',c.tip));tips.append(card);}
+   });
+   if(!tips.children.length)tips.append(tag('li','استمر بتطبيق طريقة العد نفسها على الجزيئات التي تدرسها: احسب التكافؤ أولًا، ثم المشتركة وغير المشتركة.','recommendation'));
+   const labRows=$('#practicalResults');labRows.replaceChildren();
+   for(const key of ['H2','O2','N2']){
+     const st=labState.stats[key]||{attempts:0,errors:0};const row=document.createElement('tr');
+     row.append(tag('th',key.replace('2','₂')),tag('td',num(st.attempts)),tag('td',num(st.errors)),tag('td',labState.completed.includes(key)?'تم التحقق من البناء':'لم يُتحقق منه'));labRows.append(row);
+   }
+   const review=$('#answerReview');review.replaceChildren();
+   questions.forEach((q,i)=>{
+     const s=states[i],correct=q.options.find(o=>o.value===q.correctValues[0]),first=q.options.find(o=>o.value===s.first),item=document.createElement('details');item.className='reviewItem';
+     item.append(tag('summary',`السؤال ${num(i+1)} — ${s.first===q.correctValues[0]?'صحيح أولًا':'صُحّح بعد الشرح'}`));
+     item.append(tag('p',q.question,'reviewQuestion'),tag('p','إجابتك الأولى: '+first.label),tag('p','الإجابة الصحيحة: '+correct.label,'correctExplanation'),tag('p',correct.feedback),tag('p','عدد الإجابات المرسلة: '+num(s.attempts),'smallNote'));review.append(item);
+   });
+   if(announce){show($('#quizResults'));focus($('#resultTitle'));}
+ }
+
+ $('#startQuiz').addEventListener('click',open);$('#openQuiz').addEventListener('click',open);
+ bindNavigation('#previousQuestion',-1);bindNavigation('#nextQuestion',1);
+ $('#restartQuiz').addEventListener('click',()=>{
+   states=fresh();index=0;finished=false;
+   $('#quizResults').hidden=true;$('#quizPane').hidden=false;renderQuestion();show($('#quizPane'));focus($('#questionText'));
+ });
+ $('#printResults').addEventListener('click',()=>window.print());unlock();
+})();
+
+</script>
+</body>
+</html>
